@@ -1,21 +1,10 @@
 view: users {
   sql_table_name: mysql_heroku_app_db.users ;;
 
-  dimension: user_id {
+  dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.user_id ;;
-  }
-
-  dimension: _fivetran_deleted {
-    type: yesno
-    sql: ${TABLE}._fivetran_deleted ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._fivetran_synced ;;
+    sql: ${TABLE}.id ;;
   }
 
   dimension: ambassador {
@@ -32,6 +21,7 @@ view: users {
     type: number
     # hidden: yes
     sql: ${TABLE}.contact_id ;;
+    hidden: yes
   }
 
   dimension_group: created {
@@ -56,14 +46,16 @@ view: users {
     sql: ${TABLE}.first_name ;;
   }
 
-  dimension: id {
+  dimension: user_id {
     type: number
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.user_id ;;
+    hidden: yes
   }
 
   dimension: is_set_password {
     type: string
     sql: ${TABLE}.is_set_password ;;
+    hidden: yes
   }
 
   dimension_group: last_login {
@@ -75,11 +67,6 @@ view: users {
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;
-  }
-
-  dimension: password {
-    type: string
-    sql: ${TABLE}.password ;;
   }
 
   dimension: permissions {
@@ -106,11 +93,6 @@ view: users {
   dimension: user_avatar {
     type: string
     sql: ${TABLE}.user_avatar ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [detail*]
   }
 
   # ----- Sets of fields for drilling ------

@@ -5,32 +5,18 @@ view: shop_orders {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-  }
-
-  dimension: _fivetran_deleted {
-    type: yesno
-    sql: ${TABLE}._fivetran_deleted ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._fivetran_synced ;;
+    label: "Order ID"
   }
 
   dimension: billing_address_id {
     type: number
     sql: ${TABLE}.billing_address_id ;;
+    hidden: yes
   }
 
   dimension: carrier {
     type: string
     sql: ${TABLE}.carrier ;;
-  }
-
-  dimension: carrier_charge {
-    type: number
-    sql: ${TABLE}.carrier_charge ;;
   }
 
   dimension_group: created {
@@ -54,54 +40,65 @@ view: shop_orders {
   dimension: shipping_address_id {
     type: number
     sql: ${TABLE}.shipping_address_id ;;
+    hidden: yes
   }
 
   dimension_group: shipwire_delivereddate {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.shipwire_delivereddate ;;
+    view_label: "Shipwire"
   }
 
   dimension: shipwire_externalid {
     type: string
     sql: ${TABLE}.shipwire_externalid ;;
+    view_label: "Shipwire"
+    hidden: yes
   }
 
   dimension: shipwire_id {
     type: number
     sql: ${TABLE}.shipwire_id ;;
+    view_label: "Shipwire"
   }
 
   dimension: shipwire_last_topic {
     type: string
     sql: ${TABLE}.shipwire_last_topic ;;
+    view_label: "Shipwire"
   }
 
   dimension: shipwire_orderno {
     type: number
     sql: ${TABLE}.shipwire_orderno ;;
+    view_label: "Shipwire"
   }
 
   dimension: shipwire_status {
     type: string
     sql: ${TABLE}.shipwire_status ;;
+    view_label: "Shipwire"
   }
 
   dimension: shipwire_summary {
     type: string
     sql: ${TABLE}.shipwire_summary ;;
+    view_label: "Shipwire"
   }
 
   dimension_group: shipwire_summarydate {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.shipwire_summarydate ;;
+    view_label: "Shipwire"
   }
 
   dimension_group: shipwire_trackeddate {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.shipwire_trackeddate ;;
+    view_label: "Shipwire"
   }
 
   dimension: status {
@@ -117,21 +114,19 @@ view: shop_orders {
   dimension: subscription_id {
     type: number
     sql: ${TABLE}.subscription_id ;;
+    hidden: yes
   }
 
   dimension: subtotal {
     type: number
     sql: ${TABLE}.subtotal ;;
-  }
-
-  dimension: tax_in_cents {
-    type: number
-    sql: ${TABLE}.tax_in_cents ;;
+    hidden: yes
   }
 
   dimension: total_price {
     type: number
     sql: ${TABLE}.total_price ;;
+    hidden: yes
   }
 
   dimension: trackings {
@@ -147,8 +142,8 @@ view: shop_orders {
 
   dimension: user_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.user_id ;;
+    hidden: yes
   }
 
   dimension: user_orders_count {
@@ -156,8 +151,15 @@ view: shop_orders {
     sql: ${TABLE}.user_orders_count ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [id, users.first_name, users.last_name, users.user_id]
+
+################# Measures #######################
+  measure: tax_in_cents {
+    type: sum
+    sql: ${TABLE}.tax_in_cents / 100.0 ;;
+  }
+
+  measure: carrier_charge {
+    type: sum
+    sql: ${TABLE}.carrier_charge ;;
   }
 }

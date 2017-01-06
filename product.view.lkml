@@ -1,21 +1,10 @@
 view: product {
   sql_table_name: mysql_heroku_app_db.product ;;
 
-  dimension: product_id {
+  dimension: id {
     primary_key: yes
     type: string
-    sql: ${TABLE}.product_id ;;
-  }
-
-  dimension: _fivetran_deleted {
-    type: yesno
-    sql: ${TABLE}._fivetran_deleted ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._fivetran_synced ;;
+    sql: ${TABLE}.id ;;
   }
 
   dimension: benefits {
@@ -26,6 +15,7 @@ view: product {
   dimension: category_id {
     type: number
     sql: ${TABLE}.category_id ;;
+    hidden: yes
   }
 
   dimension: comment {
@@ -47,6 +37,7 @@ view: product {
   dimension: default_billing_plan_id {
     type: number
     sql: ${TABLE}.default_billing_plan_id ;;
+    hidden: yes
   }
 
   dimension_group: deleted {
@@ -60,9 +51,9 @@ view: product {
     sql: ${TABLE}.description ;;
   }
 
-  dimension: id {
+  dimension: product_id {
     type: number
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.product_id ;;
   }
 
   dimension: ingredients {
@@ -93,6 +84,7 @@ view: product {
   dimension: paysys_id {
     type: string
     sql: ${TABLE}.paysys_id ;;
+    hidden: yes
   }
 
   dimension: prevent_if_other {
@@ -103,6 +95,7 @@ view: product {
   dimension: product_image {
     type: string
     sql: ${TABLE}.product_image ;;
+    hidden: yes
   }
 
   dimension: product_type {
@@ -160,11 +153,13 @@ view: product {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
+    hidden: yes
   }
 
   dimension: v2_product_image {
     type: string
     sql: ${TABLE}.v2_product_image ;;
+    hidden: yes
   }
 
   dimension: weight {
@@ -175,11 +170,6 @@ view: product {
   dimension: weight_unit {
     type: string
     sql: ${TABLE}.weight_unit ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [detail*]
   }
 
   # ----- Sets of fields for drilling ------

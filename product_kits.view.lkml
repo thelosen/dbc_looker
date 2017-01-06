@@ -7,17 +7,6 @@ view: product_kits {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: _fivetran_deleted {
-    type: yesno
-    sql: ${TABLE}._fivetran_deleted ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._fivetran_synced ;;
-  }
-
   dimension_group: created {
     type: time
     timeframes: [time, date, week, month]
@@ -53,11 +42,13 @@ view: product_kits {
   dimension: kit_id {
     type: string
     sql: ${TABLE}.kit_id ;;
+    hidden: yes
   }
 
   dimension: kit_image {
     type: string
     sql: ${TABLE}.kit_image ;;
+    hidden: yes
   }
 
   dimension: kit_name {
@@ -95,11 +86,7 @@ view: product_kits {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+    hidden: yes
   }
 
   # ----- Sets of fields for drilling ------

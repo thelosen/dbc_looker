@@ -7,17 +7,6 @@ view: product_category {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: _fivetran_deleted {
-    type: yesno
-    sql: ${TABLE}._fivetran_deleted ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._fivetran_synced ;;
-  }
-
   dimension: alias {
     type: string
     sql: ${TABLE}.alias ;;
@@ -78,7 +67,7 @@ view: product_category {
 
   dimension: user_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
