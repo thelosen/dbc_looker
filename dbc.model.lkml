@@ -47,6 +47,7 @@ explore: shop_order_items {
 
   join: product_category {
     sql_on:  ${product.category_id} = ${product_category.id} ;;
+    view_label: "Products"
     relationship: many_to_one
   }
 
