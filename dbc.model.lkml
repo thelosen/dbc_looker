@@ -1,5 +1,7 @@
 connection: "redshift"
 
+label: "Version 3.0"
+
 # include all the views
 include: "*.view"
 
@@ -9,7 +11,6 @@ include: "*.dashboard"
 
 explore: shop_order_items {
   view_label: "Order Items"
-  hidden:  yes
   label: "Orders"
 
   conditionally_filter: {
@@ -49,4 +50,9 @@ explore: shop_order_items {
     relationship: many_to_one
   }
 
+}
+
+explore: users {
+  view_label: "Users"
+  label: "Users"
 }
