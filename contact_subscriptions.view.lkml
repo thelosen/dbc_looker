@@ -157,6 +157,7 @@ view: contact_subscriptions {
   measure: subscription_amount {
     type: sum
     sql: ${TABLE}.amount_in_cents/100.0 ;;
+    value_format_name: usd_0
   }
 
   # ----- Sets of fields for drilling ------
