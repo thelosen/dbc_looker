@@ -57,3 +57,8 @@ explore: users {
   view_label: "Users"
   label: "Users"
 }
+
+explore: contact_subscriptions {
+  label: "Subscriptions"
+  view_label: "Subscriptions"
+}

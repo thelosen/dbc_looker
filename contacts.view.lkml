@@ -5,17 +5,7 @@ view: contacts {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-  }
-
-  dimension: _fivetran_deleted {
-    type: yesno
-    sql: ${TABLE}._fivetran_deleted ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._fivetran_synced ;;
+    hidden: yes
   }
 
   dimension: address1 {
@@ -69,11 +59,13 @@ view: contacts {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
+    hidden: yes
   }
 
   dimension: deleted_by {
     type: number
     sql: ${TABLE}.deleted_by ;;
+    hidden: yes
   }
 
   dimension: email {
@@ -140,6 +132,7 @@ view: contacts {
   dimension: password {
     type: string
     sql: ${TABLE}.password ;;
+    hidden: yes
   }
 
   dimension: phone {
@@ -201,11 +194,13 @@ view: contacts {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
 
   dimension: updated_by {
     type: number
     sql: ${TABLE}.updated_by ;;
+    hidden: yes
   }
 
   dimension: user_id {
@@ -224,10 +219,6 @@ view: contacts {
     sql: ${TABLE}.zipcode ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
 
   # ----- Sets of fields for drilling ------
   set: detail {
