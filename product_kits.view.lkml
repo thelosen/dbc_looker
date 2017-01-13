@@ -17,6 +17,7 @@ view: product_kits {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
+    hidden: yes
   }
 
   dimension: is_disabled {
@@ -80,6 +81,7 @@ view: product_kits {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
 
   dimension: user_id {

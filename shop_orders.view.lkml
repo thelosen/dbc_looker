@@ -23,12 +23,14 @@ view: shop_orders {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at ;;
+    hidden: yes
   }
 
   dimension_group: deleted {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
+    hidden:  yes
   }
 
   dimension_group: processafterdate {

@@ -15,6 +15,7 @@ view: users {
   dimension: cart_bail_token {
     type: string
     sql: ${TABLE}.cart_bail_token ;;
+    hidden: yes
   }
 
   dimension: contact_id {
@@ -34,6 +35,7 @@ view: users {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
+    hidden: yes
   }
 
   dimension: email {
@@ -82,17 +84,26 @@ view: users {
   dimension: remember_token {
     type: string
     sql: ${TABLE}.remember_token ;;
+    hidden: yes
   }
 
   dimension_group: updated {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
 
   dimension: user_avatar {
     type: string
     sql: ${TABLE}.user_avatar ;;
+  }
+
+  ################## Measures #################
+
+  measure: user_count {
+    type: count_distinct
+    sql:  ${TABLE}.id ;;
   }
 
   # ----- Sets of fields for drilling ------

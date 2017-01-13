@@ -5,6 +5,7 @@ view: product_category {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    hidden: yes
   }
 
   dimension: alias {
@@ -27,9 +28,10 @@ view: product_category {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
+    hidden: yes
   }
 
-  dimension: description {
+  dimension: category_description {
     type: string
     sql: ${TABLE}.description ;;
   }
@@ -37,9 +39,10 @@ view: product_category {
   dimension: funnel {
     type: number
     sql: ${TABLE}.funnel ;;
+    hidden: yes
   }
 
-  dimension: name {
+  dimension: category_name {
     type: string
     sql: ${TABLE}.name ;;
   }
@@ -52,17 +55,20 @@ view: product_category {
   dimension: sort_order {
     type: number
     sql: ${TABLE}.sort_order ;;
+    hidden: yes
   }
 
   dimension: steps {
     type: string
     sql: ${TABLE}.steps ;;
+    hidden: yes
   }
 
   dimension_group: updated {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
 
   dimension: user_id {
@@ -71,8 +77,4 @@ view: product_category {
     sql: ${TABLE}.user_id ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [id, name, users.first_name, users.last_name, users.user_id]
-  }
 }

@@ -10,7 +10,7 @@ include: "*.dashboard"
 
 
 explore: shop_order_items {
-  view_label: "Order Items"
+  view_label: "Orders"
   label: "Orders"
 
   conditionally_filter: {

@@ -5,6 +5,7 @@ view: product {
     primary_key: yes
     type: string
     sql: ${TABLE}.id ;;
+    hidden: yes
   }
 
   dimension: benefits {
@@ -44,6 +45,7 @@ view: product {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
+    hidden: yes
   }
 
   dimension: description {
@@ -126,6 +128,7 @@ view: product {
   dimension: sort_order {
     type: string
     sql: ${TABLE}.sort_order ;;
+    hidden: yes
   }
 
   dimension: start_date {
@@ -147,6 +150,7 @@ view: product {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
 
   dimension: user_id {

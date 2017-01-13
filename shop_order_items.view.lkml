@@ -24,6 +24,7 @@ view: shop_order_items {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
+    hidden: yes
   }
 
   dimension: is_recurring {
@@ -61,13 +62,29 @@ view: shop_order_items {
     sql: ${TABLE}.updated_at ;;
   }
 
-################## Measures #######################
-  measure: price {
-    type: sum
-    sql: ${TABLE}.price ;;
+  dimension: price_of_sku_when_sold {
+    type:  number
+    sql: ${TABLE}.price;;
+    value_format_name: usd_0
   }
 
-  measure: quantity {
+################## Measures #######################
+
+  # used to calculate revenue for a given item sold
+  dimension: revenue_dim {
+    type:  number
+    sql: ${TABLE}.price * ${TABLE}.quantity ;;
+    hidden: yes
+  }
+
+  measure: revenue {
+    type: sum
+    sql: ${revenue_dim} ;;
+    value_format_name: usd_0
+    description: "Price times Quantity"
+  }
+
+  measure: item_quantity {
     type: sum
     sql: ${TABLE}.quantity ;;
   }
@@ -75,5 +92,6 @@ view: shop_order_items {
   measure: count_of_orders {
     type: count_distinct
     sql: ${TABLE}.order_id ;;
+    description: "Distinct count of order IDs"
   }
 }
