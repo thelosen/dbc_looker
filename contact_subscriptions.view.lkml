@@ -56,7 +56,7 @@ view: contact_subscriptions {
 
   dimension: frequency {
     type: string
-    sql: ${TABLE}.frequency ;;
+    sql: coalesce(${TABLE}.frequency, 'Unknown') ;;
   }
 
   dimension: is_product_free {
@@ -119,7 +119,7 @@ view: contact_subscriptions {
 
   dimension: subscription_id {
     type: number
-    sql: ${TABLE}.subscription_id ;;
+    sql: case when ${TABLE}.subscription_id = 0 then null else ${TABLE}.subscription_id end ;;
   }
 
   dimension: total_cycles {

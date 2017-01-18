@@ -51,6 +51,13 @@ explore: shop_order_items {
     relationship: many_to_one
   }
 
+#   join: contact_subscriptions {
+#     sql_on:  ${shop_orders.subscription_id} = ${contact_subscriptions.subscription_id} AND ${shop_order_items.product_id} = ${contact_subscriptions.product_id};;
+#     view_label: "Subscriptions"
+#     relationship: many_to_many
+#
+#   }
+
 }
 
 explore: users {

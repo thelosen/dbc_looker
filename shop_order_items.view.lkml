@@ -28,7 +28,7 @@ view: shop_order_items {
   }
 
   dimension: is_recurring {
-    type: number
+    type: yesno
     sql: ${TABLE}.is_recurring ;;
   }
 
