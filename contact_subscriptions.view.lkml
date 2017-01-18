@@ -160,6 +160,11 @@ view: contact_subscriptions {
     value_format_name: usd_0
   }
 
+  measure: subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
