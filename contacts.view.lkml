@@ -244,4 +244,5 @@ view: contacts {
       v2_users.count
     ]
   }
+
 }

@@ -68,4 +68,10 @@ explore: users {
 explore: contact_subscriptions {
   label: "Subscriptions"
   view_label: "Subscriptions"
+
+  join: contacts {
+    sql_on:  ${contact_subscriptions.contact_id} = ${contacts.id};;
+    view_label: "Contacts"
+    relationship: many_to_one
+  }
 }

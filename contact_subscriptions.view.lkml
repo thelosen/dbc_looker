@@ -151,6 +151,7 @@ view: contact_subscriptions {
   measure:  subscription_count {
     type: count_distinct
     sql: ${subscription_id} ;;
+    drill_fields: [user_detail*]
   }
 
 
@@ -158,11 +159,13 @@ view: contact_subscriptions {
     type: sum
     sql: ${TABLE}.amount_in_cents/100.0 ;;
     value_format_name: usd_0
+    drill_fields: [user_detail*]
   }
 
   measure: subscriber_count {
     type: count_distinct
     sql: ${user_id} ;;
+    drill_fields: [user_detail*]
   }
 
   # ----- Sets of fields for drilling ------
@@ -177,6 +180,14 @@ view: contact_subscriptions {
       contacts.last_name,
       product.product_id,
       product.name
+    ]
+  }
+
+  set: user_detail {
+    fields: [
+      contacts.email,
+      contacts.first_name,
+      contacts.last_name,
     ]
   }
 }
