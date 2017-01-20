@@ -168,6 +168,51 @@ view: contact_subscriptions {
     drill_fields: [user_detail*]
   }
 
+  measure: active_subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+    drill_fields: [user_detail*]
+    filters: {
+      field: status
+      value: "active"
+    }
+  }
+
+  measure: 7_day_new_subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+    drill_fields: [user_detail*]
+    filters: {
+      field: created_date
+      value: "7 days"
+    }
+  }
+
+  measure: 7_day_cancelled_subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+    drill_fields: [user_detail*]
+    filters: {
+      field: cancelled_date
+      value: "7 days"
+    }
+  }
+
+  measure: 7_day_net_subscriber_count {
+    type: number
+    sql: ${7_day_new_subscriber_count} - ${7_day_cancelled_subscriber_count} ;;
+    description: "New subscribers minus cancelled subscribers"
+    drill_fields: [user_detail*]
+  }
+
+  measure: 7_day_subscriber_churn {
+    type: number
+    sql: (1.0 * ${7_day_cancelled_subscriber_count}) / nullif(${active_subscriber_count},0) ;;
+    drill_fields: [user_detail*]
+    value_format: "0.00%"
+    description: "Cancelled subscribers divided by Total Active Subscribers"
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

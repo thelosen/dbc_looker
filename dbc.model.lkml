@@ -15,7 +15,7 @@ explore: shop_order_items {
 
   conditionally_filter: {
     filters: {
-      field: shop_order_items.created_date
+      field: shop_orders.created_date
       value: "last 30 days"
     }
     unless: [shop_order_items.created_date]
@@ -73,5 +73,17 @@ explore: contact_subscriptions {
     sql_on:  ${contact_subscriptions.contact_id} = ${contacts.id};;
     view_label: "Contacts"
     relationship: many_to_one
+  }
+
+  join:  original_order {
+    from: shop_orders
+    sql_on: ${contact_subscriptions.original_order_id} = ${original_order.id} ;;
+    relationship: one_to_one
+  }
+
+  join: most_recent_order {
+    from: shop_orders
+    sql_on: ${contact_subscriptions.recent_order_id} = ${most_recent_order.id} ;;
+    relationship: one_to_one
   }
 }
