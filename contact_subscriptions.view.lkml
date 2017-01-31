@@ -19,7 +19,7 @@ view: contact_subscriptions {
     hidden: yes
   }
 
-  dimension_group: cancelled {
+  dimension_group: product_subscription_canceled {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.cancelled_at ;;
@@ -31,7 +31,7 @@ view: contact_subscriptions {
     sql: ${TABLE}.contact_id ;;
   }
 
-  dimension_group: created {
+  dimension_group: product_subscription_created {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at ;;
@@ -47,7 +47,7 @@ view: contact_subscriptions {
     sql: ${TABLE}.cycles_completed ;;
   }
 
-  dimension_group: deleted {
+  dimension_group: product_subscription_deleted {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
@@ -176,6 +176,7 @@ view: contact_subscriptions {
       field: recurly_subscription.recurly_active_or_future_state
       value: "yes"
     }
+    description: "Where recurly subscription state is active or future"
   }
 
   measure: 7_day_new_subscriber_count {
@@ -183,13 +184,14 @@ view: contact_subscriptions {
     sql: ${user_id} ;;
     drill_fields: [user_detail*]
     filters: {
-      field: created_date
+      field: recurly_subscription.created_date
       value: "7 days"
     }
     filters: {
       field: recurly_subscription.recurly_active_or_future_state
       value: "yes"
     }
+    description: "Where recurly subscription state is active or future and recurly subscription created date is in the past seven days"
   }
 
   measure: 7_day_cancelled_subscriber_count {
@@ -204,6 +206,7 @@ view: contact_subscriptions {
       field: recurly_subscription.state
       value: "canceled"
     }
+    description: "Where recurly subscription state is canceled and recurly subscription canceled date is in the past seven days"
   }
 
   measure: 7_day_net_subscriber_count {
