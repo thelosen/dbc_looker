@@ -106,7 +106,7 @@ view: contact_subscriptions {
     sql: ${TABLE}.recent_order_id ;;
   }
 
-  dimension_group: started {
+  dimension_group: product_subscription_started {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.started_at ;;
