@@ -86,4 +86,9 @@ explore: contact_subscriptions {
     sql_on: ${contact_subscriptions.recent_order_id} = ${most_recent_order.id} ;;
     relationship: one_to_one
   }
+
+  join: recurly_subscription {
+    sql_on: ${contact_subscriptions.subscription_id} = ${recurly_subscription.id} ;;
+    relationship: many_to_one
+  }
 }

@@ -112,7 +112,7 @@ view: contact_subscriptions {
     sql: ${TABLE}.started_at ;;
   }
 
-  dimension: status {
+  dimension: product_subscription_status {
     type: string
     sql: ${TABLE}.status ;;
   }
@@ -173,8 +173,8 @@ view: contact_subscriptions {
     sql: ${user_id} ;;
     drill_fields: [user_detail*]
     filters: {
-      field: status
-      value: "active"
+      field: recurly_subscription.recurly_active_or_future_state
+      value: "yes"
     }
   }
 
@@ -186,6 +186,10 @@ view: contact_subscriptions {
       field: created_date
       value: "7 days"
     }
+    filters: {
+      field: recurly_subscription.recurly_active_or_future_state
+      value: "yes"
+    }
   }
 
   measure: 7_day_cancelled_subscriber_count {
@@ -193,15 +197,19 @@ view: contact_subscriptions {
     sql: ${user_id} ;;
     drill_fields: [user_detail*]
     filters: {
-      field: cancelled_date
+      field: recurly_subscription.canceled_date
       value: "7 days"
+    }
+    filters: {
+      field: recurly_subscription.state
+      value: "canceled"
     }
   }
 
   measure: 7_day_net_subscriber_count {
     type: number
     sql: ${7_day_new_subscriber_count} - ${7_day_cancelled_subscriber_count} ;;
-    description: "New subscribers minus cancelled subscribers"
+    description: "New subscribers minus canceled subscribers"
     drill_fields: [user_detail*]
   }
 
@@ -210,7 +218,7 @@ view: contact_subscriptions {
     sql: (1.0 * ${7_day_cancelled_subscriber_count}) / nullif(${active_subscriber_count},0) ;;
     drill_fields: [user_detail*]
     value_format: "0.00%"
-    description: "Cancelled subscribers divided by Total Active Subscribers"
+    description: "Canceled subscribers divided by Total Active Subscribers"
   }
 
   # ----- Sets of fields for drilling ------
