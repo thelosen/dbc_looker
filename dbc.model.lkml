@@ -90,5 +90,6 @@ explore: contact_subscriptions {
   join: recurly_subscription {
     sql_on: ${contact_subscriptions.subscription_id} = ${recurly_subscription.id} ;;
     relationship: many_to_one
+    view_label: "Recurly"
   }
 }
