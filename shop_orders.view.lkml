@@ -1,5 +1,72 @@
 view: shop_orders {
-  sql_table_name: mysql_heroku_app_db.shop_orders ;;
+#   sql_table_name: mysql_heroku_app_db.shop_orders ;;
+  derived_table: {
+#     distribution: "EVEN"
+#     sortkeys: ["order_id"]
+#     sql_trigger_value:  SELECT FLOOR(EXTRACT(epoch from GETDATE()) / (1*60*60));;
+    sql:
+      SELECT id,
+           subscription_id,
+           shipwire_id,
+           shipwire_orderno,
+           shipwire_externalid,
+           processafterdate,
+           trackings,
+           user_id,
+           user_orders_count,
+           billing_address_id,
+           shipping_address_id,
+           status,
+           carrier,
+           carrier_charge,
+           total_price,
+           subtotal,
+           tax_in_cents,
+           shipwire_status,
+           shipwire_summary,
+           shipwire_summarydate,
+           shipwire_trackeddate,
+           shipwire_last_topic,
+           shipwire_delivereddate,
+           stripe_order_id,
+           created_at,
+           updated_at,
+           deleted_at,
+           _fivetran_deleted,
+           _fivetran_synced
+      FROM mysql_heroku_app_db.shop_orders
+    UNION ALL
+      SELECT id,
+           null as subscription_id,
+           null as shipwire_id,
+           null as shipwire_orderno,
+           null as shipwire_externalid,
+           null as processafterdate,
+           null as trackings,
+           user_id,
+           user_order_count,
+           billing_address_id,
+           shipping_address_id,
+           null as status,
+           carrier,
+           carrier_charge,
+           total_price,
+           null as subtotal,
+           tax_in_cents,
+           null as shipwire_status,
+           null as shipwire_summary,
+           null as shipwire_summarydate,
+           null as shipwire_trackeddate,
+           null as shipwire_last_topic,
+           null as shipwire_delivereddate,
+           stripe_order_id,
+           created_at,
+           updated_at,
+           null as deleted_at,
+           _fivetran_deleted,
+           _fivetran_synced
+      FROM v2_shop_orders ;;
+  }
 
   dimension: id {
     primary_key: yes

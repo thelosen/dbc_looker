@@ -1,5 +1,45 @@
 view: shop_order_items {
-  sql_table_name: mysql_heroku_app_db.shop_order_items ;;
+#   sql_table_name: mysql_heroku_app_db.shop_order_items ;;
+  derived_table: {
+#     distribution: "EVEN"
+#     sortkeys: ["order_id"]
+#     sql_trigger_value:  SELECT FLOOR(EXTRACT(epoch from GETDATE()) / (1*60*60));;
+    sql:
+      SELECT
+             id
+             , order_id
+             , TYPE
+             , kit_id
+             , product_id
+             , product_sku
+             , is_recurring
+             , price
+             , quantity
+             , created_at
+             , updated_at
+             , deleted_at
+             , _fivetran_deleted
+             , _fivetran_synced
+      FROM mysql_heroku_app_db.shop_order_items
+      UNION ALL
+      SELECT
+             id
+             , order_id
+             , TYPE
+             , null as kit_id
+             , null as product_id
+             , product_sku
+             , is_recurring
+             , price
+             , quantity
+             , created_at
+             , updated_at
+             , null as deleted_at
+             , _fivetran_deleted
+             , _fivetran_synced
+      FROM public.v2_shop_order_items
+      ;;
+  }
 
   dimension: id {
     primary_key: yes
