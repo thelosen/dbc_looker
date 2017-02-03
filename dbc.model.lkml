@@ -18,7 +18,7 @@ explore: shop_order_items {
       field: shop_orders.created_date
       value: "last 30 days"
     }
-    unless: [shop_order_items.created_date]
+    unless: [shop_order_items.created_date, shop_orders.created_date]
   }
 
   join: shop_orders {

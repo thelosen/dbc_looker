@@ -30,7 +30,7 @@ view: shop_order_items {
              , null as product_id
              , product_sku
              , is_recurring
-             , price
+             , price/100.0 as price
              , quantity
              , created_at
              , updated_at
@@ -56,6 +56,7 @@ view: shop_order_items {
 
   dimension_group: created {
     type: time
+    label: "items"
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at ;;
     hidden: yes
