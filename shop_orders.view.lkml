@@ -1,9 +1,9 @@
 view: shop_orders {
 #   sql_table_name: mysql_heroku_app_db.shop_orders ;;
   derived_table: {
-#     distribution: "EVEN"
-#     sortkeys: ["order_id"]
-#     sql_trigger_value:  SELECT FLOOR(EXTRACT(epoch from GETDATE()) / (1*60*60));;
+    distribution: "EVEN"
+    sortkeys: ["order_id"]
+    sql_trigger_value:  SELECT COUNT(*) FROM mysql_heroku_app_db.shop_orders;;
     sql:
       SELECT id,
            subscription_id,
