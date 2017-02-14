@@ -1,7 +1,7 @@
 view: shop_order_items {
 #   sql_table_name: mysql_heroku_app_db.shop_order_items ;;
   derived_table: {
-    distribution: "EVEN"
+    distribution_style: even
     sortkeys: ["order_id"]
     sql_trigger_value:  SELECT COUNT(*) FROM mysql_heroku_app_db.shop_order_items;;
     sql:

@@ -1,69 +1,93 @@
 view: pdt_user_fact {
-  # # You can specify the table name if it's different from the view name:
-  # sql_table_name: my_schema_name.tester ;;
-  #
-  # # Define your dimensions and measures here, like this:
-  # dimension: user_id {
-  #   description: "Unique ID for each user that has ordered"
-  #   type: number
-  #   sql: ${TABLE}.user_id ;;
-  # }
-  #
-  # dimension: lifetime_orders {
-  #   description: "The total number of orders for each user"
-  #   type: number
-  #   sql: ${TABLE}.lifetime_orders ;;
-  # }
-  #
-  # dimension_group: most_recent_purchase {
-  #   description: "The date when each user last ordered"
-  #   type: time
-  #   timeframes: [date, week, month, year]
-  #   sql: ${TABLE}.most_recent_purchase_at ;;
-  # }
-  #
-  # measure: total_lifetime_orders {
-  #   description: "Use this for counting lifetime orders across many users"
-  #   type: sum
-  #   sql: ${lifetime_orders} ;;
-  # }
-}
+  derived_table: {
+    distribution_style: even
+    sortkeys: ["user_id"]
+    sql_trigger_value: SELECT COUNT(*) FROM ${shop_orders.SQL_TABLE_NAME};;
+    sql: select
+      users.user_id
+      , sum(shop_orders.subtotal) as lifetime_revenue
+      , min(shop_orders.created_at) as first_order_timestamp
+      , max(shop_orders.created_at) as most_recent_order_timestamp
+      , count(distinct shop_orders.id) as lifetime_order_count
+      , avg(shop_orders.subtotal) as average_order_amount
+      FROM mysql_heroku_app_db.users
+        LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON users.id = shop_orders.user_id
+      GROUP BY users.user_id
+       ;;
+  }
 
-# view: pdt_user_fact {
-#   # Or, you could make this view a derived table, like this:
-#   derived_table: {
-#     sql: SELECT
-#         user_id as user_id
-#         , COUNT(*) as lifetime_orders
-#         , MAX(orders.created_at) as most_recent_purchase_at
-#       FROM orders
-#       GROUP BY user_id
-#       ;;
-#   }
-#
-#   # Define your dimensions and measures here, like this:
-#   dimension: user_id {
-#     description: "Unique ID for each user that has ordered"
-#     type: number
-#     sql: ${TABLE}.user_id ;;
-#   }
-#
-#   dimension: lifetime_orders {
-#     description: "The total number of orders for each user"
-#     type: number
-#     sql: ${TABLE}.lifetime_orders ;;
-#   }
-#
-#   dimension_group: most_recent_purchase {
-#     description: "The date when each user last ordered"
-#     type: time
-#     timeframes: [date, week, month, year]
-#     sql: ${TABLE}.most_recent_purchase_at ;;
-#   }
-#
-#   measure: total_lifetime_orders {
-#     description: "Use this for counting lifetime orders across many users"
-#     type: sum
-#     sql: ${lifetime_orders} ;;
-#   }
-# }
+  ##### Dimensions ###############
+
+  dimension: user_id {
+    type: number
+    sql: ${TABLE}.user_id ;;
+    hidden: yes
+  }
+
+  dimension: lifetime_revenue_dim {
+    type: number
+    sql: ${TABLE}.lifetime_revenue ;;
+    hidden: yes
+  }
+
+  dimension_group: first_order {
+    type: time
+    timeframes: [date, week, month]
+    sql: ${TABLE}.first_order_timestamp ;;
+  }
+
+  dimension_group: most_recent_order {
+    type: time
+    timeframes: [date, week, month]
+    sql: ${TABLE}.most_recent_order_timestamp ;;
+  }
+
+  dimension: lifetime_order_count_dim {
+    type: number
+    sql: ${TABLE}.lifetime_order_count ;;
+    hidden: yes
+  }
+
+  dimension: average_order_amount {
+    type: number
+    sql: ${TABLE}.average_order_amount ;;
+    value_format_name: usd
+  }
+
+  dimension: lifetime_revenue_grouping {
+    type: string
+    sql: CASE WHEN ${TABLE}.lifetime_revenue is NULL THEN '8. Not available'
+      WHEN ${TABLE}.lifetime_revenue < 25 THEN '1. Under $25'
+      WHEN ${TABLE}.lifetime_revenue < 50 THEN '2. $25 - $49.99'
+      WHEN ${TABLE}.lifetime_revenue < 75 THEN '3. $50 - $74.99'
+      WHEN ${TABLE}.lifetime_revenue < 100 THEN '4. $75 - $99.99'
+      WHEN ${TABLE}.lifetime_revenue < 150 THEN '5. $100 - $149.99'
+      WHEN ${TABLE}.lifetime_revenue < 250 THEN '6. $150 - $249.99'
+      ELSE '7. Over $250' END ;;
+  }
+
+  dimension: average_order_amount_grouping {
+    type: string
+    sql:  CASE WHEN ${TABLE}.average_purchase is NULL THEN '8. Not available'
+      WHEN ${TABLE}.average_purchase < 5 THEN '1. Under $5'
+      WHEN ${TABLE}.average_purchase < 10 THEN '2. $5 - $9.99'
+      WHEN ${TABLE}.average_purchase < 15 THEN '3. $10 - $14.99'
+      WHEN ${TABLE}.average_purchase < 20 THEN '4. $15 - $19.99'
+      WHEN ${TABLE}.average_purchase < 25 THEN '5. $20 - $24.99'
+      WHEN ${TABLE}.average_purchase < 30 THEN '6. $25 - $29.99'
+      ELSE '7. Over $30' END;;
+  }
+
+
+  #### Measures #################
+  dimension: lifetime_revenue {
+    type: number
+    sql: ${TABLE}.lifetime_revenue ;;
+    value_format_name: usd
+  }
+
+  measure: lifetime_order_count {
+    type: sum
+    sql: ${TABLE}.lifetime_order_count ;;
+  }
+}
