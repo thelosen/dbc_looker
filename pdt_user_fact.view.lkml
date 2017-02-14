@@ -1,10 +1,10 @@
 view: pdt_user_fact {
   derived_table: {
     distribution_style: even
-    sortkeys: ["user_id"]
+    sortkeys: ["id"]
     sql_trigger_value: SELECT COUNT(*) FROM ${shop_orders.SQL_TABLE_NAME};;
     sql: select
-      users.user_id
+      users.id
       , sum(shop_orders.subtotal) as lifetime_revenue
       , min(shop_orders.created_at) as first_order_timestamp
       , max(shop_orders.created_at) as most_recent_order_timestamp
@@ -12,16 +12,17 @@ view: pdt_user_fact {
       , avg(shop_orders.subtotal) as average_order_amount
       FROM mysql_heroku_app_db.users
         LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON users.id = shop_orders.user_id
-      GROUP BY users.user_id
+      GROUP BY users.id
        ;;
   }
 
   ##### Dimensions ###############
 
-  dimension: user_id {
+  dimension: id {
     type: number
-    sql: ${TABLE}.user_id ;;
+    sql: ${TABLE}.id ;;
     hidden: yes
+    primary_key: yes
   }
 
   dimension: lifetime_revenue_dim {

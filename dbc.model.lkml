@@ -51,11 +51,11 @@ explore: shop_order_items {
     relationship: many_to_one
   }
 
-#   join:  pdt_user_fact {
-#     sql_on:  ${shop_orders.user_id} = ${pdt_user_fact.user_id} ;;
-#     view_label: "Users"
-#     relationship: many_to_one
-#   }
+  join:  pdt_user_fact {
+    sql_on:  ${shop_orders.user_id} = ${pdt_user_fact.id} ;;
+    view_label: "Users"
+    relationship: many_to_one
+  }
 #   join: contact_subscriptions {
 #     sql_on:  ${shop_orders.subscription_id} = ${contact_subscriptions.subscription_id} AND ${shop_order_items.product_id} = ${contact_subscriptions.product_id};;
 #     view_label: "Subscriptions"
@@ -97,4 +97,9 @@ explore: contact_subscriptions {
     relationship: many_to_one
     view_label: "Recurly"
   }
+}
+
+
+explore:  pdt_user_fact {
+  hidden: yes
 }
