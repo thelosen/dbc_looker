@@ -2,7 +2,7 @@ view: pdt_customer_fact {
   derived_table: {
     distribution: "EVEN"
     sortkeys: ["user_id"]
-    sql_trigger_value: SELECT COUNT(*) FROM ${shop_orders.SQL_TABLE_NAME}
+    sql_trigger_value: SELECT COUNT(*) FROM ${shop_orders.SQL_TABLE_NAME};;
     sql: select
       users.user_id
       , sum(shop_orders.subtotal) as lifetime_revenue
@@ -51,7 +51,7 @@ view: pdt_customer_fact {
   dimension: average_order_amount {
     type: number
     sql: ${TABLE}.average_order_amount ;;
-    value_format_name: usd_2
+    value_format_name: usd
   }
 
   dimension: lifetime_revenue_grouping {
@@ -83,7 +83,7 @@ view: pdt_customer_fact {
   dimension: lifetime_revenue {
     type: number
     sql: ${TABLE}.lifetime_revenue ;;
-    value_format_name: usd_2
+    value_format_name: usd
   }
 
   measure: lifetime_order_count {
