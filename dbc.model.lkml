@@ -25,6 +25,7 @@ explore: shop_order_items {
     sql_on: ${shop_order_items.order_id} = ${shop_orders.id} ;;
     view_label: "Orders"
     relationship: many_to_one
+#     fields: [-order_total]
   }
 
   join: product {
@@ -96,6 +97,29 @@ explore: contact_subscriptions {
     sql_on: ${contact_subscriptions.subscription_id} = ${recurly_subscription.id} ;;
     relationship: many_to_one
     view_label: "Recurly"
+  }
+}
+
+
+### Cohort Explore
+# using shop_orders here. Some orders did not receive line itmes in the historic data
+explore: cohort_analysis {
+  from:  shop_orders
+  sql_always_where: (case
+              when carrier_charge is null and total_price is not null then true
+              when carrier_charge <> total_price then true
+             else false end) ;;
+
+  join: users {
+    sql_on: ${cohort_analysis.user_id} = ${users.id} ;;
+    view_label: "Users"
+    relationship: many_to_one
+  }
+
+  join:  pdt_user_fact {
+    sql_on:  ${cohort_analysis.user_id} = ${pdt_user_fact.id} ;;
+    view_label: "Users"
+    relationship: many_to_one
   }
 }
 

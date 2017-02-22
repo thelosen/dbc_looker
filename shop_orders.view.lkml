@@ -49,10 +49,10 @@ view: shop_orders {
            shipping_address_id,
            null as status,
            carrier,
-           carrier_charge,
-           total_price,
+           carrier_charge/100.0 as carrier_charge,
+           total_price/100.0 as total_price,
            null as subtotal,
-           tax_in_cents,
+           tax_in_cents/100.0 as tax_in_cents,
            null as shipwire_status,
            null as shipwire_summary,
            null as shipwire_summarydate,
@@ -65,7 +65,7 @@ view: shop_orders {
            null as deleted_at,
            _fivetran_deleted,
            _fivetran_synced
-      FROM v2_shop_orders ;;
+      FROM public.v2_shop_orders ;;
   }
 
   dimension: id {
@@ -230,4 +230,12 @@ view: shop_orders {
     type: sum
     sql: ${TABLE}.carrier_charge ;;
   }
+
+  measure: order_total {
+    type: sum
+    sql: cast(${TABLE}.total_price as float) ;;
+    value_format_name: usd
+    hidden: no
+  }
+
 }
