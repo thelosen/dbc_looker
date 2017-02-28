@@ -25,6 +25,7 @@ view: recurly_subscription {
   }
 
   dimension_group: canceled {
+    description: "Caution: Canceled date seems sparsely populated for canceled subscriptions."
     type: time
     timeframes: [
       raw,
@@ -124,6 +125,7 @@ view: recurly_subscription {
   }
 
   dimension_group: updated {
+    description: "Using updated to check for when users canceled a subscription due to sparse data fill on canceled at"
     type: time
     timeframes: [
       raw,

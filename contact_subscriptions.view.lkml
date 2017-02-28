@@ -199,7 +199,7 @@ view: contact_subscriptions {
     sql: ${user_id} ;;
     drill_fields: [user_detail*]
     filters: {
-      field: recurly_subscription.canceled_date
+      field: recurly_subscription.updated_date
       value: "7 days"
     }
     filters: {
