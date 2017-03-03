@@ -105,6 +105,8 @@ explore: contact_subscriptions {
 # using shop_orders here. Some orders did not receive line itmes in the historic data
 explore: cohort_analysis {
   from:  shop_orders
+  view_label: "Orders"
+  hidden: yes
   sql_always_where: (case
               when carrier_charge is null and total_price is not null then true
               when carrier_charge <> total_price then true
