@@ -301,6 +301,13 @@ view: recurly_subscription {
     sql: ${TABLE}.uuid ;;
   }
 
+########### Measures ###############
+
+  measure: recurly_subscription_amount {
+    type: sum
+    sql: ${TABLE}.unit_amount_in_cents/100.0 ;;
+    value_format_name: usd_0
+  }
 
   # ----- Sets of fields for drilling ------
   set: detail {
