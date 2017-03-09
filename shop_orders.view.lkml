@@ -47,7 +47,7 @@ view: shop_orders {
            user_order_count,
            billing_address_id,
            shipping_address_id,
-           null as status,
+           refund_check.status as status, --checking for historic refunds
            carrier,
            carrier_charge/100.0 as carrier_charge,
            total_price/100.0 as total_price,
@@ -59,13 +59,21 @@ view: shop_orders {
            null as shipwire_trackeddate,
            null as shipwire_last_topic,
            null as shipwire_delivereddate,
-           stripe_order_id,
+           v2_shop_orders.stripe_order_id,
            created_at,
            updated_at,
            null as deleted_at,
            _fivetran_deleted,
            _fivetran_synced
-      FROM public.v2_shop_orders ;;
+      FROM public.v2_shop_orders
+      LEFT JOIN (
+        SELECT DISTINCT
+          "_order".id as stripe_order_id
+          ,'migrated_order-refund' as status
+          FROM stripe."_order"
+          LEFT JOIN stripe."_charges" ON "_order".charge = "_charges".id
+          WHERE "_charges".refunded is true
+      ) as refund_check ON v2_shop_orders.stripe_order_id = refund_check.stripe_order_id;;
   }
 
   dimension: id {
