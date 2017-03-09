@@ -71,12 +71,12 @@ explore: users {
   label: "Users"
 
   join:  recurly_accounts {
-    sql_on:  ${users.user_id} = ${recurly_accounts.user_id} ;;
+    sql_on:  ${users.id} = ${recurly_accounts.user_id} ;;
     relationship: one_to_many
   }
 
   join: recurly_subscription {
-    sql_on: ${users.user_id} = ${recurly_subscription.user_id} ;;
+    sql_on: ${users.id} = ${recurly_subscription.user_id} ;;
     relationship: one_to_many
   }
 }
