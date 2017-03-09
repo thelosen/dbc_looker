@@ -69,6 +69,16 @@ explore: shop_order_items {
 explore: users {
   view_label: "Users"
   label: "Users"
+
+  join:  recurly_accounts {
+    sql_on:  ${users.user_id} = ${recurly_accounts.user_id} ;;
+    relationship: one_to_many
+  }
+
+  join: recurly_subscription {
+    sql_on: ${users.user_id} = ${recurly_subscription.user_id} ;;
+    relationship: one_to_many
+  }
 }
 
 explore: contact_subscriptions {

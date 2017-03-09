@@ -309,6 +309,68 @@ view: recurly_subscription {
     value_format_name: usd_0
   }
 
+  measure:  recurly_subscription_count {
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
+    measure: recurly_subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
+
+  measure: recurly_active_subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+    filters: {
+      field: recurly_subscription.recurly_active_or_future_state
+      value: "yes"
+    }
+    description: "Where recurly subscription state is active or future"
+  }
+
+  measure: recurly_7_day_new_subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+    filters: {
+      field: recurly_subscription.created_date
+      value: "7 days"
+    }
+    filters: {
+      field: recurly_subscription.recurly_active_or_future_state
+      value: "yes"
+    }
+    description: "Where recurly subscription state is active or future and recurly subscription created date is in the past seven days"
+  }
+
+  measure: recurly_7_day_cancelled_subscriber_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+    filters: {
+      field: recurly_subscription.canceled_date
+      value: "7 days"
+    }
+    filters: {
+      field: recurly_subscription.state
+      value: "canceled"
+    }
+    description: "Where recurly subscription state is canceled and recurly subscription canceled date is in the past seven days"
+  }
+
+  measure: recurly_7_day_net_subscriber_count {
+    type: number
+    sql: ${recurly_7_day_new_subscriber_count} - ${recurly_7_day_cancelled_subscriber_count} ;;
+    description: "New subscribers minus canceled subscribers"
+  }
+
+  measure: recurly_7_day_subscriber_churn {
+    type: number
+    sql: (1.0 * ${recurly_7_day_cancelled_subscriber_count}) / nullif(${recurly_active_subscriber_count},0) ;;
+    value_format: "0.00%"
+    description: "Canceled subscribers divided by Total Active Subscribers"
+  }
+
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
