@@ -160,6 +160,7 @@ view: contact_subscriptions {
     sql: ${TABLE}.amount_in_cents/100.0 ;;
     value_format_name: usd_0
     drill_fields: [user_detail*]
+    description: "possibly inaccurate, doesn't multiply quantity * amount"
   }
 
   measure: subscriber_count {
@@ -228,6 +229,14 @@ view: contact_subscriptions {
     type: sum
     sql: ${TABLE}.quantity ;;
     drill_fields: [user_detail*]
+  }
+
+  measure: total_units_price {
+    type: sum
+    sql: (${TABLE}.quantity * ${TABLE}.amount_in_cents/100.0) ;;
+    value_format_name: usd_0
+    drill_fields: [user_detail*]
+    description: "Unit Price * Unit Quantity"
   }
 
   # ----- Sets of fields for drilling ------
