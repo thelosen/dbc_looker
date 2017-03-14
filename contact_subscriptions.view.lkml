@@ -231,7 +231,7 @@ view: contact_subscriptions {
     drill_fields: [user_detail*]
   }
 
-  measure: total_units_price {
+  measure: total_product_price {
     type: sum
     sql: (${TABLE}.quantity * ${TABLE}.amount_in_cents/100.0) ;;
     value_format_name: usd_0
