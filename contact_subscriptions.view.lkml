@@ -224,6 +224,12 @@ view: contact_subscriptions {
     description: "Canceled subscribers divided by Total Active Subscribers"
   }
 
+  measure: product_quantity {
+    type: sum
+    sql: ${TABLE}.quantity ;;
+    drill_fields: [user_detail*]
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
