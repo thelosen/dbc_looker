@@ -376,11 +376,9 @@ view: recurly_subscription {
     fields: [
       id,
       contacts.id,
-      contacts.first_name,
-      contacts.last_name,
-      users.first_name,
-      users.last_name,
-      users.user_id
-    ]
+      users.user_id,
+      users.email,
+      recurly_accounts.account_code
+      ]
   }
 }
