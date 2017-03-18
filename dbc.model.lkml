@@ -70,21 +70,23 @@ explore: users {
   view_label: "Users"
   label: "Users"
 
-  join:  recurly_accounts {
-    sql_on:  ${users.id} = ${recurly_accounts.user_id} ;;
-    relationship: one_to_many
-  }
-
   join: recurly_subscription {
     sql_on: ${users.id} = ${recurly_subscription.user_id} ;;
     relationship: one_to_many
+  }
+
+  join:  recurly_accounts {
+    sql_on:  ${users.id} = ${recurly_accounts.user_id} ;;
+    relationship: one_to_one
+    sql_where: ${recurly_accounts.status} = "active"  ;;
   }
 
   join: contact_subscriptions {
     sql_on: ${recurly_subscription.id} = ${contact_subscriptions.subscription_id} ;;
     relationship: one_to_many
   }
-}
+
+ }
 
 explore: contact_subscriptions {
   label: "Subscriptions"
