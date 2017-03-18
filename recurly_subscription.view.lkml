@@ -383,7 +383,7 @@ view: recurly_subscription {
     fields: [
       id,
       contacts.id,
-      users.user_id,
+      users.id,
       users.email,
       recurly_accounts.account_code
       ]
