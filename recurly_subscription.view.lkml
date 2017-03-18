@@ -382,9 +382,8 @@ view: recurly_subscription {
   set: detail {
     fields: [
       id,
-      contacts.id,
-      users.id,
-      users.email,
+      recurly_subscription.user_id,
+      recurly_accounts.email,
       recurly_accounts.account_code
       ]
   }
