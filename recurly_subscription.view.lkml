@@ -312,11 +312,13 @@ view: recurly_subscription {
   measure:  recurly_subscription_count {
     type: count_distinct
     sql: ${id} ;;
+    drill_fields: [detail*]
   }
 
     measure: recurly_subscriber_count {
     type: count_distinct
     sql: ${user_id} ;;
+      drill_fields: [detail*]
   }
 
   measure: recurly_active_subscriber_count {
@@ -326,6 +328,7 @@ view: recurly_subscription {
       field: recurly_subscription.recurly_active_or_future_state
       value: "yes"
     }
+    drill_fields: [detail*]
     description: "Where recurly subscription state is active or future"
   }
 
@@ -340,6 +343,7 @@ view: recurly_subscription {
       field: recurly_subscription.recurly_active_or_future_state
       value: "yes"
     }
+    drill_fields: [detail*]
     description: "Where recurly subscription state is active or future and recurly subscription created date is in the past seven days"
   }
 
@@ -354,12 +358,14 @@ view: recurly_subscription {
       field: recurly_subscription.state
       value: "canceled"
     }
+    drill_fields: [detail*]
     description: "Where recurly subscription state is canceled and recurly subscription canceled date is in the past seven days"
   }
 
   measure: recurly_7_day_net_subscriber_count {
     type: number
     sql: ${recurly_7_day_new_subscriber_count} - ${recurly_7_day_cancelled_subscriber_count} ;;
+    drill_fields: [detail*]
     description: "New subscribers minus canceled subscribers"
   }
 
@@ -367,6 +373,7 @@ view: recurly_subscription {
     type: number
     sql: (1.0 * ${recurly_7_day_cancelled_subscriber_count}) / nullif(${recurly_active_subscriber_count},0) ;;
     value_format: "0.00%"
+    drill_fields: [detail*]
     description: "Canceled subscribers divided by Total Active Subscribers"
   }
 
