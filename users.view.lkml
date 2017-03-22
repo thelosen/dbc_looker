@@ -58,9 +58,9 @@ view: users {
       year
     ]
     sql:  (
-      SELECT min(r.created)
-      FROM recurly_subscription AS r
-      WHERE r.user_id = ${TABLE}.id
+      SELECT min(recurly_subscription.created)
+      FROM recurly_subscription
+      WHERE recurly_subscription.user_id = ${TABLE}.id
     ) ;;
   }
 
