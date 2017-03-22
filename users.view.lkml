@@ -60,7 +60,7 @@ view: users {
     sql:  (
       SELECT min(recurly_subscription.created)
       FROM recurly_subscription
-      WHERE recurly_subscription.user_id = ${TABLE}.id
+      WHERE ${TABLE}.id = recurly_subscription.user_id
     ) ;;
   }
 
