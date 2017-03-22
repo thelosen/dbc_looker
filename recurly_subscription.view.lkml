@@ -381,7 +381,8 @@ view: recurly_subscription {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-      recurly_subscription.user_id,
+      id,
+      user_id,
       users.email
             ]
   }
