@@ -48,6 +48,22 @@ view: users {
     sql: ${TABLE}.first_name ;;
   }
 
+  dimension_group: first_subscription_created_at {
+    type: time
+    timeframes: [
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql:  (
+      SELECT min(r.created)
+      FROM recurly_subscription AS r
+      WHERE r.user_id = ${TABLE}.id
+    ) ;;
+  }
+
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
@@ -98,6 +114,8 @@ view: users {
     type: string
     sql: ${TABLE}.user_avatar ;;
   }
+
+
 
   ################## Measures #################
 
