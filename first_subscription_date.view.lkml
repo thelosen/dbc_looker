@@ -1,4 +1,4 @@
-# cleaning up duplicates from recurly accounts table
+# getting the earliest subscription date for each user
 
 
 view: first_subscription_date {
