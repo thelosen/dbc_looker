@@ -19,7 +19,7 @@ view: recurly_accounts_limited {
 
   ##### Dimensions ###############
 
-dimension_group: created {
+dimension_group: first_created {
   type: time
   timeframes: [
     date,
@@ -28,7 +28,7 @@ dimension_group: created {
     quarter,
     year
   ]
-  sql: ${TABLE}.created_at ;;
+  sql: ${TABLE}.first_created ;;
 }
 
 
