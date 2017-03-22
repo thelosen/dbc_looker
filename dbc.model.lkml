@@ -77,8 +77,7 @@ explore: users {
 
   join:  recurly_accounts {
     sql_on:  ${users.id} = ${recurly_accounts.user_id} ;;
-    relationship: one_to_one
-    sql_where: ${recurly_accounts.status} = "active"  ;;
+    relationship: one_to_many
   }
 
   join: contact_subscriptions {
