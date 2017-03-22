@@ -1,7 +1,7 @@
-# cleaning up duplicates from recurly accounts table
+# working around duplicates from recurly accounts table
 
 
-view: recurly_accounts_limited {
+view: recurly_accounts_derived {
   derived_table: {
     distribution_style: even
     sortkeys: ["user_id"]

@@ -85,8 +85,13 @@ explore: users {
     relationship: one_to_many
   }
 
-  join:  recurly_accounts_limited {
-    sql_on:  ${users.id} = ${recurly_accounts_limited.user_id} ;;
+  join:  recurly_accounts_derived {
+    sql_on:  ${users.id} = ${recurly_accounts_derived.user_id} ;;
+    relationship: one_to_one
+  }
+
+  join: first_subscription_date {
+    sql_on:  ${users.id} = ${first_subscription_date.user_id} ;;
     relationship: one_to_one
   }
 }

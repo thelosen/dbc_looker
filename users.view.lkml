@@ -48,22 +48,6 @@ view: users {
     sql: ${TABLE}.first_name ;;
   }
 
-  dimension_group: first_subscription_created_at {
-    type: time
-    timeframes: [
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql:  (
-      SELECT min(recurly_subscription.created)
-      FROM recurly_subscription
-      WHERE ${TABLE}.id = recurly_subscription.user_id
-    ) ;;
-  }
-
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
