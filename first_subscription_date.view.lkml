@@ -36,7 +36,8 @@ view: first_subscription_date {
   }
 
   measure: count {
-    type: count
+    type: count_distinct
+    sql:${user_id};;
     drill_fields: [detail*]
   }
 
@@ -44,8 +45,7 @@ view: first_subscription_date {
 # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-      user_id,
-      users.email
+      user_id
         ]
   }
 }
