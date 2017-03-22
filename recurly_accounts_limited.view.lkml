@@ -1,18 +1,18 @@
 # cleaning up duplicates from recurly accounts table
 
 
-view: recurly_accounts_derived {
+view: recurly_accounts_limited {
   derived_table: {
     distribution_style: even
     sortkeys: ["id"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_accounts;;
     sql:
       SELECT
-        recurly_accounts1.user_id
-      , min(recurly_accounts1.created_at) as first_created
-      , min(recurly_accounts1.email) as email
+        user_id
+      , min(created_at) as first_created
+      , min(email) as email
       FROM mysql_heroku_app_db.recurly_accounts
-      GROUP BY recurly_accounts1.user_id
+      GROUP BY user_id
        ;;
   }
 
