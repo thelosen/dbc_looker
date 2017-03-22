@@ -4,7 +4,7 @@
 view: recurly_accounts_limited {
   derived_table: {
     distribution_style: even
-    sortkeys: ["id"]
+    sortkeys: ["user_id"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_accounts;;
     sql:
       SELECT
