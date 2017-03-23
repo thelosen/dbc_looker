@@ -1,4 +1,4 @@
-# getting the earliest subscription date for each user
+# getting the earliest subscription date and order date for each user
 
 
 view: first_subscription_date {
@@ -8,17 +8,17 @@ view: first_subscription_date {
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_subscription;;
     sql:
       SELECT
-        user_id
-      , min(created_at) as first_created
-      FROM mysql_heroku_app_db.recurly_subscription
-      GROUP BY user_id
-       ;;
+        recurly_subscription.user_id,
+        min(recurly_subscription.created_at) as first_created,
+        min(shop_orders.created_at) as first_order_created
+        FROM mysql_heroku_app_db.recurly_subscription
+        LEFT JOIN mysql_heroku_app_db.shop_orders ON recurly_subscription.user_id = shop_orders.user_id
+        GROUP BY user_id;;
   }
-
 
   ##### Dimensions ###############
 
-  dimension_group: first_created {
+  dimension_group: first__created {
     type: time
     timeframes: [
       date,
@@ -30,6 +30,17 @@ view: first_subscription_date {
     sql: ${TABLE}.first_created ;;
   }
 
+  dimension_group: first_order_created {
+    type: time
+    timeframes: [
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.first_order_created ;;
+  }
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
