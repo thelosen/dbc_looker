@@ -18,7 +18,7 @@ view: first_subscription_date {
 
   ##### Dimensions ###############
 
-  dimension_group: first__created {
+  dimension_group: first_created {
     type: time
     timeframes: [
       raw,
