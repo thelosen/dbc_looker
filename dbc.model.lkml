@@ -96,7 +96,7 @@ explore: users {
   }
 
   join: shop_orders {
-    sql_on: ${first_subscription_date.user_id} = ${shop_orders.user_id};;
+    sql_on: ${first_subscription_date.user_id} = ${shop_orders.user_id} AND ${first_subscription_date.first_order_created_raw} = ${shop_orders.created_raw} ;;
     view_label: "First Order"
     relationship: many_to_one
   }
