@@ -246,4 +246,8 @@ view: shop_orders {
     hidden: no
   }
 
+  measure: order_subtotal {
+    type: sum
+    sql: ${TABLE}.subtotal ;;
+  }
 }
