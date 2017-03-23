@@ -94,7 +94,14 @@ explore: users {
     sql_on:  ${users.id} = ${first_subscription_date.user_id} ;;
     relationship: one_to_one
   }
-}
+
+  join: shop_orders {
+    sql_on: ${first_subscription_date.user_id} = ${shop_orders.user_id};;
+    view_label: "First Order"
+    relationship: many_to_one
+  }
+
+  }
 
 explore: contact_subscriptions {
   label: "Subscriptions"

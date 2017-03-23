@@ -21,6 +21,7 @@ view: first_subscription_date {
   dimension_group: first__created {
     type: time
     timeframes: [
+      raw,
       date,
       week,
       month,
@@ -33,6 +34,7 @@ view: first_subscription_date {
   dimension_group: first_order_created {
     type: time
     timeframes: [
+      raw,
       date,
       week,
       month,
