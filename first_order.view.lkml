@@ -8,7 +8,15 @@
       sql:
       SELECT *
       FROM mysql_heroku_app_db.shop_orders
-      WHERE shop_orders.user_id = ${first_subscription_date.user_id} AND shop_orders.created_at = ${first_subscription_date.first_order_created_raw};;
+      INNER JOIN
+        (SELECT
+        recurly_subscription.user_id,
+        min(recurly_subscription.created_at) as first_created,
+        min(shop_orders.created_at) as first_order_created
+        FROM mysql_heroku_app_db.recurly_subscription
+        LEFT JOIN mysql_heroku_app_db.shop_orders ON recurly_subscription.user_id = shop_orders.user_id
+        GROUP BY recurly_subscription.user_id) FOD ON
+      shop_orders.user_id = FOD.user_id AND shop_orders.created_at = FOD.First_order_created;;
   }
 
   dimension: id {
