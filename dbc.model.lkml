@@ -96,7 +96,7 @@ explore: users {
   }
 
   join: first_order {
-    sql_on: ${first_order.user_id} = ${first_subscription_date.user_id} ;;
+    sql_on: ${users.id} = ${first_order.user_id} ;;
     view_label: "First Order"
     relationship: one_to_one
   }
