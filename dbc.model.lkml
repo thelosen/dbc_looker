@@ -95,13 +95,31 @@ explore: users {
     relationship: one_to_one
   }
 
-  join: shop_orders {
-    sql_on: ${first_subscription_date.user_id} = ${shop_orders.user_id} AND ${first_subscription_date.first_order_created_raw} = ${shop_orders.created_raw} ;;
+  join: first_order {
+    sql_on: ${users.id} = ${first_order.user_id};;
     view_label: "First Order"
-    relationship: many_to_one
+    relationship: one_to_one
   }
 
+  join: shop_orders {
+    sql_on: ${users.id} = ${shop_orders.user_id} ;;
+    view_label: "Orders"
+    relationship: one_to_many
   }
+
+  join: shop_order_items {
+    sql_on: ${shop_orders.id} = ${shop_order_items.order_id} ;;
+    view_label: "Orders"
+    relationship: one_to_many
+  }
+
+  join: product {
+    sql_on: ${shop_order_items.product_id} = ${product.id} ;;
+    view_label: "Products"
+    relationship: many_to_one
+  }
+}
+
 
 explore: contact_subscriptions {
   label: "Subscriptions"
