@@ -10,13 +10,13 @@
       FROM mysql_heroku_app_db.shop_orders
       INNER JOIN
         (SELECT
-        recurly_subscription.user_id,
+        recurly_subscription.user_id as user_id2,
         min(recurly_subscription.created_at) as first_created,
         min(shop_orders.created_at) as first_order_created
         FROM mysql_heroku_app_db.recurly_subscription
         LEFT JOIN mysql_heroku_app_db.shop_orders ON recurly_subscription.user_id = shop_orders.user_id
         GROUP BY recurly_subscription.user_id) FOD ON
-      shop_orders.user_id = FOD.user_id AND shop_orders.created_at = FOD.First_order_created;;
+      shop_orders.user_id = FOD.user_id2 AND shop_orders.created_at = FOD.First_order_created;;
   }
 
   dimension: id {
