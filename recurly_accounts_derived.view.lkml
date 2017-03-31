@@ -2,6 +2,7 @@
 
 
 view: recurly_accounts_derived {
+  label: "First Recurly Account"
   derived_table: {
     distribution_style: even
     sortkeys: ["user_id"]
