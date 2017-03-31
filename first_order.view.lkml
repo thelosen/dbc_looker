@@ -173,12 +173,14 @@
 ################# Measures #######################
   measure: tax_in_cents {
     type: sum
-    sql: ${TABLE}.tax_in_cents / 100.0 ;;
+    sql: cast((${TABLE}.tax_in_cents / 100.0)  as float);;
+    value_format_name: usd
   }
 
   measure: carrier_charge {
     type: sum
-    sql: ${TABLE}.carrier_charge ;;
+    sql: cast(${TABLE}.carrier_charge as float) ;;
+    value_format_name: usd
   }
 
   measure: order_total {
@@ -190,6 +192,7 @@
 
   measure: order_subtotal {
     type: sum
-    sql: ${TABLE}.subtotal ;;
+    sql: cast(${TABLE}.subtotal as float) ;;
+    value_format_name: usd
   }
 }
