@@ -171,7 +171,7 @@
 
 
 ################# Measures #######################
-  measure: tax_in_cents {
+  measure: tax {
     type: sum
     sql: cast((${TABLE}.tax_in_cents / 100.0)  as float);;
     value_format_name: usd
