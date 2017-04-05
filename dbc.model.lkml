@@ -118,6 +118,13 @@ explore: users {
     view_label: "Products"
     relationship: many_to_one
   }
+
+  join: shipping_address {
+    sql_on: ${shop_orders.shipping_address_id} = ${shipping_address.shipping_address_id} ;;
+    view_label: "Shipping Address"
+    relationship: many_to_one
+  }
+
 }
 
 
