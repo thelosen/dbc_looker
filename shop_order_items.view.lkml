@@ -20,7 +20,6 @@ view: shop_order_items {
              , deleted_at
              , _fivetran_deleted
              , _fivetran_synced
-             , shipping_address_id
       FROM mysql_heroku_app_db.shop_order_items
       UNION ALL
       SELECT
@@ -38,7 +37,6 @@ view: shop_order_items {
              , null as deleted_at
              , _fivetran_deleted
              , _fivetran_synced
-             , null as shipping_address_id
       FROM public.v2_shop_order_items
       ;;
   }
@@ -110,11 +108,6 @@ view: shop_order_items {
     type:  number
     sql: ${TABLE}.price;;
     value_format_name: usd_0
-  }
-
-  dimension: shipping_address_id {
-    type: number
-    sql: ${TABLE}.shipping_address_id ;;
   }
 
 ################## Measures #######################
