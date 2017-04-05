@@ -7,7 +7,7 @@
               shop_orders.shipping_address_id
               , contact_addresses.country_iso
               , contact_addresses.state_iso
-              , contact_addreses.zip
+              , contact_addresses.zip
               FROM ${shop_orders.SQL_TABLE_NAME} as shop_orders
                 LEFT JOIN mysql_heroku_app_db.contact_addresses ON shop_orders.shipping_address_id = contact_addresses.id;;
     }
