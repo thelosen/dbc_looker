@@ -229,7 +229,7 @@ view: shop_orders {
 
 
 ################# Measures #######################
-  measure: tax_in_cents {
+  measure: tax {
     type: sum
     sql: ${TABLE}.tax_in_cents / 100.0 ;;
   }
