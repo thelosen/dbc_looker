@@ -181,7 +181,8 @@ view: recurly_subscription {
     ]
     sql: CASE WHEN ${TABLE}.canceled_at NOT NULL THEN ${TABLE}.canceled_at
               WHEN ${TABLE}.canceled_at IS NULL AND ${TABLE}.expires_at NOT NULL THEN ${TABLE}.expires_at
-              ELSE NULL;;
+              ELSE NULL
+          END;;
   }
 
  ####################################
