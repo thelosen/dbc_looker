@@ -167,6 +167,23 @@ view: recurly_subscription {
     sql: ${TABLE}.trial_started_at ;;
   }
 
+  dimension_group: cancel_expire {
+    description: "cancel date or expire date if null"
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: CASE WHEN ${TABLE}.canceled_at NOT NULL THEN ${TABLE}.canceled_at
+              WHEN ${TABLE}.canceled_at IS NULL AND ${TABLE}.expires_at NOT NULL THEN ${TABLE}.expires_at
+              ELSE NULL;;
+  }
+
  ####################################
 
   dimension: bank_account_authorized_at {
