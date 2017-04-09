@@ -179,8 +179,8 @@ view: recurly_subscription {
       quarter,
       year
     ]
-    sql: CASE WHEN ${TABLE}.canceled_at NOT NULL THEN ${TABLE}.canceled_at
-              WHEN ${TABLE}.canceled_at IS NULL AND ${TABLE}.expires_at NOT NULL THEN ${TABLE}.expires_at
+    sql: CASE WHEN ${TABLE}.canceled_at IS NOT NULL THEN ${TABLE}.canceled_at
+              WHEN ${TABLE}.canceled_at IS NULL AND ${TABLE}.expires_at IS NOT NULL THEN ${TABLE}.expires_at
               ELSE NULL
           END;;
   }
