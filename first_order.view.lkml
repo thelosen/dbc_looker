@@ -66,58 +66,48 @@
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.shipwire_delivereddate ;;
-    view_label: "Shipwire"
   }
 
   dimension: shipwire_externalid {
     type: string
     sql: ${TABLE}.shipwire_externalid ;;
-    view_label: "Shipwire"
-    hidden: yes
   }
 
   dimension: shipwire_id {
     type: number
     sql: ${TABLE}.shipwire_id ;;
-    view_label: "Shipwire"
   }
 
   dimension: shipwire_last_topic {
     type: string
     sql: ${TABLE}.shipwire_last_topic ;;
-    view_label: "Shipwire"
   }
 
   dimension: shipwire_orderno {
     type: number
     sql: ${TABLE}.shipwire_orderno ;;
-    view_label: "Shipwire"
   }
 
   dimension: shipwire_status {
     type: string
     sql: ${TABLE}.shipwire_status ;;
-    view_label: "Shipwire"
   }
 
   dimension: shipwire_summary {
     type: string
     sql: ${TABLE}.shipwire_summary ;;
-    view_label: "Shipwire"
   }
 
   dimension_group: shipwire_summarydate {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.shipwire_summarydate ;;
-    view_label: "Shipwire"
   }
 
   dimension_group: shipwire_trackeddate {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.shipwire_trackeddate ;;
-    view_label: "Shipwire"
   }
 
   dimension: status {
