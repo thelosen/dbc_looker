@@ -126,7 +126,7 @@ explore: users {
   }
 
   join: recurly_transactions {
-    sql_on: ${shop_orders.id} = ${recurly_transactions.order_id};;
+    sql_on: ${recurly_subscription.uuid} = ${recurly_transactions.subscription_id};;
     view_label: "Recurly Transactions"
     relationship: one_to_many
   }
@@ -163,6 +163,22 @@ explore: contact_subscriptions {
   }
 }
 
+explore: recurly_transactions {
+  view_label: "Recurly Transactions"
+  label: "Recurly Transactions"
+
+  join: shop_orders {
+    sql_on: ${shop_orders.id} = ${recurly_transactions.order_id} ;;
+    view_label: "Orders"
+    relationship: one_to_many
+  }
+
+  join: shipping_address {
+    sql_on: ${shop_orders.shipping_address_id} = ${shipping_address.shipping_address_id} ;;
+    view_label: "Shipping Address"
+    relationship: many_to_one
+  }
+}
 
 ### Cohort Explore
 # using shop_orders here. Some orders did not receive line itmes in the historic data
