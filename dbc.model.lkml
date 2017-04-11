@@ -125,6 +125,12 @@ explore: users {
     relationship: many_to_one
   }
 
+  join: recurly_transactions {
+    sql_on: ${recurly_subscription.uuid} = ${recurly_transactions.subscription_id};;
+    view_label: "Shipping Address"
+    relationship: one_to_many
+  }
+
 }
 
 
