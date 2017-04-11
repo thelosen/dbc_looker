@@ -306,9 +306,18 @@ view: recurly_transactions {
     sql: ${TABLE}.voidable ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+########### Measures ###############
+
+  measure: Total_Amount {
+    type: sum
+    sql: ${TABLE}.amount_in_cents/100.0 ;;
+    value_format_name: usd_0
+  }
+
+  measure: Tax {
+    type: sum
+    sql: ${TABLE}.tax_in_cents/100.0 ;;
+    value_format_name: usd_0
   }
 
   # ----- Sets of fields for drilling ------
