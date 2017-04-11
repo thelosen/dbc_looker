@@ -126,7 +126,7 @@ explore: users {
   }
 
   join: recurly_transactions {
-    sql_on: ${recurly_subscription.uuid} = ${recurly_transactions.subscription_id};;
+    sql_on: ${shop_orders.id} = ${recurly_transactions.order_id};;
     view_label: "Recurly Transactions"
     relationship: one_to_many
   }
