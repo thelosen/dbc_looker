@@ -110,11 +110,6 @@ view: shop_order_items {
     value_format_name: usd_0
   }
 
-  dimension: number_of_products {
-    type: number
-    sql: COUNT(${TABLE}.product_id) WHERE ${TABLE}.order_id = ${TABLE}.order_id;;
-  }
-
 ################## Measures #######################
 
   # used to calculate revenue for a given item sold
