@@ -131,6 +131,12 @@ explore: users {
     relationship: one_to_many
   }
 
+  join: item_count_per_order {
+    sql_on: ${item_count_per_order.order_id} = ${shop_orders.id} ;;
+    view_label: "Orders"
+    relationship: one_to_one
+  }
+
 }
 
 

@@ -16,6 +16,7 @@ view: item_count_per_order {
 
   dimension: order_id {
     primary_key: yes
+    hidden: yes
     type: number
     sql: ${TABLE}.order_id ;;
   }
@@ -23,14 +24,6 @@ view: item_count_per_order {
   dimension: item_count {
     type: number
     sql: ${TABLE}.item_count ;;
-  }
-
-################## Measures #######################
-
-  measure: count_of_orders {
-    type: count_distinct
-    sql: ${TABLE}.order_id ;;
-    description: "Distinct count of order IDs"
   }
 
 }
