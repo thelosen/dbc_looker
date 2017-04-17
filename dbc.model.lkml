@@ -137,6 +137,11 @@ explore: users {
     relationship: one_to_one
   }
 
+  join: kit_customer {
+    sql_on: ${kit_customer.user_id}= ${users.id};;
+    view_label: "Users"
+    relationship: one_to_one
+  }
 }
 
 
