@@ -136,4 +136,10 @@ view: shop_order_items {
     sql: ${TABLE}.order_id ;;
     description: "Distinct count of order IDs"
   }
+
+  measure: count_of_items {
+    type: count_distinct
+    sql: ${TABLE}.product_id ;;
+    description: "Distinct count of product ID"
+  }
 }
