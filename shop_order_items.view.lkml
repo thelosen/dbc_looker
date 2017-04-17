@@ -133,6 +133,7 @@ view: shop_order_items {
 
   measure: count_of_orders {
     type: count_distinct
+    drill_fields: [detail*]
     sql: ${TABLE}.order_id ;;
     description: "Distinct count of order IDs"
   }
@@ -143,5 +144,11 @@ view: shop_order_items {
     description: "Distinct count of product IDs"
   }
 
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      order_id
+    ]
+  }
 
 }
