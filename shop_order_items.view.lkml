@@ -139,10 +139,10 @@ view: shop_order_items {
   }
 
   measure: count_of_items {
-    type: count_distinct
-    sql: ${TABLE}.product_id ;;
-    description: "Distinct count of product IDs"
+    type: count
+    description: "Count of items"
   }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
