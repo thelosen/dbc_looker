@@ -10,12 +10,12 @@ view: combination {
   }
 
   dimension: SKU {
-    type: number
+    type: string
     sql: ${TABLE}.sku ;;
     }
 
   dimension: combo_sku {
-    type: number
+    type: string
     sql: ${TABLE}.combo_sku ;;
   }
 
