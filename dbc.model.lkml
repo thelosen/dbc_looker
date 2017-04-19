@@ -142,6 +142,13 @@ explore: users {
     view_label: "Users"
     relationship: one_to_one
   }
+
+  join: combination {
+    sql_on: ${combination.Order_id} = ${shop_orders.id};;
+    view_label: "2-Product Combinations"
+    relationship: many_to_one
+
+  }
 }
 
 
