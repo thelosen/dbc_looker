@@ -103,6 +103,12 @@ view: pdt_user_fact {
     sql: ${TABLE}.lifetime_order_count ;;
   }
 
+  measure: user_count {
+    drill_fields: [detail*]
+    type: count_distinct
+    sql:  ${TABLE}.id ;;
+  }
+
 # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
