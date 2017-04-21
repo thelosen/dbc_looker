@@ -112,7 +112,7 @@ view: users {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-    users.id,
+      users.id,
       users.email,
       users.first_name,
       users.last_name,
@@ -122,7 +122,10 @@ view: users {
       contacts.city,
       contacts.state,
       contacts.zipcode,
-      contacts.country
+      contacts.country,
+      pdt_user_fact.lifetime_order_amount_dim,
+      pdt_user_fact.lifetime_order_count_dim,
+      pdt_user_fact.average_order_amount
     ]
   }
 }
