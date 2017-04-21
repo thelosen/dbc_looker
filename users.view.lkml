@@ -104,6 +104,7 @@ view: users {
   ################## Measures #################
 
   measure: user_count {
+    drill_fields: [detail*]
     type: count_distinct
     sql:  ${TABLE}.id ;;
   }
@@ -111,36 +112,17 @@ view: users {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-      user_id,
-      first_name,
-      last_name,
-      contacts.id,
-      contacts.first_name,
-      contacts.last_name,
-      _accounts_missing.count,
-      activations.count,
-      ambassadors.count,
-      contact_subscriptions.count,
-      contacts.count,
-      persistences.count,
-      product.count,
-      product_cart.count,
-      product_category.count,
-      product_kits.count,
-      recurly_accounts.count,
-      recurly_logs.count,
-      recurly_subscription.count,
-      reminders.count,
-      revisions.count,
-      role_users.count,
-      sessions.count,
-      shop_orders.count,
-      survey.count,
-      user_temp_cart_products.count,
-      v2_contact_subscription.count,
-      v2_contacts.count,
-      v2_shop_orders.count,
-      v2_users.count
+    users.id,
+      users.email,
+      users.first_name,
+      users.last_name,
+      users.phone_number,
+      contacts.address1,
+      contacts.address2,
+      contacts.city,
+      contacts.state,
+      contacts.zipcode,
+      contacts.country
     ]
   }
 }
