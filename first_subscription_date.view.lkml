@@ -8,8 +8,8 @@ view: first_subscription_date {
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_subscription;;
     sql:
       SELECT
-        user_id
-        min(created_at) as first_created,
+        user_id,
+        min(created_at) as first_created
         FROM (
           SELECT
           recurly_subscription.user_id as user_id,
