@@ -38,7 +38,6 @@ view: pdt_user_fact {
   dimension: lifetime_order_amount_dim {
     type: number
     sql: ${TABLE}.lifetime_order_amount ;;
-    hidden: yes
   }
 
   dimension_group: first_order {
@@ -56,8 +55,7 @@ view: pdt_user_fact {
   dimension: lifetime_order_count_dim {
     type: number
     sql: ${TABLE}.lifetime_order_count ;;
-    hidden: yes
-  }
+   }
 
   dimension: average_order_amount {
     type: number
