@@ -20,7 +20,7 @@ view: first_subscription_date {
           v2_contact_subscription.user_id as user_id,
           v2_contact_subscription.created_at as created_at
           FROM mysql_heroku_app_db.v2_contact_subscription)
-        GROUP BY recurly_subscription.user_id;;
+        GROUP BY user_id;;
   }
 
   ##### Dimensions ###############
