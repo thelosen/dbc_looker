@@ -94,11 +94,29 @@ view: pdt_user_fact {
   dimension: lifetime_revenue {
     type: number
     sql: ${TABLE}.lifetime_revenue ;;
+    drill_fields: [detail*]
     value_format_name: usd
   }
 
   measure: lifetime_order_count {
     type: sum
     sql: ${TABLE}.lifetime_order_count ;;
+  }
+
+# ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      users.id,
+      users.email,
+      users.first_name,
+      users.last_name,
+      users.phone_number,
+      contacts.address1,
+      contacts.address2,
+      contacts.city,
+      contacts.state,
+      contacts.zipcode,
+      contacts.country
+    ]
   }
 }
