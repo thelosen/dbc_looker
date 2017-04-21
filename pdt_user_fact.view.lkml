@@ -37,6 +37,7 @@ view: pdt_user_fact {
 
   dimension: lifetime_order_amount_dim {
     type: number
+    value_format_name: usd_0
     sql: ${TABLE}.lifetime_order_amount ;;
   }
 
