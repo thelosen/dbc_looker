@@ -154,6 +154,12 @@ explore: users {
     view_label: "User Fact"
     relationship: one_to_one
   }
+
+  join: contacts {
+    sql_on: ${users.id} = ${contacts.user_id} ;;
+    view_label: "Contacts"
+    relationship: one_to_one
+  }
 }
 
 
