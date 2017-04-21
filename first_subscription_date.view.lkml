@@ -19,7 +19,7 @@ view: first_subscription_date {
           SELECT
           v2_contact_subscription.user_id as user_id,
           v2_contact_subscription.created_at as created_at
-          FROM mysql_heroku_app_db.v2_contact_subscription)
+          FROM public.v2_contact_subscription)
         GROUP BY user_id;;
   }
 
