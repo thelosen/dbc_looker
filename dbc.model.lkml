@@ -220,6 +220,12 @@ explore: cohort_analysis {
     view_label: "Users"
     relationship: many_to_one
   }
+
+  join: contacts {
+    sql_on: ${cohort_analysis.user_id} = ${contacts.user_id} ;;
+    view_label: "Contacts"
+    relationship: many_to_one
+  }
 }
 
 
