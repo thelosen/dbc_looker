@@ -147,7 +147,12 @@ explore: users {
     sql_on: ${combination.Order_id} = ${shop_orders.id};;
     view_label: "2-Product Combinations"
     relationship: many_to_one
+  }
 
+  join:  pdt_user_fact {
+    sql_on:  ${users.id} = ${pdt_user_fact.id} ;;
+    view_label: "User Fact"
+    relationship: one_to_one
   }
 }
 
@@ -202,6 +207,7 @@ explore: recurly_transactions {
 # using shop_orders here. Some orders did not receive line itmes in the historic data
 explore: cohort_analysis {
   from:  shop_orders
+  hidden: yes
   view_label: "Orders"
   sql_always_where: (case
               when carrier_charge is null and total_price is not null then true
