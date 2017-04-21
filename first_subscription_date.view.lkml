@@ -8,11 +8,18 @@ view: first_subscription_date {
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_subscription;;
     sql:
       SELECT
-        recurly_subscription.user_id,
-        min(recurly_subscription.created_at) as first_created,
-        min(shop_orders.created_at) as first_order_created
-        FROM mysql_heroku_app_db.recurly_subscription
-        LEFT JOIN mysql_heroku_app_db.shop_orders ON recurly_subscription.user_id = shop_orders.user_id
+        user_id
+        min(created_at) as first_created,
+        FROM (
+          SELECT
+          recurly_subscription.user_id as user_id,
+          recurly_subscription.created_at as created_at
+          FROM mysql_heroku_app_db.recurly_subscription
+          UNION ALL
+          SELECT
+          v2_contact_subscription.user_id as user_id,
+          v2_contact_subscription.created_at as created_at
+          FROM mysql_heroku_app_db.v2_contact_subscription)
         GROUP BY recurly_subscription.user_id;;
   }
 
@@ -31,18 +38,6 @@ view: first_subscription_date {
     sql: ${TABLE}.first_created ;;
   }
 
-  dimension_group: first_order_created {
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.first_order_created ;;
-  }
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
