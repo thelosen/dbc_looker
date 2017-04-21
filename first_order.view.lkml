@@ -8,7 +8,7 @@
       sql:
      Select pdt_user_fact.id as pdt_user_id, pdt_user_fact.first_order_timestamp as pdt_first_order_created_at, shop_orders.id as id, shop_orders.total_price as total_price, shop_orders.subtotal as subtotal,
       FROM ${pdt_user_fact.SQL_TABLE_NAME} as pdt_user_fact
-      INNER JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON pdt_user_fact.id = shop_orders.user_id AND pdt_user_fact.first_order_timestamp = shop_orders.created_at;;
+      INNER JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON (pdt_user_fact.id = shop_orders.user_id AND pdt_user_fact.first_order_timestamp = shop_orders.created_at);;
 
   }
 
