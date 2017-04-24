@@ -46,4 +46,9 @@
     hidden: no
   }
 
+ measure: order_count {
+    type: count_distinct
+    sql: ${TABLE}.id ;;
+  }
+
 }
