@@ -195,11 +195,11 @@ view: recurly_subscription {
 
   dimension: subscription_period_days_grouping {
     type: string
-    sql: CASE WHEN ${TABLE}.subscription_period_days is NULL THEN 'NULL'
-      WHEN ${TABLE}.subscription_period_days < 46  THEN '0 to 45 days'
-      WHEN ${TABLE}.subscription_period_days < 91 THEN '46 to 90 days'
-      WHEN ${TABLE}.subscription_period_days < 121 THEN '91 to 120 days'
-      WHEN ${TABLE}.subscription_period_days < 181 THEN '121 to 180 days'
+    sql: CASE WHEN ${subscription_period_days} is NULL THEN 'NULL'
+      WHEN ${subscription_period_days} < 46  THEN '0 to 45 days'
+      WHEN ${subscription_period_days} < 91 THEN '46 to 90 days'
+      WHEN ${subscription_period_days} < 121 THEN '91 to 120 days'
+      WHEN ${subscription_period_days} < 181 THEN '121 to 180 days'
       ELSE '181 days+' END ;;
   }
 
