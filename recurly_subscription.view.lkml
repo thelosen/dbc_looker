@@ -125,7 +125,6 @@ view: recurly_subscription {
   }
 
   dimension_group: updated {
-    description: "Using updated to check for when users canceled a subscription due to sparse data fill on canceled at"
     type: time
     timeframes: [
       raw,
@@ -168,7 +167,7 @@ view: recurly_subscription {
   }
 
   dimension_group: cancel_expire {
-    description: "cancel date or expire date if null"
+    description: "expire date if cancel date is null - no longer using this methodology"
     hidden: yes
     type: time
     timeframes: [
@@ -192,6 +191,16 @@ view: recurly_subscription {
     type: number
     description: "Number of days between current period start and current period end"
     sql: DATEDIFF(day,${current_period_started_date},${current_period_ends_date});;
+  }
+
+  dimension: subscription_period_days_grouping {
+    type: string
+    sql: CASE WHEN ${TABLE}.subscription_period_days is NULL THEN 'NULL'
+      WHEN ${TABLE}.subscription_period_days < 46  THEN '0 to 45 days'
+      WHEN ${TABLE}.subscription_period_days < 91 THEN '46 to 90 days'
+      WHEN ${TABLE}.subscription_period_days < 121 THEN '91 to 120 days'
+      WHEN ${TABLE}.subscription_period_days < 181 THEN '121 to 180 days'
+      ELSE '181 days+' END ;;
   }
 
   dimension: bank_account_authorized_at {
