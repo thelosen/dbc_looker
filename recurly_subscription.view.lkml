@@ -188,6 +188,12 @@ view: recurly_subscription {
 
  ####################################
 
+  dimension: subscription_period_days {
+    type: number
+    description: "Number of days between current period start and current period end"
+    sql: DATEDIFF(day,${current_period_started_date},${current_period_ends_date});;
+  }
+
   dimension: bank_account_authorized_at {
     type: string
     sql: ${TABLE}.bank_account_authorized_at ;;
