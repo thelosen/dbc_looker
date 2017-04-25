@@ -25,7 +25,7 @@ view: recurly_subscription {
   }
 
   dimension_group: canceled {
-    description: "Caution: Canceled date seems sparsely populated for canceled subscriptions."
+    description: "Caution: Canceled_at timestamp may need regular syncing with recurly."
     type: time
     timeframes: [
       raw,
@@ -169,6 +169,7 @@ view: recurly_subscription {
 
   dimension_group: cancel_expire {
     description: "cancel date or expire date if null"
+    hidden: yes
     type: time
     timeframes: [
       raw,
