@@ -226,6 +226,8 @@ view: recurly_subscription {
 
   dimension: paused_subscription {
     type: yesno
+    hidden: yes
+    description: "methodology no longer supported"
     sql: DATEDIFF(day,${current_period_started_date},${current_period_ends_date}) between 55 and 65 ;;
   }
 
