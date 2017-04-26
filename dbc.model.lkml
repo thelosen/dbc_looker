@@ -1,7 +1,7 @@
 connection: "redshift"
 
 label: "Version 3.0"
-persist_for: "5 minutes"
+persist_for: "30 minutes"
 # include all the views
 include: "*.view"
 
@@ -67,6 +67,7 @@ explore: shop_order_items {
 }
 
 explore: users {
+  persist_for: "5 minutes"
   view_label: "Users"
   label: "Users"
 
