@@ -1,7 +1,7 @@
 connection: "redshift"
 
 label: "Version 3.0"
-persist_for: "4 hours"
+persist_for: "5 minutes"
 # include all the views
 include: "*.view"
 
