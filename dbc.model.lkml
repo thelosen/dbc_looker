@@ -150,6 +150,12 @@ explore: users {
     relationship: many_to_one
   }
 
+  join: combination_2 {
+    sql_on: ${combination_2.Order_id} = ${shop_orders.id};;
+    view_label: "3-Product Combinations"
+    relationship: many_to_one
+  }
+
   join:  pdt_user_fact {
     sql_on:  ${users.id} = ${pdt_user_fact.id} ;;
     view_label: "User Fact"
