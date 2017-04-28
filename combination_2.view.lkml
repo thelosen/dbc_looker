@@ -1,0 +1,50 @@
+view: combination_2 {
+  derived_table: {
+    distribution_style: even
+    sortkeys: ["order_id"]
+    sql_trigger_value:  SELECT COUNT(*) FROM mysql_heroku_app_db.shop_order_items;;
+    sql:
+    SELECT shop_order_items.order_id, shop_order_items.product_id, shop_order_items_1.product_id AS combo, shop_order_items_2.product_id AS combo_2
+    FROM (mysql_heroku_app_db.shop_order_items INNER JOIN mysql_heroku_app_db.shop_order_items AS shop_order_items_1 ON shop_order_items.order_id = shop_order_items_1.order_id) INNER JOIN mysql_heroku_app_db.shop_order_items AS shop_order_items_2 ON shop_order_items_1.order_id = shop_order_items_2.order_id
+    WHERE (((shop_order_items_1.product_id)<>[shop_order_items].[product_id]) AND ((shop_order_items_2.product_id)<>[shop_order_items].[product_id] And (shop_order_items_2.product_id)<>[shop_order_items_1].[product_id]));;
+
+  }
+
+  dimension: product_id {
+    type: number
+    sql: ${TABLE}.product_id ;;
+  }
+
+  dimension: combo_product {
+    type: number
+    sql: ${TABLE}.combo ;;
+  }
+
+  dimension: combo_product_2 {
+    type: number
+    sql: ${TABLE}.combo_2 ;;
+  }
+
+  dimension: Order_id {
+    type: number
+    sql: ${TABLE}.order_id ;;
+  }
+
+################## Measures #######################
+
+  measure: count_of_orders {
+    type: count_distinct
+    drill_fields: [detail*]
+    sql: ${TABLE}.order_id ;;
+    description: "Distinct count of order IDs"
+  }
+
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      Order_id
+    ]
+  }
+
+}
