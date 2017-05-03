@@ -6,14 +6,15 @@ view: kit_initial_id {
     sortkeys: ["user_id"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.contact_subscriptions;;
     sql:SELECT DISTINCT first_subscription.user_id as user_id,
-            first_subscription.first_created as first_created,
-            kit_id.kit_id as kit_id
+            min(first_subscription.first_created) as first_created,
+            max(kit_id.kit_id) as kit_id
         FROM ((
           SELECT user_id,
             min(created_at) as first_created
           FROM mysql_heroku_app_db.contact_subscriptions
           GROUP BY user_id) first_subscription
-          INNER JOIN mysql_heroku_app_db.contact_subscriptions as kit_id ON (first_subscription.user_id = kit_id.user_id AND first_subscription.first_created = kit_id.created_at));;
+          INNER JOIN mysql_heroku_app_db.contact_subscriptions as kit_id ON (first_subscription.user_id = kit_id.user_id AND first_subscription.first_created = kit_id.created_at))
+        GROUP BY user_id;;
   }
 
   ##### Dimensions ###############
