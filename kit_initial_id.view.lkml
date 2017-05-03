@@ -14,7 +14,7 @@ view: kit_initial_id {
           FROM mysql_heroku_app_db.contact_subscriptions
           GROUP BY user_id) first_subscription
           INNER JOIN mysql_heroku_app_db.contact_subscriptions as kit_id ON (first_subscription.user_id = kit_id.user_id AND first_subscription.first_created = kit_id.created_at))
-        GROUP BY user_id;;
+        GROUP BY first_subscription.user_id;;
   }
 
   ##### Dimensions ###############
