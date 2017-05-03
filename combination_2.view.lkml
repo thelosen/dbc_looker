@@ -1,3 +1,4 @@
+# to get order counts for 3-item sku combinations
 view: combination_2 {
   derived_table: {
     distribution_style: even
