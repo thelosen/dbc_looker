@@ -5,7 +5,7 @@ view: kit_initial_id {
     distribution_style: even
     sortkeys: ["user_id"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.contact_subscriptions;;
-    sql:SELECT first_subscription.user_id as user_id,
+    sql:SELECT DISTINCT first_subscription.user_id as user_id,
             first_subscription.first_created as first_created,
             kit_id.kit_id as kit_id
         FROM ((
