@@ -33,6 +33,7 @@ view: kit_initial_id {
   }
 
   dimension: user_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.user_id ;;
   }

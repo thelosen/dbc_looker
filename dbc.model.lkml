@@ -67,7 +67,6 @@ explore: shop_order_items {
 }
 
 explore: users {
-  persist_for: "5 minutes"
   view_label: "Users"
   label: "Users"
 
@@ -248,6 +247,12 @@ explore: cohort_analysis {
   join: contacts {
     sql_on: ${cohort_analysis.user_id} = ${contacts.user_id} ;;
     view_label: "Contacts"
+    relationship: many_to_one
+  }
+
+  join: kit_initial_id {
+    sql_on: ${cohort_analysis.user_id}= ${kit_initial_id.user_id} ;;
+    view_label: "Users"
     relationship: many_to_one
   }
 }
