@@ -229,7 +229,7 @@ view: shop_orders {
 
   dimension: customer_month {
     type: number
-    sql: DATEDIFF(month, ${pdt_user_fact.first_order_month}, ${created_month};;
+    sql: DATEDIFF(month, ${pdt_user_fact.first_order_date}::date, ${created_date}::date;;
   }
 
 
