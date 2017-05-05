@@ -202,6 +202,12 @@ explore: contact_subscriptions {
     relationship: many_to_one
     view_label: "Recurly"
   }
+
+  join:  pdt_user_fact {
+    sql_on:  ${contact_subscriptions.user_id} = ${pdt_user_fact.id} ;;
+    view_label: "Users"
+    relationship: many_to_one
+  }
 }
 
 explore: recurly_transactions {
@@ -217,6 +223,12 @@ explore: recurly_transactions {
   join: shipping_address {
     sql_on: ${shop_orders.shipping_address_id} = ${shipping_address.shipping_address_id} ;;
     view_label: "Shipping Address"
+    relationship: many_to_one
+  }
+
+  join:  pdt_user_fact {
+    sql_on:  ${shop_orders.user_id} = ${pdt_user_fact.id} ;;
+    view_label: "Users"
     relationship: many_to_one
   }
 }

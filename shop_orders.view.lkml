@@ -227,6 +227,10 @@ view: shop_orders {
     sql: ${TABLE}.user_orders_count ;;
   }
 
+  dimension: customer_month {
+  type: number
+  sql: DATEDIFF(month, ${pdt_user_fact.first_order_raw}::date, ${TABLE}.created_at_raw}::date)
+  }
 
 ################# Measures #######################
   measure: tax {
