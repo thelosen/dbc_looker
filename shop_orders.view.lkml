@@ -255,4 +255,9 @@ view: shop_orders {
     type: sum
     sql: ${TABLE}.subtotal ;;
   }
+
+  measure: order_count {
+    type: count_distinct
+    sql: ${TABLE}.id ;;
+  }
 }
