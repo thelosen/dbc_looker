@@ -95,6 +95,14 @@ view: pdt_user_fact {
     sql: ${TABLE}.lifetime_revenue ;;
     drill_fields: [detail*]
     value_format_name: usd
+    description: "do not use - this doesnt appear to be a legit field"
+  }
+
+  measure: lifetime_order_amount {
+    type: sum
+    sql: ${TABLE}.lifetime_order_amount ;;
+    drill_fields: [detail*]
+    value_format_name: usd
   }
 
   measure: lifetime_order_count {
