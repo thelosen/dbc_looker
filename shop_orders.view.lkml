@@ -100,6 +100,14 @@ view: shop_orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension_group: created_no_conversion {
+    type: time
+    convert_tz: no
+    hidden: yes
+    timeframes: [time, date, week, month, raw]
+    sql: ${TABLE}.created_at ;;
+  }
+
   dimension_group: deleted {
     type: time
     timeframes: [time, date, week, month]
@@ -229,7 +237,7 @@ view: shop_orders {
 
   dimension: customer_month {
     type: number
-    sql: DATEDIFF(month, ${pdt_user_fact.first_order_raw}, ${created_raw});;
+    sql: DATEDIFF(month, ${pdt_user_fact.first_order_no_conversion_raw}, ${created_no_conversion_raw});;
   }
 
 

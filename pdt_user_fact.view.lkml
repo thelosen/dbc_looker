@@ -47,6 +47,14 @@ view: pdt_user_fact {
     sql: ${TABLE}.first_order_timestamp ;;
   }
 
+  dimension_group: first_order_no_conversion {
+    type: time
+    convert_tz: no
+    hidden: yes
+    timeframes: [date, week, month, raw]
+    sql: ${TABLE}.first_order_timestamp ;;
+  }
+
   dimension_group: most_recent_order {
     type: time
     timeframes: [date, week, month]
