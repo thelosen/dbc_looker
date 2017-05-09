@@ -270,7 +270,15 @@ view: shop_orders {
   }
 
   measure: user_count {
+    drill_fields: [detail*]
     type: count_distinct
     sql: ${TABLE}.user_id ;;
+  }
+
+# ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      user_id
+    ]
   }
 }
