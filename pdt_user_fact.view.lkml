@@ -112,6 +112,7 @@ view: pdt_user_fact {
   }
 
   measure: user_count {
+    hidden: yes
     drill_fields: [detail*]
     type: count_distinct
     sql:  ${TABLE}.id ;;
