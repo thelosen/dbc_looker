@@ -268,4 +268,9 @@ view: shop_orders {
     type: count_distinct
     sql: ${TABLE}.id ;;
   }
+
+  measure: user_count {
+    type: count_distinct
+    sql: ${TABLE}.user_id ;;
+  }
 }
