@@ -44,7 +44,7 @@ view: kit_initial_id {
               FROM ((
                 SELECT user_id, min(id) as id, min(created_at) as first_order_date
                 FROM  ${shop_orders.SQL_TABLE_NAME}
-                GROUP BY shop_orders.user_id) first_order
+                GROUP BY user_id) first_order
                 LEFT JOIN ${shop_order_items.SQL_TABLE_NAME} as kit_id ON first_order.id = kit_id.order_id)
                 GROUP BY first_order.user_id)) so
           ON cs.user_id = so.user_id;;
