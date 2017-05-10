@@ -3,22 +3,15 @@ view: kit_initial_id {
   derived_table: {
     distribution_style: even
     sortkeys: ["user_id"]
-    sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.contact_subscriptions;;
+    sql_trigger_value: SELECT COUNT(*) FROM ${shop_orders.SQL_TABLE_NAME};;
     sql:SELECT distinct user_id, min(kit_id) as kit_id
         FROM(
-          SELECT DISTINCT first_subscription.user_id as user_id, kit_id.kit_id as kit_id
-           FROM ((
-             SELECT user_id, min(id) as first_id
-             FROM mysql_heroku_app_db.contact_subscriptions
-             GROUP BY user_id) first_subscription
-            JOIN mysql_heroku_app_db.contact_subscriptions as kit_id ON (first_subscription.first_id = kit_id.id))
-        UNION
-         SELECT DISTINCT first_order.user_id as user_id, max(kit_id.kit_id) as kit_id
+        SELECT DISTINCT first_order.user_id as user_id, max(kit_id.kit_id) as kit_id
          FROM ((
           SELECT user_id, min(id) as id
-          FROM mysql_heroku_app_db.shop_orders
+          FROM ${shop_orders.SQL_TABLE_NAME}
           GROUP BY user_id) first_order
-          INNER JOIN mysql_heroku_app_db.shop_order_items as kit_id ON (first_order.id = kit_id.order_id))
+          INNER JOIN ${shop_order_items.SQL_TABLE_NAME} as kit_id ON (first_order.id = kit_id.order_id))
          GROUP BY first_order.user_id)
         GROUP BY user_id;;
 
