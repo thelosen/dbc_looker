@@ -6,7 +6,7 @@ view: kit_initial_id {
     sql_trigger_value: SELECT COUNT(*) FROM ${shop_orders.SQL_TABLE_NAME};;
     sql:
         SELECT DISTINCT user_id
-                , "initial_kit_id" =
+                , initial_kit_id =
                 CASE
                   WHEN first_created < '2016-10-31 00:00:00' THEN 0
                   WHEN kit_id IS NULL THEN 0
