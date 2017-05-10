@@ -11,8 +11,8 @@ view: kit_initial_id {
           ELSE NULL
           END as user_id
         , CASE
-          WHEN first_created IS NOT NULL AND <'2016-11-01 00:00:00' THEN 0
-          WHEN first_order_date IS NOT NULL AND <'2016-11-01 00:00:00' THEN 0
+          WHEN first_created <'2016-11-01 00:00:00' AND first_created IS NOT NULL THEN 0
+          WHEN first_order_date <'2016-11-01 00:00:00' AND first_order_date IS NOT NULL THEN 0
           WHEN cs_initial_kit_id IS NOT NULL THEN cs_initial_kit_id
           WHEN so_initial_kit_id IS NOT NULL THEN so_initial_kit_id
           ELSE 0
