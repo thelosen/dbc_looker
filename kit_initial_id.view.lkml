@@ -11,6 +11,8 @@ view: kit_initial_id {
           ELSE NULL
           END as user_id
         , CASE
+          WHEN first_created IS NOT NULL AND <'2016-11-01 00:00:00' THEN 0
+          WHEN first_order_date IS NOT NULL AND <'2016-11-01 00:00:00' THEN 0
           WHEN cs_initial_kit_id IS NOT NULL THEN cs_initial_kit_id
           WHEN so_initial_kit_id IS NOT NULL THEN so_initial_kit_id
           ELSE 0
@@ -18,13 +20,13 @@ view: kit_initial_id {
         FROM(
         --define rules for initial_kit_id from contact_subscriptions based on date
             SELECT DISTINCT user_id
-                , CASE
-                  WHEN first_created < '2016-10-31 00:00:00' THEN 0
-                  ELSE kit_id
-                  END as cs_initial_kit_id
+                , kit_id as cs_initial_kit_id
+                , first_created
             FROM(
           --define first subscription created and kit id for that subscription in contact_subscriptions there are no null values
-              SELECT DISTINCT first_subscription.user_id as user_id, max(kit_id.kit_id) as kit_id, min(created_at) as first_created
+              SELECT DISTINCT first_subscription.user_id as user_id
+              , max(kit_id.kit_id) as kit_id
+              , min(created_at) as first_created
               FROM ((
                 SELECT user_id, min(id) as id, min(created_at) as first_created
                 FROM mysql_heroku_app_db.contact_subscriptions
@@ -34,13 +36,13 @@ view: kit_initial_id {
         FULL OUTER JOIN
         --define rules for initial_kit_id from shop orders based on date
             (SELECT DISTINCT user_id
-                , CASE
-                  WHEN first_order_date < '2016-10-31 00:00:00' THEN 0
-                  ELSE kit_id
-                  END as so_initial_kit_id
+                , kit_id as so_initial_kit_id
+                , first_order_date
             FROM(
             --define first order created and kit id for that order from shop_order items
-              SELECT DISTINCT user_id, max(kit_id) as kit_id, min(first_order_date) as first_order_date
+              SELECT DISTINCT user_id
+              , max(kit_id) as kit_id
+              , min(first_order_date) as first_order_date
               FROM ((
                 SELECT user_id, min(id) as id, min(created_at) as first_order_date
                 FROM  ${shop_orders.SQL_TABLE_NAME}
