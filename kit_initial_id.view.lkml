@@ -17,7 +17,7 @@ view: kit_initial_id {
         FROM((
           SELECT DISTINCT first_subscription.user_id as user_id, min(kit_id.kit_id) as kit_id, min(created_at) as first_created
           FROM ((
-            SELECT user_id, min(id) as first_subcription, min(created_at) as first_created
+            SELECT user_id, min(id) as id, min(created_at) as first_created
             FROM mysql_heroku_app_db.contact_subscriptions
             GROUP BY user_id) first_subscription
           INNER JOIN mysql_heroku_app_db.contact_subscriptions as kit_id ON (first_subscription.id = kit_id.id))
