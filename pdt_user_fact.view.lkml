@@ -14,6 +14,7 @@ view: pdt_user_fact {
       , max(shop_orders.created_at) as most_recent_order_timestamp
       , count(distinct shop_orders.id) as lifetime_order_count
       , avg(shop_orders.total_price) as average_order_amount
+      , min(shop_orders.id) as first_order_id
       FROM mysql_heroku_app_db.users
         LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON users.id = shop_orders.user_id
       WHERE 1=1
@@ -70,6 +71,11 @@ view: pdt_user_fact {
     type: number
     sql: ${TABLE}.average_order_amount ;;
     value_format_name: usd
+  }
+
+  dimension: first_order_id {
+    type: number
+    sql: ${TABLE}.first_order_id;;
   }
 
   dimension: lifetime_revenue_grouping {
