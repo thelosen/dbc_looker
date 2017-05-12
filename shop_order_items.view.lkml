@@ -83,13 +83,14 @@ view: shop_order_items {
   dimension: product_id {
     type: number
     sql: ${TABLE}.product_id ;;
-    hidden: no
+    hidden: yes
   }
 
   dimension: product_sku {
     type: string
     sql: ${TABLE}.product_sku ;;
-    hidden: yes
+    description: "Use for Pre V3 data only. Not currently accurate for V3"
+    hidden: no
   }
 
   dimension: type {
