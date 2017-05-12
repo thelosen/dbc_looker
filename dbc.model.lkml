@@ -297,12 +297,6 @@ explore: cohort_analysis {
     view_label: "Products"
     relationship: many_to_one
   }
-
-  join: shop_order_items_fact {
-    view_label: "Orders"
-    sql_on: ${cohort_analysis.id} = ${shop_order_items_fact.first_product_order_id} ;;
-    relationship: one_to_many
-  }
 }
 
 
