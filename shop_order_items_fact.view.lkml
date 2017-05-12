@@ -12,7 +12,7 @@ view: shop_order_items_fact {
       , count(distinct shop_order_items.id) as lifetime_product_order_count
       FROM ${shop_order_items.SQL_TABLE_NAME} as shop_order_items
         LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON shop_order_items.order_id = shop_orders.user_id
-      GROUP BY users.id, product_id
+      GROUP BY user_id, product_id
        ;;
   }
 
