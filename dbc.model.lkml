@@ -172,6 +172,12 @@ explore: users {
     view_label: "Contacts"
     relationship: one_to_one
   }
+
+  join: order_sequence {
+    sql_on: ${order_sequence.id} = ${shop_orders.id} ;;
+    view_label: "Orders"
+    relationship: one_to_one
+  }
 }
 
 

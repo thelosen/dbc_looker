@@ -40,14 +40,17 @@ view: order_sequence {
 
     ################## Measures #######################
 
-  measure: first_order_count {
-    type: count
-    sql:  ${TABLE}.order_sequence = 1;;
+  measure: renewal_order_count {
+    type: count_distinct
+    sql:  ${TABLE}.id;;
+    filters: {field:is_first_order value:"no"}
   }
 
-  measure: renewal_order_count {
-    type: count
-    sql:  ${TABLE}.order_sequence > 1;;
+  measure: first_order_count {
+    type: count_distinct
+    sql:  ${TABLE}.id;;
+    filters: {field:is_first_order value:"yes"}
   }
+
 
   }
