@@ -9,6 +9,7 @@ view: product {
   }
 
   dimension: benefits {
+    hidden: yes
     type: string
     sql: ${TABLE}.benefits ;;
   }
@@ -20,17 +21,20 @@ view: product {
   }
 
   dimension: comment {
+    hidden: yes
     type: string
     sql: ${TABLE}.comment ;;
   }
 
   dimension_group: created {
+    hidden: yes
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at ;;
   }
 
   dimension: currency {
+    hidden: yes
     type: string
     sql: ${TABLE}.currency ;;
   }
@@ -48,7 +52,7 @@ view: product {
     hidden: yes
   }
 
-  dimension: description {
+  dimension: product_description {
     type: string
     sql: ${TABLE}.description ;;
   }
@@ -59,18 +63,20 @@ view: product {
     sql: ${TABLE}.product_id ;;
   }
 
-  dimension: ingredients {
+  dimension: product_ingredients {
     type: string
     sql: ${TABLE}.ingredients ;;
   }
 
   dimension: is_disabled {
     type: yesno
+    hidden: yes
     sql: ${TABLE}.is_disabled ;;
   }
 
   dimension: is_tangible {
     type: yesno
+    hidden: yes
     sql: ${TABLE}.is_tangible ;;
   }
 
@@ -92,6 +98,7 @@ view: product {
 
   dimension: prevent_if_other {
     type: string
+    hidden: yes
     sql: ${TABLE}.prevent_if_other ;;
   }
 

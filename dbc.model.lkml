@@ -81,6 +81,7 @@ explore: users {
   }
 
   join: contact_subscriptions {
+    view_label: "Product Subscriptions"
     sql_on: ${recurly_subscription.id} = ${contact_subscriptions.subscription_id} ;;
     relationship: one_to_many
   }
@@ -115,13 +116,12 @@ explore: users {
 
   join: product {
     sql_on: ${shop_order_items.product_id} = ${product.id} ;;
-    view_label: "Products"
     relationship: many_to_one
   }
 
   join: shipping_address {
     sql_on: ${shop_orders.shipping_address_id} = ${shipping_address.shipping_address_id} ;;
-    view_label: "Shipping Address"
+    view_label: "Orders"
     relationship: many_to_one
   }
 
@@ -163,7 +163,7 @@ explore: users {
 
   join:  pdt_user_fact {
     sql_on:  ${users.id} = ${pdt_user_fact.id} ;;
-    view_label: "User Fact"
+    view_label: "Users"
     relationship: one_to_one
   }
 
@@ -178,6 +178,12 @@ explore: users {
     view_label: "Orders"
     relationship: one_to_one
   }
+
+  join: subscription_product {
+      from: product
+      sql_on: ${contact_subscriptions.product_id} = ${product.id} ;;
+      relationship: many_to_one
+    }
 }
 
 

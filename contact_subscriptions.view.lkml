@@ -92,8 +92,10 @@ view: contact_subscriptions {
   }
 
   dimension: product_sku {
+    description: "Many null values - do not use"
     type: string
     sql: ${TABLE}.product_sku ;;
+    hidden: yes
   }
 
   dimension: quantity {
