@@ -270,7 +270,13 @@ explore: cohort_analysis {
 
   join: shop_order_items {
     sql_on: ${shop_order_items.order_id} = ${cohort_analysis.id} ;;
-    view_label: "Orders"
+    view_label: "Products"
+    relationship: many_to_one
+  }
+
+  join: product {
+    sql_on: ${shop_order_items.product_id} = ${product.id} ;;
+    view_label: "Products"
     relationship: many_to_one
   }
 }
