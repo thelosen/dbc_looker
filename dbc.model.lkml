@@ -64,8 +64,8 @@ explore: shop_order_items {
   }
 
   join: subscriber_status {
-    sql_on: ${users.id} = ${subscriber_status.user_id} ;;
-    relationship: one_to_one
+    sql_on: ${recurly_subscription.user_id} = ${subscriber_status.user_id} ;;
+    relationship: many_to_one
   }
 
 #   join: contact_subscriptions {
@@ -202,8 +202,9 @@ explore: users {
     }
 
   join: subscriber_status {
-    sql_on: ${users.id} = ${subscriber_status.user_id} ;;
-    relationship: one_to_one
+    view_label: "Recurly_Subscription"
+    sql_on: ${recurly_subscription.user_id} = ${subscriber_status.user_id} ;;
+    relationship: many_to_one
   }
 }
 
@@ -320,8 +321,9 @@ explore: cohort_analysis {
   }
 
   join: subscriber_status {
-    sql_on: ${users.id} = ${subscriber_status.user_id} ;;
-    relationship: one_to_one
+    view_label: "Users"
+    sql_on: ${recurly_subscription.user_id} = ${subscriber_status.user_id} ;;
+    relationship: many_to_one
   }
 }
 
