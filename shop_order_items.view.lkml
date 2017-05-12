@@ -82,9 +82,8 @@ view: shop_order_items {
 
   dimension: product_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.product_id ;;
-    hidden: yes
+    hidden: no
   }
 
   dimension: product_sku {
