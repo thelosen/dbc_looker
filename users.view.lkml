@@ -54,6 +54,13 @@ view: users {
     hidden: yes
   }
 
+  dimension: active_subscriber {
+    type: yesno
+    sql: CASE WHEN ${recurly_subscription.state} IN ("active","future") THEN "YES"
+          ELSE "NO"
+           END;;
+  }
+
   dimension: is_set_password {
     type: string
     sql: ${TABLE}.is_set_password ;;
@@ -98,7 +105,6 @@ view: users {
     type: string
     sql: ${TABLE}.user_avatar ;;
   }
-
 
 
   ################## Measures #################

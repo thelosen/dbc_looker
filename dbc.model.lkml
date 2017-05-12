@@ -57,6 +57,11 @@ explore: shop_order_items {
     view_label: "Users"
     relationship: many_to_one
   }
+
+  join: recurly_subscription {
+    sql_on: ${users.id} = ${recurly_subscription.user_id} ;;
+    relationship: one_to_many
+  }
 #   join: contact_subscriptions {
 #     sql_on:  ${shop_orders.subscription_id} = ${contact_subscriptions.subscription_id} AND ${shop_order_items.product_id} = ${contact_subscriptions.product_id};;
 #     view_label: "Subscriptions"
@@ -296,6 +301,11 @@ explore: cohort_analysis {
     sql_on: ${shop_order_items.product_id} = ${product.id} ;;
     view_label: "Products"
     relationship: many_to_one
+  }
+
+  join: recurly_subscription {
+    sql_on: ${users.id} = ${recurly_subscription.user_id} ;;
+    relationship: one_to_many
   }
 }
 
