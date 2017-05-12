@@ -114,8 +114,11 @@ explore: users {
     relationship: one_to_many
   }
 
-  join: product {
-    sql_on: ${shop_order_items.product_id} = ${product.id} ;;
+  join: order_product {
+    from: product
+    view_label: "Orders"
+    sql_on: ${shop_order_items.product_id} = ${order_product.id} ;;
+    fields: [sku]
     relationship: many_to_one
   }
 
@@ -181,8 +184,10 @@ explore: users {
 
   join: subscription_product {
       from: product
-      sql_on: ${contact_subscriptions.product_id} = ${product.id} ;;
+      view_label: "Product Subscriptions"
+      sql_on: ${contact_subscriptions.product_id} = ${subscription_product.id} ;;
       relationship: many_to_one
+    fields: [sku]
     }
 }
 
