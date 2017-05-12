@@ -189,12 +189,6 @@ explore: users {
       relationship: many_to_one
     fields: [sku]
     }
-
-  join: shop_order_items_fact {
-    view_label: "Orders"
-    sql_on: ${shop_orders.id} = ${shop_order_items_fact.first_product_order_id} ;;
-    relationship: one_to_many
-  }
 }
 
 
@@ -254,6 +248,7 @@ explore: recurly_transactions {
     view_label: "Users"
     relationship: many_to_one
   }
+
 }
 
 ### Cohort Explore
@@ -301,6 +296,12 @@ explore: cohort_analysis {
     sql_on: ${shop_order_items.product_id} = ${product.id} ;;
     view_label: "Products"
     relationship: many_to_one
+  }
+
+  join: shop_order_items_fact {
+    view_label: "Orders"
+    sql_on: ${cohort_analysis.id} = ${shop_order_items_fact.first_product_order_id} ;;
+    relationship: one_to_many
   }
 }
 
