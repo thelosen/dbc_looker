@@ -56,7 +56,8 @@ view: users {
 
   dimension: active_subscriber {
     type: yesno
-    sql: CASE WHEN ${recurly_subscription.state} IN ("active","future") THEN "YES"
+    sql: CASE WHEN ${recurly_subscription.state} = "active" THEN "YES"
+              WHEN ${recurly_subscription.state} = "future" THEN "YES"
           ELSE "NO"
            END;;
   }
