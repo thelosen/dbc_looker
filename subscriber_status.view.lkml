@@ -4,22 +4,25 @@ view: subscriber_status {
     sortkeys: ["id"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.users;;
     sql:
-      SELECT all.id as user_id,
-            CASE WHEN status1 NOT NULL THEN status1
-              ELSE status2
+      SELECT subscribers.id as user_id,
+          CASE WHEN active.status IS NOT NULL THEN active.status
+              ELSE subscribers.status
               END as status
       FROM
-       (SELECT
-        DISTINCT users.id, 'active' as status1
-        FROM mysql_heroku_app_db.users as users
+       (SELECT DISTINCT users.id, 'active' as status
+        FROM mysql_heroku_app_db.users users
         LEFT JOIN mysql_heroku_app_db.recurly_subscription as recurly_subscription ON users.id = recurly_subscription.user_id
         WHERE recurly_subscription.state IN ('active','future')) active
+
       FULL OUTER JOIN
+
         (SELECT
-        DISTINCT users.id, 'inactive' as status2
-        FROM mysql_heroku_app_db.users as users
-        LEFT JOIN mysql_heroku_app_db.recurly_subscription as recurly_subscription ON users.id = recurly_subscription.user_id) all
-        ON active.id = all.id;;
+        DISTINCT users.id, 'inactive' as status
+        FROM mysql_heroku_app_db.users users
+        LEFT JOIN mysql_heroku_app_db.recurly_subscription as recurly_subscription ON users.id = recurly_subscription.user_id) subscribers
+        ON active.id = subscribers.id;;
+
+
   }
 
   ##### Dimensions ###############
