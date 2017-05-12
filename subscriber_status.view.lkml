@@ -4,7 +4,7 @@ view: subscriber_status {
     sortkeys: ["id"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.users;;
     sql:
-      SELECT subscribers.id as user_id,
+      SELECT subscribers.id as id,
           CASE WHEN active.status IS NOT NULL THEN active.status
               ELSE subscribers.status
               END as status
@@ -31,7 +31,7 @@ view: subscriber_status {
     primary_key: yes
     hidden: yes
     type: number
-    sql: ${TABLE}.user_id ;;
+    sql: ${TABLE}.id ;;
     }
 
   dimension: subscriber_recurly_status {
