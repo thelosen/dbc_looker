@@ -207,13 +207,6 @@ explore: users {
     sql_on: ${users.id} = ${subscriber_status.user_id} ;;
     relationship: one_to_one
   }
-
-  join: contact_subscription_status {
-  from:subscriber_status
-    view_label: "Product Subscriptions"
-    sql_on: ${users.id} = ${contact_subscriptions.user_id} ;;
-    relationship: one_to_many
-  }
 }
 
 
