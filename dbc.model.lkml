@@ -267,6 +267,12 @@ explore: cohort_analysis {
     view_label: "Users"
     relationship: many_to_one
   }
+
+  join: shop_order_items {
+    sql_on: ${shop_order_items.order_id} = ${cohort_analysis.id} ;;
+    view_label: "Orders"
+    relationship: many_to_one
+  }
 }
 
 
