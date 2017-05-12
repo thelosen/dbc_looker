@@ -189,6 +189,12 @@ explore: users {
       relationship: many_to_one
     fields: [sku]
     }
+
+  join: shop_order_items_fact {
+    view_label: "Orders"
+    sql_on: ${shop_orders.id} = ${shop_order_items_fact.first_product_order_id} ;;
+    relationship: one_to_many
+  }
 }
 
 
