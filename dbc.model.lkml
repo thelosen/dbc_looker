@@ -59,6 +59,7 @@ explore: shop_order_items {
   }
 
   join: recurly_subscription {
+    view_label:"Recurly Subscription"
     sql_on: ${users.id} = ${recurly_subscription.user_id} ;;
     relationship: one_to_many
   }
@@ -202,7 +203,7 @@ explore: users {
     }
 
   join: subscriber_status {
-    view_label: "Recurly_Subscription"
+    view_label: "Recurly Subscription"
     sql_on: ${recurly_subscription.user_id} = ${subscriber_status.user_id} ;;
     relationship: many_to_one
   }
