@@ -240,6 +240,15 @@ view: shop_orders {
     sql: DATEDIFF(month, ${pdt_user_fact.first_order_no_conversion_raw}, ${created_no_conversion_raw});;
   }
 
+  dimension: first_order_or_renewal {
+    description: "Counts earliest order as first order regardless of status"
+    type: yesno
+    sql: CASE WHEN ${TABLE}.id = ${pdt_user_fact.first_order_id} THEN "First Order"
+              WHEN ${TABLE}.id != ${pdt_user_fact.first_order_id} THEN "Renewal Order"
+              ELSE NULL
+        END;;
+  }
+
 
 ################# Measures #######################
   measure: tax {
@@ -273,6 +282,16 @@ view: shop_orders {
     drill_fields: [detail*]
     type: count_distinct
     sql: ${TABLE}.user_id ;;
+  }
+
+  measure: first_order_count {
+    type: count_distinct
+    sql: ${TABLE}.id = ${pdt_user_fact.first_order_id} ;;
+  }
+
+  measure: renewal_order_count {
+    type: count_distinct
+    sql: ${TABLE}.id != ${pdt_user_fact.first_order_id} ;;
   }
 
 # ----- Sets of fields for drilling ------
