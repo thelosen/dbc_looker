@@ -13,7 +13,7 @@ view: pdt_user_product_fact {
       FROM ${shop_order_items.SQL_TABLE_NAME} as shop_order_items
       LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON shop_order_items.order_id = shop_orders.id
       GROUP BY user_id, product_id
-      WHERE product_id IS NOT NULL
+      HAVING product_id >0
        ;;
   }
 
