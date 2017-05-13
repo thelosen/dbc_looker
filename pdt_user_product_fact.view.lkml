@@ -6,16 +6,16 @@ view: pdt_user_product_fact {
   derived_table: {
     distribution_style: even
     sortkeys: ["user_id"]
-    sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.shop_order_items;;
+    sql_trigger_value: SELECT COUNT(*) FROM ${shop_orders.SQL_TABLE_NAME};;
     sql: Select DISTINCT
       shop_orders.user_id
       , shop_order_items.product_id
-      , min(shop_orders_items.created_at) as first_product_order_timestamp
-      , max(shop_orders_items.created_at) as most_recent_product_order_timestamp
+      , min(shop_order_items.created_at) as first_product_order_timestamp
+      , max(shop_order_items.created_at) as most_recent_product_order_timestamp
       , count(distinct shop_order_items.id) as lifetime_product_order_count
-      , min(shop_orders_items.id) as first_product_order_id
-      FROM mysql_heroku_app_db.shop_order_items
-        LEFT JOIN mysql_heroku_app_db.shop_orders ON shop_order_items.order_id = shop_orders.id
+      , min(shop_order_items.id) as first_product_order_id
+      FROM ${shop_order_items.SQL_TABLE_NAME} as shop_order_items
+      JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON shop_order_items.order_id = shop_orders.id
       GROUP BY user_id, product_id
        ;;
   }
