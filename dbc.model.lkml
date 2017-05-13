@@ -214,6 +214,15 @@ explore: users {
     relationship: one_to_many
   }
 
+  join: product_fact_product {
+    from: product
+    view_label: "User Product Fact"
+    sql_on: ${pdt_user_product_fact.product_id} = ${product_fact_product.id} ;;
+    fields: [sku]
+    relationship: many_to_one
+  }
+
+
 
 }
 
