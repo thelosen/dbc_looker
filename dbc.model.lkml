@@ -207,6 +207,14 @@ explore: users {
     sql_on: ${users.id} = ${subscriber_status.user_id} ;;
     relationship: one_to_one
   }
+
+  join:  pdt_user_product_fact {
+    sql_on:  ${users.id} = ${pdt_user_product_fact.user_id} ;;
+    view_label: "User Product Fact"
+    relationship: one_to_many
+  }
+
+
 }
 
 
