@@ -27,7 +27,35 @@ view: shop_order_items {
              , order_id
              , TYPE
              , null as kit_id
-             , null as product_id
+             , CASE WHEN product_sku = 'DBC-WAX-105' THEN  8
+                    WHEN product_sku = 'DBC-VIT-160' THEN  13
+                    WHEN product_sku = 'DBC-SS-PIC-FREE' THEN  27
+                    WHEN product_sku = 'DBC-SS-PIC' THEN  18
+                    WHEN product_sku = 'DBC-SN-OIL-120' THEN  4
+                    WHEN product_sku = 'DBC-SN-OIL-105' THEN  3
+                    WHEN product_sku = 'DBC-SN-MUS-201-FREE' THEN  26
+                    WHEN product_sku = 'DBC-SN-MUS-201' THEN  25
+                    WHEN product_sku = 'DBC-SN-BLM-110' THEN  7
+                    WHEN product_sku = 'DBC-SMP-260' THEN  11
+                    WHEN product_sku = 'DBC-SMP-180' THEN  10
+                    WHEN product_sku = 'DBC-SH-101-XL' THEN  21
+                    WHEN product_sku = 'DBC-SH-101-M' THEN  19
+                    WHEN product_sku = 'DBC-SH-101-L' THEN  20
+                    WHEN product_sku = 'DBC-SH-101-2XL' THEN  22
+                    WHEN product_sku = 'DBC-OIL-120' THEN  2
+                    WHEN product_sku = 'DBC-OIL-105' THEN  1
+                    WHEN product_sku = 'DBC-MNY-FREE' THEN  17
+                    WHEN product_sku = 'DBC-MNY-201' THEN  16
+                    WHEN product_sku = 'DBC-HAT-101' THEN  23
+                    WHEN product_sku = 'DBC-GR-SPR-110' THEN  24
+                    WHEN product_sku = 'DBC-GR-OIL-110' THEN  12
+                    WHEN product_sku = 'DBC-CRM-120' THEN  6
+                    WHEN product_sku = 'DBC-CMB-201' THEN  14
+                    WHEN product_sku = 'DBC-BRS-201' THEN  15
+                    WHEN product_sku = 'DBC-BDY-180' THEN  9
+                    WHEN product_sku = 'DBC-BALM-110' THEN  5
+                ELSE NULL
+                END as product_id
              , product_sku
              , is_recurring
              , price/100.0 as price
