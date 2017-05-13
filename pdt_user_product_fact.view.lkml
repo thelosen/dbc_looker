@@ -15,7 +15,7 @@ view: pdt_user_product_fact {
       , count(distinct shop_order_items.id) as lifetime_product_order_count
       , min(shop_order_items.id) as first_product_order_id
       FROM ${shop_order_items.SQL_TABLE_NAME} as shop_order_items
-      JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON shop_order_items.order_id = shop_orders.id
+      LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON shop_order_items.order_id = shop_orders.id
       GROUP BY user_id, product_id
       HAVING product_id IS NOT NULL
        ;;
