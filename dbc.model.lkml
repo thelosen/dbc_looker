@@ -343,6 +343,20 @@ explore: cohort_analysis {
     sql_on: ${users.id} = ${subscriber_status.user_id} ;;
     relationship: one_to_one
   }
+
+  join:  pdt_user_product_fact {
+    sql_on:  ${cohort_analysis.user_id} = ${pdt_user_product_fact.user_id} ;;
+    view_label: "User Product Fact"
+    relationship: many_to_many
+  }
+
+  join: product_fact_product {
+    from: product
+    view_label: "User Product Fact"
+    sql_on: ${pdt_user_product_fact.product_id} = ${product_fact_product.id} ;;
+    fields: [sku]
+    relationship: many_to_one
+  }
 }
 
 
