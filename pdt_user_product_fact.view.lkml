@@ -31,7 +31,6 @@ view: pdt_user_product_fact {
   dimension: product_id {
     type: number
     sql: ${TABLE}.product_id ;;
-    hidden: yes
   }
 
   dimension_group: first_product_order {
