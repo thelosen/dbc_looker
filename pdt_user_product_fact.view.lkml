@@ -1,7 +1,3 @@
-# user fact table
-# basic min, max, first, last, lifetime metrics
-# doing some cleaning/exclusions to account for oddities
-
 view: pdt_user_product_fact {
   derived_table: {
     distribution_style: even
@@ -17,7 +13,7 @@ view: pdt_user_product_fact {
       FROM ${shop_order_items.SQL_TABLE_NAME} as shop_order_items
       LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON shop_order_items.order_id = shop_orders.id
       GROUP BY user_id, product_id
-      HAVING product_id IS NOT NULL
+      WHERE product_id IS NOT NULL
        ;;
   }
 
