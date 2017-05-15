@@ -124,7 +124,8 @@ view: users {
       contacts.country,
       pdt_user_fact.lifetime_order_amount_dim,
       pdt_user_fact.lifetime_order_count_dim,
-      pdt_user_fact.average_order_amount
+      pdt_user_fact.average_order_amount,
+      pdt_user_fact.most_recent_order_date
     ]
   }
 }
