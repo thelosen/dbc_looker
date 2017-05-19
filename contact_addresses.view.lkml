@@ -36,21 +36,21 @@ view: contact_addresses {
       FROM mysql_heroku_app_db.contact_addresses
     UNION ALL
       SELECT id,
-          _fivetran_deleted,
-          _fivetran_synced,
-          addressee,
-          city,
-          contact_id,
+          null as _fivetran_deleted,
+          null as _fivetran_synced,
+          null as addressee,
+          null as city,
+          null as contact_id,
           country_iso,
           null as country_name,
           null as created_at,
-          created_by,
+          null as created_by,
           null as deleted_at,
-          is_billing,
+          null as is_billing,
           null as is_default_billing,
           null as is_default_shipping,
-          is_primary,
-          is_shipping,
+          null as is_primary,
+          null as is_shipping,
           null  as latitude,
           null as longitude,
           null as name,
@@ -58,11 +58,11 @@ view: contact_addresses {
           null  as phone,
           null as sibling_id,
           state_iso,
-          state_name,
-          street,
-          street_extra,
+          null as state_name,
+          null as street,
+          null as street_extra,
           null as updated_at,
-          zip
+          null as zip
       FROM public.v2_contact_addresses;;
   }
 
