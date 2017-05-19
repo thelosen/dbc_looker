@@ -52,7 +52,7 @@ view: shop_orders {
            carrier_charge/100.0 as carrier_charge,
            total_price/100.0 as total_price,
            null as subtotal,
-           tax_in_cents/100.0 as tax_in_cents,
+           tax_in_cents,
            null as shipwire_status,
            null as shipwire_summary,
            null as shipwire_summarydate,
