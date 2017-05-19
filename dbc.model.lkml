@@ -135,8 +135,10 @@ explore: users {
   }
 
   join: shipping_address {
-    sql_on: ${shop_orders.shipping_address_id} = ${shipping_address.shipping_address_id} ;;
-    view_label: "Orders"
+    from: contact_addresses
+    sql_on: ${shop_orders.shipping_address_id} = ${shipping_address.id} ;;
+    fields: [state_iso, country_iso, zip]
+    view_label: "Order Shipping Address"
     relationship: many_to_one
   }
 
