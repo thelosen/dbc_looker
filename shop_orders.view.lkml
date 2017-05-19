@@ -240,6 +240,21 @@ view: shop_orders {
     sql: DATEDIFF(month, ${pdt_user_fact.first_order_no_conversion_raw}, ${created_no_conversion_raw});;
   }
 
+  dimension: is_before_mtd {
+    type: yesno
+    sql:
+      (EXTRACT(DAY FROM ${TABLE}.created_at) < EXTRACT(DAY FROM GETDATE())
+       OR
+      (EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM GETDATE()) AND
+      EXTRACT(HOUR FROM ${TABLE}.created_at) < EXTRACT(HOUR FROM GETDATE()))
+      OR
+      (EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM GETDATE()) AND
+      EXTRACT(HOUR FROM ${TABLE}.created_at) <= EXTRACT(HOUR FROM GETDATE()) AND
+      EXTRACT(MINUTE FROM ${TABLE}.created_at) < EXTRACT(MINUTE FROM GETDATE()))
+      );;
+  }
+
+
 
 ################# Measures #######################
   measure: tax {
