@@ -42,7 +42,7 @@ view: contact_addresses {
           city,
           contact_id,
           country_iso,
-          country_name,
+          null as country_name,
           null as created_at,
           created_by,
           null as deleted_at,
