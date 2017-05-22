@@ -58,7 +58,6 @@ view: order_sequence {
   }
 
   dimension: first_order_amount_grouping {
-      view_label: "pdt_user_fact"
       type: string
       sql:  CASE WHEN ${TABLE}.order_sequence = 1 AND ${TABLE}.total_price < 5 THEN '1. Under $5'
               WHEN  ${TABLE}.order_sequence = 1 AND ${TABLE}.total_price < 10 THEN '2. $5 - $9.99'
