@@ -359,6 +359,7 @@ explore: cohort_analysis {
     fields: [sku]
     relationship: many_to_one
   }
+
 }
 
 
