@@ -360,6 +360,12 @@ explore: cohort_analysis {
     relationship: many_to_one
   }
 
+  join: order_sequence {
+    sql_on: ${order_sequence.id} = ${cohort_analysis.id} ;;
+    view_label: "Orders"
+    relationship: one_to_one
+  }
+
 }
 
 
