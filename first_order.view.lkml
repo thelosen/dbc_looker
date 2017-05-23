@@ -61,12 +61,13 @@
     type: sum
     sql: cast(${TABLE}.total_price as float) ;;
     value_format_name: usd
-    hidden: no
+    hidden: yes
   }
 
  measure: order_count {
     type: count_distinct
     sql: ${TABLE}.id ;;
+    hidden:  yes
   }
 
 }
