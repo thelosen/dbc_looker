@@ -237,7 +237,7 @@ view: shop_orders {
 
   dimension: customer_month {
     type: number
-    sql: DATEDIFF(month, ${pdt_user_fact.first_order_no_conversion_raw}, ${created_no_conversion_raw});;
+    sql: DATEDIFF(month, ${pdt_user_fact.first_order_raw}, ${created_raw});;
   }
 
   dimension: is_before_mtd {

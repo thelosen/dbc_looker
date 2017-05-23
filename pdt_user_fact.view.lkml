@@ -58,7 +58,7 @@ view: pdt_user_fact {
 
   dimension_group: most_recent_order {
     type: time
-    timeframes: [date, week, month]
+    timeframes: [date, week, month, raw]
     sql: ${TABLE}.most_recent_order_timestamp ;;
   }
 
