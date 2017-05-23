@@ -366,6 +366,12 @@ explore: cohort_analysis {
     relationship: one_to_one
   }
 
+  join: first_order {
+    sql_on: ${users.id} = ${first_order.user_id} ;;
+    view_label: "First Order"
+    relationship: one_to_one
+  }
+
 }
 
 
