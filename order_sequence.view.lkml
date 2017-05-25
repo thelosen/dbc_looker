@@ -10,7 +10,7 @@ view: order_sequence {
           , ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at)
           as order_sequence
           , total_price
-          FROM ${shop_orders.SQL_TABLE_NAME});;
+          FROM ${shop_orders.SQL_TABLE_NAME};;
  }
 
   ################## Dimensions #######################
