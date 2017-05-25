@@ -19,15 +19,19 @@ view: order_sequence {
     type: number
     primary_key: yes
     hidden: yes
+    sql: ${TABLE}.id ;;
   }
 
   dimension: order_sequence {
     type:  number
+    sql: ${TABLE}.order_sequence ;;
   }
 
   dimension: user_id {
     type:  number
     hidden: yes
+    sql: ${TABLE}.user_id ;;
+
   }
 
   dimension: total_price {

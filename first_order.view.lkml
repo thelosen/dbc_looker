@@ -12,7 +12,7 @@
       order_sequence.created_at as created_at,
       order_sequence.total_price as total_price
       FROM ${order_sequence.SQL_TABLE_NAME} as order_sequence
-      WHERE order_sequence.sequence = 1;;
+      WHERE order_sequence.order_sequence = 1;;
 
   }
 
