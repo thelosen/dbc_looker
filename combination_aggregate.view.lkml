@@ -6,7 +6,7 @@ view: combination_aggregate {
     sql_trigger_value: SELECT COUNT(*) FROM ${item_count_per_order.SQL_TABLE_NAME};;
     sql:
     SELECT sku, combo_sku, combo_sku_2, combo_sku_3, combo_sku_4, combo_sku_5, order_id, item_count
-    FROM
+    FROM(
       SELECT product.sku as sku,
           null as combo_sku,
           null as combo_sku_2,
@@ -71,7 +71,7 @@ view: combination_aggregate {
           '6' as item_count,
           order_id
       FROM ${combination_5.SQL_TABLE_NAME} as t6
-      INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_6 ON (t6.order_id = item_count_6.order_id AND item_count_6.item_count = 6);;
+      INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_6 ON (t6.order_id = item_count_6.order_id AND item_count_6.item_count = 6));;
 
   }
 
@@ -133,5 +133,3 @@ view: combination_aggregate {
   }
 
 }
-
-
