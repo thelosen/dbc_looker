@@ -18,7 +18,7 @@ view: combination_aggregate {
       FROM (mysql_heroku_app_db.shop_order_items INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_1 ON (shop_order_items.order_id = item_count_1.order_id AND item_count_1.item_count = 1))
       INNER JOIN mysql_heroku_app_db.product ON shop_order_items.product_id = product.id
     UNION ALL
-      SELECT sku
+      SELECT sku,
           combo_sku,
           null as combo_sku_2,
           null as combo_sku_3,
@@ -29,7 +29,7 @@ view: combination_aggregate {
       FROM ${combination.SQL_TABLE_NAME} as t2
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_2 ON (t2.order_id = item_count_2.order_id AND item_count_2.item_count = 2)
     UNION ALL
-      SELECT sku
+      SELECT sku,
           combo_sku,
           combo_sku_2,
           null as combo_sku_3,
@@ -40,7 +40,7 @@ view: combination_aggregate {
       FROM ${combination_2.SQL_TABLE_NAME} as t3
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_3 ON (t3.order_id = item_count_3.order_id AND item_count_3.item_count = 3)
     UNION ALL
-      SELECT sku
+      SELECT sku,
           combo_sku,
           combo_sku_2,
           combo_sku_3,
@@ -51,7 +51,7 @@ view: combination_aggregate {
       FROM ${combination_3.SQL_TABLE_NAME} as t4
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_4 ON (t4.order_id = item_count_4.order_id AND item_count_4.item_count = 4)
     UNION ALL
-      SELECT sku
+      SELECT sku,
           combo_sku,
           combo_sku_2,
           combo_sku_3,
@@ -62,7 +62,7 @@ view: combination_aggregate {
       FROM ${combination_4.SQL_TABLE_NAME} as t5
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_5 ON (t5.order_id = item_count_5.order_id AND item_count_5.item_count = 5)
     UNION ALL
-      SELECT sku
+      SELECT sku,
           combo_sku,
           combo_sku_2,
           combo_sku_3,
