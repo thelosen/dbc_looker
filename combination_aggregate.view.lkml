@@ -2,7 +2,7 @@
 view: combination_aggregate {
   derived_table: {
     distribution_style: even
-    sortkeys: ["id"]
+    sortkeys: ["order_id"]
     sql_trigger_value: SELECT COUNT(*) FROM ${item_count_per_order.SQL_TABLE_NAME};;
     sql:
     SELECT sku, combo_sku, combo_sku_2, combo_sku_3, combo_sku_4, combo_sku_5, order_id, item_count
