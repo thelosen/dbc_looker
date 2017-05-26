@@ -14,7 +14,7 @@ view: combination_aggregate {
           null as combo_sku_4,
           null as combo_sku_5,
           '1' as item_count,
-          order_id
+          shop_order_items.order_id as order_id
       FROM (mysql_heroku_app_db.shop_order_items INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_1 ON (shop_order_items.order_id = item_count_1.order_id AND item_count_1.item_count = 1))
       INNER JOIN mysql_heroku_app_db.product ON shop_order_items.product_id = product.id
     UNION ALL
