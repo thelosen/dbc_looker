@@ -11,16 +11,19 @@ view: combination {
   }
 
   dimension: SKU {
+    hidden: yes
     type: string
     sql: ${TABLE}.sku ;;
     }
 
   dimension: combo_sku {
+    hidden: yes
     type: string
     sql: ${TABLE}.combo_sku ;;
   }
 
   dimension: Order_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.order_id ;;
     }
@@ -29,6 +32,7 @@ view: combination {
 ################## Measures #######################
 
   measure: count_of_orders {
+    hidden: yes
     type: count_distinct
     drill_fields: [detail*]
     sql: ${TABLE}.order_id ;;

@@ -76,41 +76,49 @@ view: combination_aggregate {
   }
 
   dimension: SKU {
+    hidden: yes
     type: string
     sql: ${TABLE}.sku ;;
   }
 
   dimension: combo_sku {
+    hidden: yes
     type: string
     sql: ${TABLE}.combo_sku ;;
   }
 
   dimension: combo_sku_2 {
+    hidden: yes
     type: string
     sql: ${TABLE}.combo_sku_2 ;;
   }
 
   dimension: combo_sku_3 {
+    hidden: yes
     type: string
     sql: ${TABLE}.combo_sku_3 ;;
   }
 
   dimension: combo_sku_4 {
+    hidden: yes
     type: string
     sql: ${TABLE}.combo_sku_4 ;;
   }
 
   dimension: combo_sku_5 {
+    hidden: yes
     type: string
     sql: ${TABLE}.combo_sku_5 ;;
   }
 
   dimension: Order_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.order_id ;;
   }
 
   dimension: item_count{
+    hidden: yes
     type: number
     sql: ${TABLE}.item_count ;;
   }
@@ -118,6 +126,7 @@ view: combination_aggregate {
 ################## Measures #######################
 
   measure: count_of_orders {
+    hidden: yes
     type: count_distinct
     drill_fields: [detail*]
     sql: ${TABLE}.order_id ;;
