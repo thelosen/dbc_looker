@@ -25,7 +25,7 @@ view: combination_aggregate {
           null as combo_sku_4,
           null as combo_sku_5,
           '2' as item_count,
-          order_id
+          t2.order_id as order_id
       FROM ${combination.SQL_TABLE_NAME} as t2
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_2 ON (t2.order_id = item_count_2.order_id AND item_count_2.item_count = 2)
     UNION ALL
@@ -36,7 +36,7 @@ view: combination_aggregate {
           null as combo_sku_4,
           null as combo_sku_5,
           '3' as item_count,
-          order_id
+          t3.order_id as order_id
       FROM ${combination_2.SQL_TABLE_NAME} as t3
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_3 ON (t3.order_id = item_count_3.order_id AND item_count_3.item_count = 3)
     UNION ALL
@@ -47,7 +47,7 @@ view: combination_aggregate {
           null as combo_sku_4,
           null as combo_sku_5,
           '4' as item_count,
-          order_id
+          t4.order_id as order_id
       FROM ${combination_3.SQL_TABLE_NAME} as t4
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_4 ON (t4.order_id = item_count_4.order_id AND item_count_4.item_count = 4)
     UNION ALL
@@ -58,7 +58,7 @@ view: combination_aggregate {
           combo_sku_4,
           null as combo_sku_5,
           '5' as item_count,
-          order_id
+          t5.order_id as order_id
       FROM ${combination_4.SQL_TABLE_NAME} as t5
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_5 ON (t5.order_id = item_count_5.order_id AND item_count_5.item_count = 5)
     UNION ALL
@@ -69,7 +69,7 @@ view: combination_aggregate {
           combo_sku_4,
           combo_sku_5,
           '6' as item_count,
-          order_id
+          t6.order_id as order_id
       FROM ${combination_5.SQL_TABLE_NAME} as t6
       INNER JOIN ${item_count_per_order.SQL_TABLE_NAME} AS item_count_6 ON (t6.order_id = item_count_6.order_id AND item_count_6.item_count = 6));;
 
