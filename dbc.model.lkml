@@ -154,8 +154,8 @@ explore: users {
     relationship: one_to_one
   }
 
-  join: kit_customer {
-    sql_on: ${kit_customer.user_id}= ${users.id};;
+  join: kit_initial_id {
+    sql_on: ${users.id}= ${kit_initial_id.user_id} ;;
     view_label: "Users"
     relationship: one_to_one
   }
