@@ -101,7 +101,7 @@ view: users {
 
   dimension: months_a_customer {
   type: number
-  sql: datediff(month, ${pdt_user_fact.first_order_raw}, ${pdt_user_fact.most_recent_order_raw});;
+  sql: datediff(month, ${pdt_user_fact.first_order_raw}, ${pdt_user_fact.most_recent_order_raw}) +1;;
   }
 
   ################## Measures #################
