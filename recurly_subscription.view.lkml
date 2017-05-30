@@ -25,7 +25,6 @@ view: recurly_subscription {
   }
 
   dimension_group: canceled {
-    description: "Caution: Canceled_at timestamp may need regular syncing with recurly."
     type: time
     timeframes: [
       raw,
@@ -419,7 +418,8 @@ view: recurly_subscription {
     fields: [
       id,
       user_id,
-      users.email
+      users.email,
+      uuid
             ]
   }
 }
