@@ -296,4 +296,11 @@ view: shop_orders {
       user_id
     ]
   }
+
+  set: order_detail {
+    fields: [
+      id,
+      created_date
+    ]
+    }
 }
