@@ -313,7 +313,6 @@ view: shop_orders {
     fields: [
       id,
       created_date,
-      created_raw,
       created_no_conversion_raw
     ]
     }
