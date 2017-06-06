@@ -246,17 +246,17 @@ view: shop_orders {
 
 
 
-      (EXTRACT(DAY FROM ${TABLE}.created_at) < EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+      (EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) < EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       OR
       (
-        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
-        EXTRACT(HOUR FROM ${TABLE}.created_at) < EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+        EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) < EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       )
       OR
       (
-        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
-        EXTRACT(HOUR FROM ${TABLE}.created_at) <= EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
-        EXTRACT(MINUTE FROM ${TABLE}.created_at) < EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+        EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) <= EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) < EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       )
     )
 
