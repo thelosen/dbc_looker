@@ -291,6 +291,7 @@ view: shop_orders {
   }
 
   measure: order_count {
+    drill_fields: [order_detail*]
     type: count_distinct
     sql: ${TABLE}.id ;;
   }
@@ -312,7 +313,8 @@ view: shop_orders {
     fields: [
       id,
       created_date,
-      created_raw
+      created_raw,
+      created_no_conversion_raw
     ]
     }
 }
