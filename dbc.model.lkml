@@ -242,6 +242,16 @@ explore: users {
     relationship: many_to_one
   }
 
+  join: recurly_billing_info {
+    sql_on: ${recurly_billing_info.account_code} = ${recurly_accounts.account_code} ;;
+    relationship: many_to_one
+  }
+
+  join: recurly_invoices {
+    sql_on: ${recurly_invoices.account_code} = ${recurly_accounts.account_code} ;;
+    relationship: many_to_one
+  }
+
 
 
 }
