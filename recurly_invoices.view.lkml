@@ -193,6 +193,6 @@ view: recurly_invoices {
 
   measure: count {
     type: count
-    drill_fields: [id, last_name, first_name]
+    drill_fields: [id, last_name, first_name, closed_date, date_date, state, total_in_cents, invoice_number, invoice_number_prefix, created_date, amount_remaining_in_cents, account_code]
   }
 }
