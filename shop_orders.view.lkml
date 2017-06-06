@@ -244,19 +244,20 @@ view: shop_orders {
     type: yesno
     sql:
 
-    (EXTRACT(DAY FROM ${TABLE}.created_at) < EXTRACT(DAY FROM CONVERT_TZ(GETDATE(),'UTC','PST'))
+     (EXTRACT(DAY FROM ${TABLE}.created_at) < EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())))
       OR
       (
-        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TZ(GETDATE(),'UTC','PST')) AND
-        EXTRACT(HOUR FROM ${TABLE}.created_at) < EXTRACT(HOUR FROM CONVERT_TZ(GETDATE(),'UTC','PST'))
+        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM ${TABLE}.created_at) < EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       )
       OR
       (
-        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TZ(GETDATE(),'UTC','PST')) AND
-        EXTRACT(HOUR FROM ${TABLE}.created_at) <= EXTRACT(HOUR FROM CONVERT_TZ(GETDATE(),'UTC','PST')) AND
-        EXTRACT(MINUTE FROM ${TABLE}.created_at) < EXTRACT(MINUTE FROM CONVERT_TZ(GETDATE(),'UTC','PST'))
+        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM ${TABLE}.created_at) <= EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(MINUTE FROM ${TABLE}.created_at) < EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       )
-    );;
+    )
+;;
   }
 
 
