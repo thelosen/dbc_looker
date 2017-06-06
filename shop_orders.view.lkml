@@ -243,20 +243,21 @@ view: shop_orders {
   dimension: is_before_mtd {
     type: yesno
     sql:
-
-     (EXTRACT(DAY FROM ${TABLE}.created_at) < EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())))
+      (EXTRACT(DAY FROM ${created_time}) < EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       OR
       (
-        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
-        EXTRACT(HOUR FROM ${TABLE}.created_at) < EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+        EXTRACT(DAY FROM ${created_time}) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM ${created_time}) < EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       )
       OR
       (
-        EXTRACT(DAY FROM ${TABLE}.created_at) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
-        EXTRACT(HOUR FROM ${TABLE}.created_at) <= EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
-        EXTRACT(MINUTE FROM ${TABLE}.created_at) < EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+        EXTRACT(DAY FROM ${created_time}) = EXTRACT(DAY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM ${created_time}) <= EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(MINUTE FROM ${created_time}) < EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
       )
     )
+
+
 ;;
   }
 
