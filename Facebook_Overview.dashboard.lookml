@@ -1,5 +1,5 @@
 - dashboard: facebook_overview
-  title: Facebook_Overview
+  title: Facebook Overview
   layout: grid
   rows:
     - elements: [total_impressions, total_spend]
@@ -93,12 +93,12 @@
     explore: facebook_ad_insights
     dimensions: [facebook_campaigns.name, facebook_adsets.end_date, facebook_adsets.effective_status,
       facebook_campaigns.objective]
-    measures: [facebook_ad_insights.total_actions, facebook_ad_insights.total_clicks,
+    measures: [facebook_ad_insights.total_clicks,
       facebook_ad_insights.total_reach, facebook_ad_insights.total_spend]
     dynamic_fields:
-    - table_calculation: cost_per_action
-      label: cost_per_action
-      expression: ${facebook_ad_insights.total_spend} / ${facebook_ad_insights.total_actions}
+    - table_calculation: cost_per_click
+      label: cost_per_click
+      expression: ${facebook_ad_insights.total_spend} / ${facebook_ad_insights.total_clicks}
     sorts: [facebook_campaigns.name]
     limit: 5000
     show_view_names: false
@@ -111,19 +111,19 @@
       date_start: facebook_ad_insights.date_start_date
 
   - name: campaign_value
-    title: Cost per action v. total actions by campaign
+    title: Cost per click v. total clicks by campaign
     type: looker_scatter
     model: dbc
     explore: facebook_ad_insights
     dimensions: [facebook_campaigns.name]
-    measures: [facebook_ad_insights.total_actions, facebook_ad_insights.total_spend]
+    measures: [facebook_ad_insights.clicks, facebook_ad_insights.total_spend]
     dynamic_fields:
-    - table_calculation: cost_per_action
-      label: Cost per action
-      expression: ${facebook_ad_insights.total_spend} / ${facebook_ad_insights.total_actions}
+    - table_calculation: cost_per_click
+      label: Cost per click
+      expression: ${facebook_ad_insights.total_spend} / ${facebook_ad_insights.total_clicks}
     hidden_fields: [facebook_ad_insights.total_spend, facebook_campaigns.name]
-    sorts: [cost_per_action desc]
-    description: 'Evaluate campaign performance by comparing the actions generated to the total spent on the campaign.'
+    sorts: [cost_per_click desc]
+    description: 'Evaluate campaign performance by comparing the clicks generated to the total spent on the campaign.'
     limit: 5000
     column_limit: 50
     stacking: ''
