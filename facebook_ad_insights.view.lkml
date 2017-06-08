@@ -18,6 +18,16 @@ view: facebook_ad_insights {
     sql: ${TABLE}.adset_id ;;
   }
 
+  dimension: app_store_clicks {
+    type: number
+    sql: ${TABLE}.app_store_clicks ;;
+  }
+
+  dimension: call_to_action_clicks {
+    type: number
+    sql: ${TABLE}.call_to_action_clicks ;;
+  }
+
   dimension: campaign_id {
     type: string
     sql: ${TABLE}.campaign_id ;;
@@ -26,21 +36,6 @@ view: facebook_ad_insights {
   dimension: campaign_name {
     type: string
     sql: ${facebook_campaigns.name} ;;
-  }
-
-  dimension: clicks {
-    type: number
-    sql: ${TABLE}.clicks ;;
-  }
-
-  dimension: cost_per_total_action {
-    type: number
-    sql: ${TABLE}.cost_per_total_action ;;
-  }
-
-  dimension: cpc {
-    type: number
-    sql: ${TABLE}.cpc ;;
   }
 
   dimension: cpm {
@@ -58,6 +53,12 @@ view: facebook_ad_insights {
     sql: ${TABLE}.ctr ;;
   }
 
+  dimension_group: date_end {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.date_end ;;
+  }
+
   dimension_group: date_start {
     type: time
     timeframes: [time, date, week, month]
@@ -70,6 +71,11 @@ view: facebook_ad_insights {
     sql: ${TABLE}.date_stop ;;
   }
 
+  dimension: deeplink_clicks {
+    type: number
+    sql: ${TABLE}.deeplink_clicks ;;
+  }
+
   dimension: frequency {
     type: number
     sql: ${TABLE}.frequency ;;
@@ -80,9 +86,44 @@ view: facebook_ad_insights {
     sql: ${TABLE}.impressions ;;
   }
 
+  dimension: inline_link_clicks {
+    type: number
+    sql: ${TABLE}.inline_link_clicks ;;
+  }
+
+  dimension: newsfeed_clicks {
+    type: number
+    sql: ${TABLE}.newsfeed_clicks ;;
+  }
+
+  dimension: newsfeed_impressions {
+    type: number
+    sql: ${TABLE}.newsfeed_impressions ;;
+  }
+
   dimension: reach {
     type: number
     sql: ${TABLE}.reach ;;
+  }
+
+  dimension: social_clicks {
+    type: number
+    sql: ${TABLE}.social_clicks ;;
+  }
+
+  dimension: social_impressions {
+    type: number
+    sql: ${TABLE}.social_impressions ;;
+  }
+
+  dimension: social_reach {
+    type: number
+    sql: ${TABLE}.social_reach ;;
+  }
+
+  dimension: social_spend {
+    type: number
+    sql: ${TABLE}.social_spend ;;
   }
 
   dimension: spend {
@@ -94,11 +135,6 @@ view: facebook_ad_insights {
   dimension: total_action_value {
     type: number
     sql: ${TABLE}.total_action_value ;;
-  }
-
-  dimension: actions {
-    type: number
-    sql: ${TABLE}.total_actions ;;
   }
 
   dimension: website_clicks {
@@ -113,20 +149,9 @@ view: facebook_ad_insights {
     drill_fields: []
   }
 
-  measure: total_actions {
-    type: sum
-    sql: ${TABLE}.total_actions ;;
-    drill_fields: [campaign_id]
-  }
-
   measure: total_reach {
     type: sum
     sql: ${TABLE}.reach ;;
-  }
-
-  measure: total_clicks {
-    type: sum
-    sql: ${TABLE}.clicks ;;
   }
 
   measure: total_impressions {
@@ -134,26 +159,72 @@ view: facebook_ad_insights {
     sql: ${TABLE}.impressions ;;
   }
 
-  measure: people_taking_action {
-    description: "The number of unique people who took an action such as liking your Page or installing your app as a result of your ad. For example, if the same person likes and comments on a post, they will be counted as 1 unique person."
-    type: sum
-    sql: ${TABLE}.total_unique_actions ;;
-  }
-
   measure: total_inline_link_clicks {
     type: sum
     sql: ${TABLE}.inline_link_clicks ;;
   }
 
-  #### NOTE: you will need to use the frequency column that appears in your dataset.
+  measure: total_app_store_clicks {
+    type: sum
+    sql: ${TABLE}.app_store_clicks ;;
+  }
+
+  measure: total_call_to_action_clicks {
+    type: sum
+    sql: ${TABLE}.call_to_action_clicks ;;
+  }
+
+  measure: total_deeplink_clicks {
+    type: sum
+    sql: ${TABLE}.deeplink_clicks ;;
+  }
+
+  measure: total_newsfeed_clicks {
+    type: sum
+    sql: ${TABLE}.newsfeed_clicks ;;
+  }
+
+  measure: total_newsfeed_impressions {
+    type: sum
+    sql: ${TABLE}.newsfeed_impressions ;;
+  }
+
+  measure: total_social_clicks {
+    type: sum
+    sql: ${TABLE}.social_clicks ;;
+  }
+
+  measure: total_social_impressions {
+    type: sum
+    sql: ${TABLE}.social_impressions ;;
+  }
+
+  measure: total_social_reach {
+    type: sum
+    sql: ${TABLE}.social_reach ;;
+  }
+
+  measure: total_social_spend {
+    type: sum
+    sql: ${TABLE}.social_spend ;;
+  }
+
+  measure: total_action_value_sum {
+    type: sum
+    sql: ${TABLE}.total_action_value ;;
+  }
+
+  measure: total_website_clicks {
+    type: sum
+    sql: ${TABLE}.website_clicks ;;
+  }
+
 
   measure: avg_frequency {
     description: "the average number of times your ad was served to each person"
     type: average
     sql: ${TABLE}.frequency ;;
   }
-
-  #### NOTE: you will need to use the cpm column that appears in your dataset.
 
   measure: avg_cpm {
     description: "The average cost you've paid to have 1,000 impressions on your ad."
@@ -162,8 +233,6 @@ view: facebook_ad_insights {
     value_format_name: usd
   }
 
-  #### NOTE: you will need to use the cpp column that appears in your dataset.
-
   measure: avg_cpp {
     description: "The average cost you've paid to have your ad served to 1,000 unique people."
     type: average
@@ -171,37 +240,21 @@ view: facebook_ad_insights {
     value_format_name: usd
   }
 
-  #### NOTE: you will need to use the spend column that appears in your dataset.
-
   measure: total_spend {
     type: sum
     sql: ${TABLE}.spend ;;
     value_format_name: usd
   }
 
-  #### NOTE: you will need to use the ctr column that appears in your dataset.
-
   measure: avg_ctr {
     type: average
     sql: ${TABLE}.ctr ;;
   }
 
-  #### NOTE: you will need to use the cpc column that appears in your dataset.
-
-  measure: avg_cpc {
-    type: average
-    sql: ${TABLE}.cpc ;;
-    value_format_name: usd
-  }
-
-  #### NOTE: you will need to use the inline link click ctr column that appears in your dataset.
-
   measure: avg_inline_link_click_ctr {
     type: average
     sql: ${TABLE}.inline_link_click_ctr ;;
   }
-
-  #### NOTE: you will need to use the cost per inline link click column that appears in your dataset.
 
   measure: avg_cost_per_inline_link_click {
     type: average
