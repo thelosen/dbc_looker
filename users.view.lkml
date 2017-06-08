@@ -15,7 +15,6 @@ view: users {
   dimension: cart_bail_token {
     type: string
     sql: ${TABLE}.cart_bail_token ;;
-    hidden: yes
   }
 
   dimension: contact_id {
