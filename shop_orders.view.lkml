@@ -96,7 +96,7 @@ view: shop_orders {
 
   dimension_group: created {
     type: time
-    timeframes: [time, date, week, month, raw, year]
+    timeframes: [time, date, week, month, raw, year,month_num,day_of_month,time_of_day,day_of_week,week_of_year]
     sql: ${TABLE}.created_at ;;
   }
 
