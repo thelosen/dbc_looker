@@ -2,7 +2,7 @@
   title: Facebook_Overview
   layout: grid
   rows:
-    - elements: [total_impressions, total_actions, total_spend]
+    - elements: [total_impressions, total_spend]
       height: 150
     - elements: [spend_actions_impressions]
       height: 400
@@ -39,20 +39,6 @@
       campaign_name: facebook_ad_insights.campaign_name
       date_start: facebook_ad_insights.date_start_date
 
-  - name: total_actions
-    title: Total actions
-    type: single_value
-    model: dbc
-    explore: facebook_ad_insights
-    measures: [facebook_ad_insights.total_actions]
-    sorts: [facebook_ad_insights.total_actions desc]
-    limit: 5000
-    show_single_value_title: true
-    show_comparison: false
-    listen:
-      campaign_name: facebook_ad_insights.campaign_name
-      date_start: facebook_ad_insights.date_start_date
-
   - name: total_spend
     title: Total spend
     type: single_value
@@ -73,7 +59,7 @@
     model: dbc
     explore: facebook_ad_insights
     dimensions: [facebook_ad_insights.date_start_month]
-    measures: [facebook_ad_insights.total_spend, facebook_ad_insights.total_actions,
+    measures: [facebook_ad_insights.total_spend,
       facebook_ad_insights.total_impressions]
     sorts: [facebook_ad_insights.date_start_month desc]
     limit: 5000
@@ -236,6 +222,3 @@
     listen:
       campaign_name: facebook_ad_insights.campaign_name
       date_start: facebook_ad_insights.date_start_date
-
-
-
