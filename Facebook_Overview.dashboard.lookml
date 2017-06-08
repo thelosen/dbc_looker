@@ -116,7 +116,7 @@
     model: dbc
     explore: facebook_ad_insights
     dimensions: [facebook_campaigns.name]
-    measures: [facebook_ad_insights.clicks, facebook_ad_insights.total_spend]
+    measures: [facebook_ad_insights.total_clicks, facebook_ad_insights.total_spend]
     dynamic_fields:
     - table_calculation: cost_per_click
       label: Cost per click
