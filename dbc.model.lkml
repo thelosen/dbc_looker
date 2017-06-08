@@ -406,7 +406,3 @@ explore: cohort_analysis {
 explore:  pdt_user_fact {
   hidden: yes
 }
-
-explore: facebook_insights {
-
-}
