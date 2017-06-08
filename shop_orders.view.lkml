@@ -261,6 +261,30 @@ view: shop_orders {
     )
 
 ;;
+}
+
+
+  dimension: is_before_ytd {
+    type: yesno
+    sql:
+
+
+
+      (EXTRACT(DOY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) < EXTRACT(DOY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+      OR
+      (
+        EXTRACT(DOY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) = EXTRACT(DOY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) < EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+      )
+      OR
+      (
+        EXTRACT(DOY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) = EXTRACT(DOY FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) <= EXTRACT(HOUR FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE())) AND
+        EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', ${TABLE}.created_at)) < EXTRACT(MINUTE FROM CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', GETDATE()))
+      )
+    )
+
+;;
   }
 
 
