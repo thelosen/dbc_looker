@@ -1,4 +1,4 @@
-view: _campaign {
+view: facebook_campaigns {
   sql_table_name: facebook._campaign ;;
 
   dimension: id {

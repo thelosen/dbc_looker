@@ -1,5 +1,5 @@
-view: _ad {
-  sql_table_name: facebook._ad ;;
+view: facebook_adsets {
+  sql_table_name: facebook._adset ;;
 
   dimension: id {
     primary_key: yes
@@ -10,21 +10,6 @@ view: _ad {
   dimension: account_id {
     type: string
     sql: ${TABLE}.account_id ;;
-  }
-
-  dimension: adset_id {
-    type: string
-    sql: ${TABLE}.adset_id ;;
-  }
-
-  dimension: bid_amount {
-    type: number
-    sql: ${TABLE}.bid_amount ;;
-  }
-
-  dimension: bid_type {
-    type: string
-    sql: ${TABLE}.bid_type ;;
   }
 
   dimension: campaign_id {
@@ -51,14 +36,47 @@ view: _ad {
     sql: ${TABLE}.created_time ;;
   }
 
+  dimension: daily_budget {
+    type: number
+    sql: ${TABLE}.daily_budget ;;
+  }
+
   dimension: effective_status {
     type: string
     sql: ${TABLE}.effective_status ;;
   }
 
+  dimension_group: end {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.end_time ;;
+  }
+
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+  }
+
+  dimension_group: start {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.start_time ;;
   }
 
   dimension_group: updated {

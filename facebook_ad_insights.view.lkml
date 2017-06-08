@@ -1,4 +1,4 @@
-view: facebook_insights {
+view: facebook_ad_insights {
   sql_table_name: facebook._insights ;;
 
   dimension: id {

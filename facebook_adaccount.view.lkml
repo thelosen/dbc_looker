@@ -1,4 +1,4 @@
-view: _adaccount {
+view: facebook_adaccount {
   sql_table_name: facebook._adaccount ;;
 
   dimension: id {
