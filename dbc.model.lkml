@@ -253,7 +253,7 @@ explore: users {
   }
 
   join: insight {
-    view_label: "facebook"
+    view_label: "Facebook"
   }
 
 
