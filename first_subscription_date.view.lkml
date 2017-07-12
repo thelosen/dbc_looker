@@ -49,7 +49,7 @@ view: first_subscription_date {
   }
 
   dimension: first_created_mm_dd {
-    sql: DATE_FORMAT(${first_created_date}, "%m %d");;
+    sql: to_char(${first_created_date}, 'MM/DD');;
     }
 
 
