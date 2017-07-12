@@ -49,8 +49,9 @@ view: first_subscription_date {
   }
 
   dimension: first_created_mm_dd {
-    sql: DATE_FORMAT(${first_created_date}, '%m-%d')
-  }
+    sql: DATE_FORMAT(${first_created_date}, '%m-%d');;
+    }
+
 
   measure: count {
     type: count_distinct
