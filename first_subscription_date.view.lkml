@@ -47,11 +47,17 @@ view: first_subscription_date {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: first_created_mm_dd {
+    sql: to_char(${TABLE}.first_created, 'MM-DD');;
+  }
+
   measure: count {
     type: count_distinct
     sql:${user_id};;
     drill_fields: [detail*]
   }
+
+
 
 
 # ----- Sets of fields for drilling ------
