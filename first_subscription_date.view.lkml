@@ -49,7 +49,7 @@ view: first_subscription_date {
   }
 
   dimension: first_created_mm_dd {
-    sql: to_char(${TABLE}.first_created, 'MM-DD');;
+    sql: DATE_FORMAT(${first_created_date}, '%m-%d')
   }
 
   measure: count {
