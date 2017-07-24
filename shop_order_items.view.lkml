@@ -105,7 +105,6 @@ view: shop_order_items {
   dimension: kit_id {
     type: number
     sql: ${TABLE}.kit_id ;;
-    hidden: yes
   }
 
   dimension: product_id {
