@@ -50,9 +50,7 @@ view: first_subscription_date {
   }
 
   dimension: first_created_mm_dd {
-    type:  date_day_of_month
-    convert_tz: no
-    sql: to_char(${first_created_date}, 'MM/DD');;
+    sql: to_char(${first_created_raw}, 'MM/DD');;
     }
 
 
