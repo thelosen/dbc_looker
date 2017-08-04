@@ -7,7 +7,7 @@ view: first_subscription_date {
     sortkeys: ["user_id"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_subscription;;
     sql:
-      SELECT
+      SELECT DISTINCT
         user_id,
         min(created_at) as first_created
         FROM (
