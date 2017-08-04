@@ -43,13 +43,16 @@ view: first_subscription_date {
     sql: ${TABLE}.first_created ;;
   }
 
+
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
   }
 
   dimension: first_created_mm_dd {
-    sql: to_char(${TABLE}.first_created, 'MM/DD');;
+    type:  date_day_of_month
+    convert_tz: no
+    sql: to_char(${first_created_date}, 'MM/DD');;
     }
 
 
