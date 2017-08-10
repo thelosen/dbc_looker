@@ -1,4 +1,4 @@
-view: transaction {
+view: rec_transaction {
   sql_table_name: recurly.transaction ;;
 
   dimension: id {

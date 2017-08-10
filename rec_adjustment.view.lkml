@@ -1,4 +1,4 @@
-view: adjustment {
+view: rec_adjustment {
   sql_table_name: recurly.adjustment ;;
 
   dimension: id {

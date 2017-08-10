@@ -1,5 +1,5 @@
-view: plan_unit_amount {
-  sql_table_name: recurly.plan_unit_amount ;;
+view: rec_plan_setup_fee {
+  sql_table_name: recurly.plan_setup_fee ;;
 
   dimension: currency {
     type: string

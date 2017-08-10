@@ -1,4 +1,4 @@
-view: invoice {
+view: rec_invoice {
   sql_table_name: recurly.invoice ;;
 
   dimension: id {

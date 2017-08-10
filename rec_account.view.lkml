@@ -1,4 +1,4 @@
-view: account {
+view: rec_account {
   sql_table_name: recurly.account ;;
 
   dimension: id {

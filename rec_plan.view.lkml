@@ -1,4 +1,4 @@
-view: plan {
+view: rec_plan {
   sql_table_name: recurly.plan ;;
 
   dimension: id {
