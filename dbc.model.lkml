@@ -410,3 +410,18 @@ explore: cohort_analysis {
 explore:  pdt_user_fact {
   hidden: yes
 }
+
+explore: rec_account {
+  hidden: yes
+  view_label: "Recurly"
+  label: "Recurly"
+
+
+  join:  rec_transaction {
+    sql_on:  ${rec_account.id}} = ${rec_transaction.account_id} ;;
+    relationship: one_to_many
+  }
+
+}
+
+
