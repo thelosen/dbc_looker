@@ -184,6 +184,7 @@ view: recurly_subscription {
           END;;
   }
 
+
  ####################################
 
   dimension: subscription_period_days {
@@ -336,6 +337,12 @@ view: recurly_subscription {
     sql: ${TABLE}.uuid ;;
   }
 
+  dimension: subscription_length_in_days {
+    type: number
+    sql: ${canceled_date}-${created_date} ;;
+    description: "Number of days between Cancellation Date and Created Date"
+  }
+
 ########### Measures ###############
 
   measure: recurly_subscription_amount {
@@ -412,12 +419,7 @@ view: recurly_subscription {
     description: "Canceled subscribers divided by Total Active Subscribers"
   }
 
-  measure: subscription_length_in_days {
-    type: number
-    sql: ${canceled_date}-${created_date} ;;
-    drill_fields: [detail*]
-    description: "Number of days between Cancellation Date and Created Date"
-  }
+
 
 
   # ----- Sets of fields for drilling ------
