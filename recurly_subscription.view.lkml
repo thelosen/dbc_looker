@@ -412,6 +412,13 @@ view: recurly_subscription {
     description: "Canceled subscribers divided by Total Active Subscribers"
   }
 
+  measure: subscription_length_in_days {
+    type: number
+    sql: ${canceled_date}-${created_date} ;;
+    drill_fields: [detail*]
+    description: "Number of days between Cancellation Date and Created Date"
+  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
