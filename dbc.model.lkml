@@ -417,19 +417,19 @@ explore: rec_account {
   label: "Recurly Accounts"
 
   join: rec_subscription {
-    view_label: "Subscriptions"
+    view_label: "Recurly Subscriptions"
     sql_on: ${rec_account.id} = ${rec_subscription.account_id} ;;
     relationship: one_to_many
   }
 
   join:  rec_transaction {
-    view_label: "Transactions"
+    view_label: "Recurly Transactions"
     sql_on:  ${rec_subscription.id} = ${rec_transaction.subscription_id} ;;
     relationship: one_to_many
   }
 
   join: rec_invoice {
-    view_label: "Invoices"
+    view_label: "Recurly Invoices"
     sql_on: ${rec_subscription.id} = ${rec_invoice.subscription_id};;
     relationship: one_to_many
   }
