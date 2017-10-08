@@ -1,4 +1,4 @@
-view: subscription {
+view: rec_subscription {
   sql_table_name: recurly.subscription ;;
 
   dimension: id {
