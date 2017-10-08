@@ -413,20 +413,23 @@ explore:  pdt_user_fact {
 
 explore: rec_account {
   hidden: no
-  view_label: "Recurly"
-  label: "Recurly"
+  view_label: "Recurly Accounts"
+  label: "Recurly Accounts"
 
   join: rec_subscription {
+    view_label: "Subscriptions"
     sql_on: ${rec_account.id} = ${rec_subscription.account_id} ;;
     relationship: one_to_many
   }
 
   join:  rec_transaction {
+    view_label: "Transactions"
     sql_on:  ${rec_subscription.id} = ${rec_transaction.subscription_id} ;;
     relationship: one_to_many
   }
 
   join: rec_invoice {
+    view_label: "Invoices"
     sql_on: ${rec_subscription.id} = ${rec_invoice.subscription_id};;
     relationship: one_to_many
   }
