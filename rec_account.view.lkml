@@ -149,10 +149,17 @@ view: rec_account {
     sql: ${TABLE}.vat_number ;;
   }
 
+  dimension: has_active_or_future_subscription {
+    type: yesno
+    sql: if(${has_active_subscription}=yes or ${has_future_subscription}=yes,YES,NO) ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
