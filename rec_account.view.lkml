@@ -172,10 +172,12 @@ view: rec_account {
       last_name,
       first_name,
       username,
+      email,
       adjustment.count,
       invoice.count,
       subscription.count,
       transaction.count
+
     ]
   }
 }
