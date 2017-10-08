@@ -297,6 +297,7 @@ explore: contact_subscriptions {
 }
 
 explore: recurly_transactions {
+  hidden:  yes
   view_label: "Recurly Transactions"
   label: "Recurly Transactions"
 
