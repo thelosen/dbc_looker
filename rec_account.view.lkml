@@ -151,7 +151,10 @@ view: rec_account {
 
   dimension: has_active_or_future_subscription {
     type: yesno
-    sql: if(or(${has_active_subscription}=TRUE, ${has_future_subscription}=TRUE),TRUE,FALSE) ;;
+    sql: CASE WHEN ${has_active_subscription} = TRUE THEN TRUE
+              WHEN ${has_future_subscription} = TRUE THEN TRUE
+              ELSE FALSE
+         END ;;
   }
 
   measure: count {
