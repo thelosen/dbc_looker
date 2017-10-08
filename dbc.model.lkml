@@ -412,7 +412,7 @@ explore:  pdt_user_fact {
 }
 
 explore: rec_account {
-  hidden: yes
+  hidden: no
   view_label: "Recurly"
   label: "Recurly"
 
