@@ -148,6 +148,13 @@ view: rec_transaction {
     drill_fields: [detail*]
   }
 
+  measure: total_transaction_amount {
+    type: sum
+    sql: ${amount};;
+    value_format_name: usd
+
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
