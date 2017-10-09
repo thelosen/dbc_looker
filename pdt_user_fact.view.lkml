@@ -122,23 +122,14 @@ view: pdt_user_fact {
   measure: average_order_count {
     type: average
     sql: ${lifetime_order_count_dim} ;;
+    value_format: "0.00"
   }
 
   measure: average_lifetime_order_amount {
     type: average
     sql: ${lifetime_order_amount_dim};;
+    value_format: "0.00"
   }
-
-  measure: median_order_count {
-    type: median
-    sql: ${lifetime_order_count_dim} ;;
-  }
-
-  measure: median_lifetime_order_amount {
-    type: median
-    sql: ${lifetime_order_amount_dim};;
-  }
-
 
   measure: user_count {
     hidden: yes
