@@ -343,7 +343,13 @@ view: recurly_subscription {
     description: "Number of days between Cancellation Date and Created Date"
   }
 
+
 ########### Measures ###############
+
+  measure: avg_subscription_length_in_days {
+    type: average
+    sql: ${subscription_length_in_days} ;;
+  }
 
   measure: recurly_subscription_amount {
     type: sum
