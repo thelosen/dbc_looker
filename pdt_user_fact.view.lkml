@@ -103,7 +103,7 @@ view: pdt_user_fact {
   }
 
 
-  #### Measures #################
+
   dimension: lifetime_revenue {
     type: number
     sql: ${TABLE}.lifetime_revenue ;;
@@ -112,10 +112,33 @@ view: pdt_user_fact {
     description: "do not use - this doesnt appear to be a legit field"
   }
 
+    #### Measures #################
+
   measure: lifetime_order_count {
     type: sum
     sql: ${TABLE}.lifetime_order_count ;;
   }
+
+  measure: average_order_count {
+    type: average
+    sql: ${lifetime_order_count_dim} ;;
+  }
+
+  measure: average_lifetime_order_amount {
+    type: average
+    sql: ${lifetime_order_amount_dim};;
+  }
+
+  measure: median_order_count {
+    type: median
+    sql: ${lifetime_order_count_dim} ;;
+  }
+
+  measure: median_lifetime_order_amount {
+    type: median
+    sql: ${lifetime_order_amount_dim};;
+  }
+
 
   measure: user_count {
     hidden: yes
