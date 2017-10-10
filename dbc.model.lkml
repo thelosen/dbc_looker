@@ -425,7 +425,7 @@ explore: rec_account {
 
   join:  rec_transaction {
     view_label: "Recurly Transactions"
-    sql_on:  ${rec_subscription.id} = ${rec_transaction.subscription_id} ;;
+    sql_on:  ${rec_account.id} = ${rec_transaction.account_id} ;;
     relationship: one_to_many
   }
 

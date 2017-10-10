@@ -211,10 +211,37 @@ view: rec_subscription {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension: cancellation_timing_days{
+    type: number
+    sql:  CASE WHEN ${canceled_date} = NULL THEN NULL
+          ELSE ${canceled_date}-${rec_account.created_date}
+          END ;;
+    description: "# Days between account creation date & subscription cancellation date"
+  }
+
+  dimension: cancellation_timing_grouping {
+    type: string
+    sql: CASE WHEN ${canceled_date} is NULL THEN '14. Not canceled'
+      WHEN ${TABLE}.cancellation_timing_days < 8 THEN '01. Week 1'
+      WHEN ${TABLE}.cancellation_timing_days < 15 THEN '02. Week 2'
+      WHEN ${TABLE}.cancellation_timing_days < 22 THEN '03. Week 3'
+      WHEN ${TABLE}.cancellation_timing_days < 29 THEN '04. Week 4'
+      WHEN ${TABLE}.cancellation_timing_days < 36 THEN '05. Week 5'
+      WHEN ${TABLE}.cancellation_timing_days < 43 THEN '06. Week 6'
+      WHEN ${TABLE}.cancellation_timing_days < 50 THEN '07. Week 7'
+      WHEN ${TABLE}.cancellation_timing_days < 57 THEN '08. Week 8'
+      WHEN ${TABLE}.cancellation_timing_days < 64 THEN '09. Week 9'
+      WHEN ${TABLE}.cancellation_timing_days < 71 THEN '10. Week 10'
+      WHEN ${TABLE}.cancellation_timing_days < 78 THEN '11. Week 11'
+      WHEN ${TABLE}.cancellation_timing_days < 85 THEN '12. Week 12'
+      ELSE '12. After Week 12' END ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
