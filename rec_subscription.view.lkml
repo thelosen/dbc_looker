@@ -234,7 +234,7 @@ view: rec_subscription {
       WHEN ${cancellation_timing_days} < 71 THEN '10. Week 10'
       WHEN ${cancellation_timing_days} < 78 THEN '11. Week 11'
       WHEN ${cancellation_timing_days} < 85 THEN '12. Week 12'
-      ELSE '12. After Week 12' END ;;
+      ELSE '13. After Week 12' END ;;
   }
 
   measure: count {
