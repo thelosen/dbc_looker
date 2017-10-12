@@ -216,8 +216,9 @@ view: rec_subscription {
     sql:  CASE WHEN ${canceled_date} = NULL THEN NULL
           ELSE ${canceled_date}-${rec_account.created_date}
           END ;;
-    description: "# Days between account creation date & subscription cancellation date"
+    description: "# Days between recurly account creation date & subscription cancellation date"
   }
+
 
   dimension: cancellation_timing_grouping {
     type: string
@@ -237,9 +238,29 @@ view: rec_subscription {
       ELSE '13. After Week 12' END ;;
   }
 
+  dimension: subscription_canceled_within_14_days_of_recurly_account_creation {
+    type: yesno
+    sql:  CASE WHEN ${cancellation_timing_days} = NULL THEN NULL
+          CASE WHEN ${cancellation_timing_days} <15 THEN TRUE
+           ELSE FALSE
+          END ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
+  }
+
+  measure: average_account_length_in_days {
+    type: average
+    sql: ${cancellation_timing_days} ;;
+  }
+
+  measure: average_billing_cycles_completed {
+    type: average
+    sql: (${total_billing_cycles}+1);;
+    description: "1st Payment = Billing Cycle #1"
+    ##first payment is on account not on subscription - thus the +1 to acccount for the intital payment
   }
 
 
