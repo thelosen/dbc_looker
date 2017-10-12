@@ -157,11 +157,47 @@ view: rec_account {
          END ;;
   }
 
+
   measure: count {
     type: count
     drill_fields: [detail*]
   }
 
+  measure: Number_of_Successful_Purchase_Transactions_Past_3_Weeks {
+    type: count_distinct
+      sql:${rec_transaction.id};;
+      filters: {
+        field: rec_transaction.action
+        value: "Purchase"
+        }
+      filters: {
+        field: rec_transaction.status
+        value: "Success"
+        }
+      filters: {
+        field: rec_transaction.created_date
+        value: "21 Days"
+      }
+
+  }
+
+  measure: Number_of_Refund_Transactions_Past_3_Weeks {
+    type: count_distinct
+    sql:${rec_transaction.id};;
+    filters: {
+      field: rec_transaction.action
+      value: "Refund"
+    }
+    filters: {
+      field: rec_transaction.status
+      value: "Success"
+    }
+    filters: {
+      field: rec_transaction.created_date
+      value: "21 Days"
+    }
+
+  }
 
 
   # ----- Sets of fields for drilling ------
