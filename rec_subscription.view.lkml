@@ -251,16 +251,11 @@ view: rec_subscription {
     drill_fields: [detail*]
   }
 
-  measure: average_account_length_in_days {
+  measure: average_cancelled_account_length_in_days {
     type: average
     sql: ${cancellation_timing_days} ;;
-  }
-
-  measure: average_billing_cycles_completed {
-    type: average
-    sql: (${total_billing_cycles}+1);;
-    description: "1st Payment = Billing Cycle #1"
-    ##first payment is on account not on subscription - thus the +1 to acccount for the intital payment
+    value_format: "0.00"
+    description: "For cancelled accounts only"
   }
 
 
