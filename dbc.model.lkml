@@ -441,6 +441,19 @@ explore: rec_account {
     relationship: one_to_many
   }
 
+  join: recurly_accounts {
+    view_label: "User ID"
+    sql_on: ${rec_account.id}=${recurly_accounts.account_code} ;;
+    fields: [recurly_accounts.user_id]
+    relationship: one_to_one
+  }
+
+  join: pdt_user_fact {
+    view_label: "User Key Facts"
+    sql_on: ${pdt_user_fact.id}=${recurly_accounts.user_id};;
+    relationship: one_to_many
+
+  }
 
 
 }
