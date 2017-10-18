@@ -15,6 +15,7 @@ view: pdt_user_fact {
       , count(distinct shop_orders.id) as lifetime_order_count
       , avg(shop_orders.total_price) as average_order_amount
       , min(shop_orders.id) as first_order_id
+      , max(shop_orders.total_price) as max_order_amount
       FROM mysql_heroku_app_db.users
         LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON users.id = shop_orders.user_id
       WHERE 1=1
@@ -110,6 +111,13 @@ view: pdt_user_fact {
     drill_fields: [detail*]
     value_format_name: usd
     description: "do not use - this doesnt appear to be a legit field"
+  }
+
+
+  dimension: max_order_amount {
+    type: number
+    sql: ${TABLE}.max_order_amount ;;
+    value_format_name: usd
   }
 
     #### Measures #################
