@@ -8,8 +8,8 @@ view: pdt_user_product_fact {
       , shop_order_items.product_id
       , min(shop_order_items.created_at) as first_product_order_timestamp
       , max(shop_order_items.created_at) as most_recent_product_order_timestamp
-      , count(distinct shop_order_items.id) as lifetime_product_order_count
-      , min(shop_order_items.id) as first_product_order_id
+      , count(distinct shop_order_items.order_id) as lifetime_product_order_count
+      , min(shop_order_items.order_id) as first_product_order_id
       FROM ${shop_order_items.SQL_TABLE_NAME} as shop_order_items
       LEFT JOIN ${shop_orders.SQL_TABLE_NAME} as shop_orders ON shop_order_items.order_id = shop_orders.id
       GROUP BY user_id, product_id
@@ -27,6 +27,12 @@ view: pdt_user_product_fact {
   dimension: product_id {
     type: number
     sql: ${TABLE}.product_id ;;
+  }
+
+  dimension: compound_primary_key {
+    primary_key: yes
+    hidden: yes
+    sql: CONCAT(${TABLE}.user_id, '  ', ${TABLE}.product_id) ;;
   }
 
   dimension_group: first_product_order {
@@ -48,7 +54,6 @@ view: pdt_user_product_fact {
 
   dimension: first_product_order_id {
     type: number
-    primary_key: yes
     sql: ${TABLE}.first_product_order_id;;
   }
 
