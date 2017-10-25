@@ -252,8 +252,16 @@ explore: users {
     relationship: many_to_one
   }
 
-  join: insight {
-    view_label: "Facebook"
+  join: product_purchases_a {
+    sql_on: ${product_purchases_a.user_id}=${users.id} ;;
+    type: left_outer
+    relationship: one_to_one
+  }
+
+  join: product_purchases_b {
+    sql_on: ${product_purchases_b.user_id}=${users.id} ;;
+    type: left_outer
+    relationship: one_to_one
   }
 
 
