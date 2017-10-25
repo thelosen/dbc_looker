@@ -15,17 +15,24 @@ view: product_purchases_a {
           WHERE {% condition select_product %}product.name{% endcondition %}
           GROUP BY 1;;
   }
+
+
+  ### dimensions ###
+
   dimension: user_id {
     hidden: yes
     type:  number
     sql: ${TABLE}.user_id ;;
   }
+
   dimension: purchase_count {
     sql: COALESCE(${TABLE}.product_count,0) ;;
     type:  number
   }
+
   filter: select_product {
-    suggest_explore: product
+    suggest_explore: users
     suggest_dimension: product.name
   }
+
 }
