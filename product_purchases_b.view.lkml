@@ -30,7 +30,7 @@ view: product_purchases_b {
   }
 
   filter: select_product {
-    suggest_explore: users
+    suggest_explore: product
     suggest_dimension: product.name
   }
 

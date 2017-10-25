@@ -460,8 +460,9 @@ explore: rec_account {
     view_label: "User Key Facts"
     sql_on: ${pdt_user_fact.id}=${recurly_accounts.user_id};;
     relationship: one_to_many
-
+  }
   }
 
 
-}
+  explore:  product {
+  }
