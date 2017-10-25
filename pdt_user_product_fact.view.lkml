@@ -33,7 +33,7 @@ view: pdt_user_product_fact {
     type: string
     primary_key: yes
     hidden: yes
-    sql: CONCAT(${TABLE}.user_id, '  ', ${TABLE}.product_id) ;;
+    sql: CONCAT(${TABLE}.user_id || '-' ||  ${TABLE}.product_id) ;;
   }
 
   dimension_group: first_product_order {
