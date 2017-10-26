@@ -468,17 +468,19 @@ explore: rec_account {
   }
 
 
-  explore:  product_kits {
+  explore: product_kit_items{
 
-  join: product_kit_items {
-    sql_on:${product_kit_items.kit_id} = ${product_kits.id};;
-    relationship: many_to_one
-  }
+    join: product_kits {
+      sql_on: ${product_kit_items.kit_id} = ${product_kits.id} ;;
+      relationship: many_to_one
+    }
 
-  join: product {
-    sql:${product.id} = ${product_kit_items.product_id} ;;
-    relationship: one_to_many
-  }
+    join: product {
+      sql_on: ${product_kit_items.product_id} = ${product.id} ;;
+      relationship: many_to_one
+    }
+
+
 
 
   }
