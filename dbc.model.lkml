@@ -466,3 +466,21 @@ explore: rec_account {
 
   explore:  product {
   }
+
+
+  explore:  product_kits {
+
+  join: product_kit_items {
+    sql_on:${product_kits.id} = ${product_kit_items.kit_id};;
+    relationship: one_to_many
+  }
+
+  join: product {
+    sql: ${product_kit_items.product_id} = ${product.id} ;;
+    relationship: one_to_many
+  }
+
+
+  }
+
+
