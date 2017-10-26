@@ -471,16 +471,14 @@ explore: rec_account {
   explore:  product_kits {
 
   join: product_kit_items {
-    sql_on:${product_kits.id} = ${product_kit_items.kit_id};;
-    relationship: one_to_many
+    sql_on:${product_kit_items.kit_id} = ${product_kits.id};;
+    relationship: many_to_one
   }
 
   join: product {
-    sql: ${product_kit_items.product_id} = ${product.id} ;;
+    sql:${product.id} = ${product_kit_items.product_id} ;;
     relationship: one_to_many
   }
 
 
   }
-
-
