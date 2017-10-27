@@ -105,8 +105,8 @@ view: users {
 
   dimension: has_active_subscription {
   type: yesno
-  sql: case when ${id} IN ${active_recurly_user_ids.user_id} THEN TRUE
-        ELSE FALSE;;
+  sql: case when ${id} = ${active_recurly_user_ids.user_id} THEN TRUE
+        ELSE FALSE END;;
   }
 
   ################## Measures #################
