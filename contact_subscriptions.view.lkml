@@ -149,6 +149,9 @@ view: contact_subscriptions {
 
 
 ########### Measures ###############
+  measure: count {
+    sql: ${id} ;;
+  }
 
   measure:  subscription_count {
     type: count_distinct
