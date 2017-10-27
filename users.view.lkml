@@ -103,6 +103,12 @@ view: users {
   sql: datediff(month, ${pdt_user_fact.first_order_raw}, ${pdt_user_fact.most_recent_order_raw}) +1;;
   }
 
+  dimension: has_active_subscription {
+  type: yesno
+  sql: case when ${id} IN ${active_recurly_user_ids.user_id} THEN TRUE
+        ELSE FALSE;;
+  }
+
   ################## Measures #################
 
   measure: user_count {

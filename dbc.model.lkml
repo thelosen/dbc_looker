@@ -46,6 +46,12 @@ explore: shop_order_items {
     relationship: many_to_one
   }
 
+  join: active_recurly_user_ids {
+    sql_on: ${users.id} = ${active_recurly_user_ids.user_id};;
+    type: left_outer
+    relationship: one_to_one
+  }
+
   join: product_category {
     sql_on:  ${product.category_id} = ${product_category.id} ;;
     view_label: "Products"
@@ -62,11 +68,6 @@ explore: shop_order_items {
     view_label:"Recurly Subscription"
     sql_on: ${users.id} = ${recurly_subscription.user_id} ;;
     relationship: one_to_many
-  }
-
-  join: subscriber_status {
-    sql_on: ${users.id} = ${subscriber_status.user_id} ;;
-    relationship: one_to_one
   }
 
 #   join: contact_subscriptions {
@@ -222,12 +223,6 @@ explore: users {
     fields: [sku]
     }
 
-  join: subscriber_status {
-    view_label: "Users"
-    sql_on: ${users.id} = ${subscriber_status.user_id} ;;
-    relationship: one_to_one
-  }
-
   join:  pdt_user_product_fact {
     sql_on:  ${users.id} = ${pdt_user_product_fact.user_id} ;;
     view_label: "User Product Fact"
@@ -260,6 +255,12 @@ explore: users {
 
   join: product_purchases_b {
     sql_on: ${product_purchases_b.user_id}=${users.id} ;;
+    type: left_outer
+    relationship: one_to_one
+  }
+
+  join: active_recurly_user_ids {
+    sql_on: ${users.id} = ${active_recurly_user_ids.user_id};;
     type: left_outer
     relationship: one_to_one
   }
@@ -381,12 +382,6 @@ explore: cohort_analysis {
     relationship: one_to_many
   }
 
-  join: subscriber_status {
-    view_label: "Users"
-    sql_on: ${users.id} = ${subscriber_status.user_id} ;;
-    relationship: one_to_one
-  }
-
   join:  pdt_user_product_fact {
     sql_on:  ${cohort_analysis.user_id} = ${pdt_user_product_fact.user_id} ;;
     view_label: "User Product Fact"
@@ -410,6 +405,12 @@ explore: cohort_analysis {
   join: first_order {
     sql_on: ${users.id} = ${first_order.user_id} ;;
     view_label: "First Order"
+    relationship: one_to_one
+  }
+
+  join: active_recurly_user_ids {
+    sql_on: ${users.id} = ${active_recurly_user_ids.user_id};;
+    type: left_outer
     relationship: one_to_one
   }
 

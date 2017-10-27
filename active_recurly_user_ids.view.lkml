@@ -2,7 +2,7 @@ view: active_recurly_user_ids {
   derived_table: {
     distribution_style: even
     sortkeys: ["id"]
-    sql_trigger_value: SELECT COUNT(*) FROM ${recurly_subscription.SQL_TABLE_NAME};;
+    sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_subscription;;
     sql:
       SELECT DISTINCT user_id
       FROM mysql_heroku_app_db.recurly_subscription
