@@ -150,7 +150,7 @@ view: contact_subscriptions {
 
 ########### Measures ###############
   measure: count {
-    sql: ${id} ;;
+    type: count
   }
 
   measure:  subscription_count {
