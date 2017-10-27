@@ -7,7 +7,6 @@ view: active_recurly_user_ids {
       SELECT DISTINCT user_id
       FROM mysql_heroku_app_db.recurly_subscription
       WHERE state IN ('active','future','past_due')
-      GROUP BY user_id
        ;;
   }
 
