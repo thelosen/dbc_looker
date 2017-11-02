@@ -484,5 +484,7 @@ explore: rec_account {
   }
 
   explore: ga_users {
+    view_label: "Google Analytics"
+    label: "Google Analytics"
 
   }
