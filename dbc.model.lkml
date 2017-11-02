@@ -481,7 +481,8 @@ explore: rec_account {
       relationship: many_to_one
     }
 
+  }
 
-
+  explore: ga_users {
 
   }
