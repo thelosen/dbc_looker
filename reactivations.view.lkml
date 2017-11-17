@@ -46,8 +46,27 @@ view: reactivations {
     sql: datediff(day,${subscription_created_at_date}-${previous_order_date_date} ;;
   }
 
+############ measures ###########
 
+  measure: user_count {
+    drill_fields: [detail*]
+    type: count_distinct
+    sql:  ${user_id} ;;
+  }
 
+  measure: average_days_since_last_order {
+    type: average
+    sql: ${days_since_last_order} ;;
+  }
 
-
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      users.id,
+      users.email,
+      days_since_last_order,
+      previous_order_date_date,
+      total_orders_before
+    ]
+  }
 }
