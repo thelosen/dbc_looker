@@ -44,6 +44,7 @@ view: reactivations {
 
   dimension: days_since_last_order {
     sql: datediff(day,${previous_order_date_date},${subscription_created_at_date}) ;;
+    value_format: "0"
   }
 
 ############ measures ###########
