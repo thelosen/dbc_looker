@@ -2,7 +2,7 @@
 view: reactivations {
   derived_table: {
     distribution_style: even
-    sortkeys: ["id"]
+    sortkeys: ["id_"]
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.recurly_subscription;;
     sql:
       SELECT rs.id as id_, rs.user_id as user_id_, rs.created_at as created_at_, Max(os.created_at) as previous_order_date, Max(os.order_sequence) as total_orders_before
