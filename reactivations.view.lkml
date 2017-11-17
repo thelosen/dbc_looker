@@ -57,6 +57,7 @@ view: reactivations {
   measure: average_days_since_last_order {
     type: average
     sql: ${days_since_last_order} ;;
+    value_format: "0"
   }
 
   # ----- Sets of fields for drilling ------
