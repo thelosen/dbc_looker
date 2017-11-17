@@ -265,6 +265,11 @@ explore: users {
     relationship: one_to_one
   }
 
+  join: reactivations {
+    sql_on: ${reactivations.user_id} = ${users.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
 
 
 }
