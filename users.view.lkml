@@ -54,9 +54,10 @@ view: users {
   }
 
   dimension: is_set_password {
+    hidden: yes
     type: string
     sql: ${TABLE}.is_set_password ;;
-    hidden: yes
+
   }
 
   dimension_group: last_login {
@@ -71,11 +72,13 @@ view: users {
   }
 
   dimension: permissions {
+    hidden: yes
     type: string
     sql: ${TABLE}.permissions ;;
   }
 
   dimension: phone_number {
+    hidden: yes
     type: string
     sql: ${TABLE}.phone_number ;;
   }
@@ -87,18 +90,21 @@ view: users {
   }
 
   dimension_group: updated {
+    hidden: yes
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
-    hidden: yes
+
   }
 
   dimension: user_avatar {
+    hidden: yes
     type: string
     sql: ${TABLE}.user_avatar ;;
   }
 
   dimension: months_a_customer {
+    hidden: yes
   type: number
   sql: datediff(month, ${pdt_user_fact.first_order_raw}, ${pdt_user_fact.most_recent_order_raw}) +1;;
   }
@@ -116,6 +122,8 @@ view: users {
   set: detail {
     fields: [
       users.id,
+      users.first_name,
+      users.last_name,
       users.email,
       users.created_date,
       contacts.state,
