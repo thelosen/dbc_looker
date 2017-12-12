@@ -58,7 +58,6 @@ view: product {
   }
 
   dimension: product_id {
-    hidden: yes
     type: number
     sql: ${TABLE}.product_id ;;
   }
