@@ -83,6 +83,11 @@ explore: users {
   view_label: "Users"
   label: "Users"
 
+  join: subscriber_status {
+    sql_on: ${users.id} = ${subscriber_status.user_id} ;;
+    relationship: one_to_one
+  }
+
   join: recurly_subscription {
     sql_on: ${users.id} = ${recurly_subscription.user_id} ;;
     relationship: one_to_many
