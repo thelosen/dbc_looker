@@ -5,8 +5,8 @@ view: subscriber_status {
     sql_trigger_value: SELECT COUNT(*) FROM mysql_heroku_app_db.users;;
     sql:
       SELECT users.id,
-          CASE WHEN active_users.user_id IS NOT NULL THEN 'Active Subscription'
-              ELSE 'No Active Subscription'
+          CASE WHEN active_users.user_id IS NOT NULL THEN 'active subscription'
+              ELSE 'no active subscription'
               END as subscription_status
 
       FROM mysql_heroku_app_db.users users
@@ -36,7 +36,7 @@ view: subscriber_status {
 
   dimension: has_active_subscription {
     type: yesno
-    sql: ${subscription_status} IN('active subscription') ;;
+    sql: ${subscription_status} = 'active subscription' ;;
   }
 
   }
