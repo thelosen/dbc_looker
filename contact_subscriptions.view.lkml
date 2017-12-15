@@ -144,7 +144,7 @@ view: contact_subscriptions {
 
   dimension: active_product_subscription {
     type: yesno
-    sql: ${recurly_active_subscription} = "yes" AND ${TABLE}.deleted_at IS NULL AND ${TABLE}.cancelled_at IS NULL AND ${TABLE}.next_renewal_date >= CURDATE()   ;;
+    sql: ${recurly_subscription_state} IN ('active','future','past_due') AND ${TABLE}.deleted_at IS NULL AND ${TABLE}.cancelled_at IS NULL AND ${TABLE}.next_renewal_date >= CURDATE()   ;;
   }
 
   dimension: subscription_id {
