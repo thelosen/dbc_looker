@@ -46,12 +46,6 @@ explore: shop_order_items {
     relationship: many_to_one
   }
 
-  join: active_recurly_user_ids {
-    sql_on: ${users.id} = ${active_recurly_user_ids.user_id};;
-    type: left_outer
-    relationship: one_to_one
-  }
-
   join: product_category {
     sql_on:  ${product.category_id} = ${product_category.id} ;;
     view_label: "Products"
@@ -264,12 +258,6 @@ explore: users {
     relationship: one_to_one
   }
 
-  join: active_recurly_user_ids {
-    sql_on: ${users.id} = ${active_recurly_user_ids.user_id};;
-    type: left_outer
-    relationship: one_to_one
-  }
-
   join: reactivations {
     sql_on: ${reactivations.user_id} = ${users.id} ;;
     type: left_outer
@@ -418,11 +406,6 @@ explore: cohort_analysis {
     relationship: one_to_one
   }
 
-  join: active_recurly_user_ids {
-    sql_on: ${users.id} = ${active_recurly_user_ids.user_id};;
-    type: left_outer
-    relationship: one_to_one
-  }
 
 }
 

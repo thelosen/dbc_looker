@@ -73,11 +73,13 @@ view: contact_addresses {
   }
 
   dimension: _fivetran_deleted {
+    hidden: yes
     type: yesno
     sql: ${TABLE}._fivetran_deleted ;;
   }
 
   dimension_group: _fivetran_synced {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -92,6 +94,7 @@ view: contact_addresses {
   }
 
   dimension: addressee {
+    hidden: yes
     type: string
     sql: ${TABLE}.addressee ;;
   }
@@ -102,6 +105,7 @@ view: contact_addresses {
   }
 
   dimension: contact_id {
+    hidden: yes
     type: number
     # hidden: yes
     sql: ${TABLE}.contact_id ;;
@@ -118,6 +122,7 @@ view: contact_addresses {
   }
 
   dimension_group: created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -132,6 +137,7 @@ view: contact_addresses {
   }
 
   dimension: created_by {
+    hidden: yes
     type: number
     sql: ${TABLE}.created_by ;;
   }
@@ -176,31 +182,37 @@ view: contact_addresses {
   }
 
   dimension: latitude {
+    hidden: yes
     type: number
     sql: ${TABLE}.latitude ;;
   }
 
   dimension: longitude {
+    hidden: yes
     type: number
     sql: ${TABLE}.longitude ;;
   }
 
   dimension: name {
+    hidden: yes
     type: string
     sql: ${TABLE}.name ;;
   }
 
   dimension: organization {
+    hidden: yes
     type: string
     sql: ${TABLE}.organization ;;
   }
 
   dimension: phone {
+    hidden: yes
     type: string
     sql: ${TABLE}.phone ;;
   }
 
   dimension: sibling_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.sibling_id ;;
   }
@@ -226,6 +238,7 @@ view: contact_addresses {
   }
 
   dimension_group: updated {
+    hidden: yes
     type: time
     timeframes: [
       raw,
