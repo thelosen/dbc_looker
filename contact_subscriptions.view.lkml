@@ -21,6 +21,7 @@ view: contact_subscriptions {
   }
 
   dimension_group: product_subscription_canceled {
+    hidden: yes
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.cancelled_at ;;
@@ -51,6 +52,7 @@ view: contact_subscriptions {
   }
 
   dimension_group: product_subscription_deleted {
+    hidden: yes
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
@@ -58,16 +60,19 @@ view: contact_subscriptions {
   }
 
   dimension: frequency {
+    hidden: yes
     type: string
     sql: ${TABLE}.frequency ;;
   }
 
   dimension: is_product_free {
+    hidden: yes
     type: number
     sql: ${TABLE}.is_product_free ;;
   }
 
   dimension: is_recurring {
+    hidden: yes
     type: number
     sql: ${TABLE}.is_recurring ;;
   }
@@ -84,13 +89,13 @@ view: contact_subscriptions {
   }
 
   dimension: original_order_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.original_order_id ;;
   }
 
   dimension: product_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.product_id ;;
   }
 
@@ -107,6 +112,7 @@ view: contact_subscriptions {
   }
 
   dimension: recent_order_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.recent_order_id ;;
   }
@@ -115,11 +121,13 @@ view: contact_subscriptions {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.started_at ;;
+    hidden: yes
   }
 
   dimension: product_subscription_status {
     type: string
     sql: ${TABLE}.status ;;
+    hidden: yes
   }
 
   dimension: recurly_subscription_state {
@@ -130,6 +138,7 @@ view: contact_subscriptions {
 
   dimension: recurly_active_subscription {
     type: yesno
+    hidden: yes
     sql: ${recurly_subscription_state} IN ('active','future','past_due') ;;
   }
 
