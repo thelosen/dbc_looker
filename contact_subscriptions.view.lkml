@@ -9,6 +9,7 @@ view: contact_subscriptions {
   }
 
   dimension: account_code {
+    hidden: yes
     type: string
     sql: ${TABLE}.account_code ;;
   }
@@ -27,7 +28,7 @@ view: contact_subscriptions {
 
   dimension: contact_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.contact_id ;;
   }
 
@@ -38,11 +39,13 @@ view: contact_subscriptions {
   }
 
   dimension: currency {
+    hidden: yes
     type: string
     sql: ${TABLE}.currency ;;
   }
 
   dimension: cycles_completed {
+    hidden: yes
     type: number
     sql: ${TABLE}.cycles_completed ;;
   }
@@ -51,12 +54,12 @@ view: contact_subscriptions {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.deleted_at ;;
-    hidden: yes
+
   }
 
   dimension: frequency {
     type: string
-    sql: coalesce(${TABLE}.frequency, 'Unknown') ;;
+    sql: ${TABLE}.frequency ;;
   }
 
   dimension: is_product_free {
@@ -119,17 +122,35 @@ view: contact_subscriptions {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: recurly_subscription_state {
+    hidden: yes
+    type: string
+    sql: recurly_subscription.state ;;
+  }
+
+  dimension: recurly_active_subscription {
+    type: yesno
+    sql: ${recurly_subscription_state} IN ('active','future','past_due') ;;
+  }
+
+  dimension: active_product_subscription {
+    type: yesno
+    sql: ${recurly_active_subscription} = "yes" AND ${TABLE}.deleted_at  IS NULL AND ${TABLE}.cancelled_at IS NULL AND ${TABLE}.next_renewal_date > DATE_SUB(NOW(), INTERVAL 1 DAY)   ;;
+  }
+
   dimension: subscription_id {
     type: number
     sql: case when ${TABLE}.subscription_id = 0 then null else ${TABLE}.subscription_id end ;;
   }
 
   dimension: total_cycles {
+    hidden: yes
     type: number
     sql: ${TABLE}.total_cycles ;;
   }
 
   dimension: type {
+    hidden: yes
     type: string
     sql: ${TABLE}.type ;;
   }
@@ -142,8 +163,8 @@ view: contact_subscriptions {
   }
 
   dimension: user_id {
+    hidden: yes
     type: number
-    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
@@ -159,75 +180,20 @@ view: contact_subscriptions {
     drill_fields: [user_detail*]
   }
 
-
-  measure: subscription_amount {
-    type: sum
-    sql: ${TABLE}.amount_in_cents/100.0 ;;
-    value_format_name: usd_0
-    drill_fields: [user_detail*]
-    description: "possibly inaccurate, doesn't multiply quantity * amount"
-  }
-
   measure: subscriber_count {
     type: count_distinct
     sql: ${user_id} ;;
     drill_fields: [user_detail*]
   }
 
-  measure: active_subscriber_count {
+  measure: active_product_subscriber_count {
     type: count_distinct
     sql: ${user_id} ;;
     drill_fields: [user_detail*]
     filters: {
-      field: recurly_subscription.recurly_active_or_future_state
+      field: active_product_subscription
       value: "yes"
     }
-    description: "Where recurly subscription state is active or future"
-  }
-
-  measure: 7_day_new_subscriber_count {
-    type: count_distinct
-    sql: ${user_id} ;;
-    drill_fields: [user_detail*]
-    filters: {
-      field: recurly_subscription.created_date
-      value: "7 days"
-    }
-    filters: {
-      field: recurly_subscription.recurly_active_or_future_state
-      value: "yes"
-    }
-    description: "Where recurly subscription state is active or future and recurly subscription created date is in the past seven days"
-  }
-
-  measure: 7_day_cancelled_subscriber_count {
-    type: count_distinct
-    sql: ${user_id} ;;
-    drill_fields: [user_detail*]
-    filters: {
-      field: recurly_subscription.canceled_date
-      value: "7 days"
-    }
-    filters: {
-      field: recurly_subscription.state
-      value: "canceled"
-    }
-    description: "Where recurly subscription state is canceled and recurly subscription canceled date is in the past seven days"
-  }
-
-  measure: 7_day_net_subscriber_count {
-    type: number
-    sql: ${7_day_new_subscriber_count} - ${7_day_cancelled_subscriber_count} ;;
-    description: "New subscribers minus canceled subscribers"
-    drill_fields: [user_detail*]
-  }
-
-  measure: 7_day_subscriber_churn {
-    type: number
-    sql: (1.0 * ${7_day_cancelled_subscriber_count}) / nullif(${active_subscriber_count},0) ;;
-    drill_fields: [user_detail*]
-    value_format: "0.00%"
-    description: "Canceled subscribers divided by Total Active Subscribers"
   }
 
   measure: product_quantity {
