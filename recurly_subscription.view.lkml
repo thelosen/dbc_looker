@@ -138,6 +138,7 @@ view: recurly_subscription {
   }
 
   dimension_group: trial_ends {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -152,6 +153,7 @@ view: recurly_subscription {
   }
 
   dimension_group: trial_started {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -165,35 +167,19 @@ view: recurly_subscription {
     sql: ${TABLE}.trial_started_at ;;
   }
 
-  dimension_group: cancel_expire {
-    description: "expire date if cancel date is null - no longer using this methodology"
-    hidden: yes
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: CASE WHEN ${TABLE}.canceled_at IS NOT NULL THEN ${TABLE}.canceled_at
-              WHEN ${TABLE}.canceled_at IS NULL AND ${TABLE}.expires_at IS NOT NULL THEN ${TABLE}.expires_at
-              ELSE NULL
-          END;;
-  }
 
 
  ####################################
 
   dimension: subscription_period_days {
+    hidden: yes
     type: number
     description: "Number of days between current period start and current period end"
     sql: DATEDIFF(day,${current_period_started_date},${current_period_ends_date});;
   }
 
   dimension: subscription_period_days_grouping {
+    hidden: yes
     type: string
     sql: CASE WHEN ${subscription_period_days} is NULL THEN '6. NULL'
       WHEN ${subscription_period_days} < 46  THEN '1. 0 to 45 days'
@@ -204,22 +190,26 @@ view: recurly_subscription {
   }
 
   dimension: bank_account_authorized_at {
+    hidden: yes
     type: string
     sql: ${TABLE}.bank_account_authorized_at ;;
   }
 
   dimension: collection_method {
+    hidden: yes
     type: string
     sql: ${TABLE}.collection_method ;;
   }
 
   dimension: contact_id {
+    hidden: yes
     type: number
     # hidden: yes
     sql: ${TABLE}.contact_id ;;
   }
 
   dimension: currency {
+    hidden: yes
     type: string
     sql: ${TABLE}.currency ;;
   }
@@ -232,51 +222,61 @@ view: recurly_subscription {
   }
 
   dimension: customer_notes {
+    hidden: yes
     type: string
     sql: ${TABLE}.customer_notes ;;
   }
 
   dimension: cycles_completed {
+    hidden: yes
     type: number
     sql: ${TABLE}.cycles_completed ;;
   }
 
   dimension: net_terms {
+    hidden: yes
     type: number
     sql: ${TABLE}.net_terms ;;
   }
 
   dimension: original_order_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.original_order_id ;;
   }
 
   dimension: pending_subscription {
+    hidden: yes
     type: string
     sql: ${TABLE}.pending_subscription ;;
   }
 
   dimension: plan {
+    hidden: yes
     type: string
     sql: ${TABLE}.plan ;;
   }
 
   dimension: po_number {
+    hidden: yes
     type: number
     sql: ${TABLE}.po_number ;;
   }
 
   dimension: quantity {
+    hidden: yes
     type: number
     sql: ${TABLE}.quantity ;;
   }
 
   dimension: recent_order_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.recent_order_id ;;
   }
 
   dimension: shipping_charges_in_cents {
+    hidden: yes
     type: number
     sql: ${TABLE}.shipping_charges_in_cents ;;
   }
@@ -287,48 +287,67 @@ view: recurly_subscription {
   }
 
   dimension: recurly_active_or_future_state {
+    hidden: yes
     type: yesno
-    sql: ${state} IN('active','future') ;;
+    sql: ${state} IN('active','future','past_due') ;;
+  }
+
+  dimension: active_subscription {
+    type: yesno
+    sql: ${state} IN('active','future','past_due') ;;
   }
 
   dimension: subscription_add_ons {
+    hidden: yes
     type: string
     sql: ${TABLE}.subscription_add_ons ;;
   }
 
   dimension: tax_in_cents {
+    hidden: yes
     type: string
     sql: ${TABLE}.tax_in_cents ;;
   }
 
   dimension: tax_rate {
+    hidden: yes
     type: string
     sql: ${TABLE}.tax_rate ;;
   }
 
   dimension: tax_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.tax_type ;;
   }
 
   dimension: terms_and_conditions {
+    hidden: yes
     type: string
     sql: ${TABLE}.terms_and_conditions ;;
   }
 
   dimension: total_cycles {
+    hidden: yes
     type: number
     sql: ${TABLE}.total_cycles ;;
   }
 
   dimension: unit_amount_in_cents {
+    hidden: yes
     type: number
     sql: ${TABLE}.unit_amount_in_cents ;;
+    }
+
+  dimension: subscription_amount{
+    type: number
+    sql: ${unit_amount_in_cents}/100 ;;
+    value_format_name: usd_0
   }
 
   dimension: user_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
@@ -373,12 +392,11 @@ view: recurly_subscription {
     type: count_distinct
     sql: ${user_id} ;;
     filters: {
-      field: recurly_subscription.recurly_active_or_future_state
+      field: recurly_subscription.active_subscription
       value: "yes"
     }
     drill_fields: [detail*]
-    description: "Where recurly subscription state is active or future"
-  }
+   }
 
   measure: recurly_7_day_new_subscriber_count {
     type: count_distinct
@@ -388,11 +406,11 @@ view: recurly_subscription {
       value: "7 days"
     }
     filters: {
-      field: recurly_subscription.recurly_active_or_future_state
+      field: recurly_subscription.active_subscription
       value: "yes"
     }
     drill_fields: [detail*]
-    description: "Where recurly subscription state is active or future and recurly subscription created date is in the past seven days"
+
   }
 
   measure: recurly_7_day_cancelled_subscriber_count {
@@ -407,7 +425,7 @@ view: recurly_subscription {
       value: "canceled"
     }
     drill_fields: [detail*]
-    description: "Where recurly subscription state is canceled and recurly subscription canceled date is in the past seven days"
+
   }
 
   measure: recurly_7_day_net_subscriber_count {
