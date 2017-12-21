@@ -103,11 +103,6 @@ explore: users {
     relationship: one_to_one
   }
 
-  join: first_subscription_date {
-    sql_on:  ${users.id} = ${first_subscription_date.user_id} ;;
-    relationship: one_to_one
-  }
-
   join: first_order {
     sql_on: ${users.id} = ${first_order.user_id} ;;
     view_label: "First Order"
@@ -474,10 +469,5 @@ explore: rec_account {
       relationship: many_to_one
     }
 
-  }
-
-  explore: ga_users {
-    view_label: "Google Analytics"
-    label: "Google Analytics"
 
   }
