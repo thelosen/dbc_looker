@@ -84,7 +84,6 @@ view: shop_order_items {
 
   dimension_group: created {
     type: time
-    label: "items"
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at ;;
     hidden: yes
@@ -100,29 +99,32 @@ view: shop_order_items {
   dimension: is_recurring {
     type: yesno
     sql: ${TABLE}.is_recurring ;;
+    hidden: yes
   }
 
   dimension: kit_id {
     type: number
     sql: ${TABLE}.kit_id ;;
+    hidden: yes
   }
 
   dimension: product_id {
     type: number
     sql: ${TABLE}.product_id ;;
-    hidden: yes
+    hidden: no
   }
 
   dimension: product_sku {
     type: string
     sql: ${TABLE}.product_sku ;;
-    description: "Use for Pre V3 data only. Not currently accurate for V3"
-    hidden: no
+    description: "V3 missing data"
+    hidden: yes
   }
 
   dimension: type {
     type: string
     sql: ${TABLE}.type ;;
+    hidden: yes
   }
 
   dimension_group: updated {
@@ -135,6 +137,7 @@ view: shop_order_items {
     type:  number
     sql: ${TABLE}.price;;
     value_format_name: usd_0
+    hidden: yes
   }
 
 ################## Measures #######################
