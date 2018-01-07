@@ -39,7 +39,7 @@ view: contact_subscriptions {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension_group: product_subscription_created_EST {
+  dimension_group: product_subscription_created_eastern_time {
     type: time
     timeframes: [time,date,week,month]
     sql: DATEADD(h,3, ${product_subscription_created_time}::date);;
