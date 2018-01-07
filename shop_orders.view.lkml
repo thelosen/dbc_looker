@@ -100,6 +100,13 @@ view: shop_orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension_group: order_created_eastern_time {
+    type: time
+    convert_tz: no
+    timeframes:  [time, date, week, month]
+    sql: CONVERT_TIMEZONE ( 'EST', ${TABLE}.created_at);;
+  }
+
   dimension_group: created_no_conversion {
     type: time
     convert_tz: no
