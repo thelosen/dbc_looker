@@ -249,7 +249,7 @@ view: shop_orders {
 
   dimension: order_kit_id {
     type: number
-    sql: MAX(${shop_order_items.kit_id};
+    sql: MAX(${shop_order_items.kit_id};;
   }
 
   dimension: is_before_mtd {
