@@ -42,7 +42,7 @@ view: contact_subscriptions {
   dimension_group: product_subscription_created_eastern_time {
     type: time
     timeframes: [time,date,week,month]
-    sql: DATEADD(hr,3, ${product_subscription_created_time}::date);;
+    sql: DATEADD(hr,3, ${product_subscription_created_time}::timestamp);;
   }
 
   dimension: currency {
