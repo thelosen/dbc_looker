@@ -285,6 +285,11 @@ explore: contact_subscriptions {
     relationship: one_to_one
   }
 
+  join: shop_order_items {
+    sql_on: ${most_recent_order.id} = ${shop_order_items.order_id} ;;
+    relationship: one_to_many
+  }
+
   join: recurly_subscription {
     sql_on: ${contact_subscriptions.subscription_id} = ${recurly_subscription.id} ;;
     relationship: many_to_one
@@ -308,6 +313,13 @@ explore: recurly_transactions {
     view_label: "Orders"
     relationship: one_to_many
   }
+
+  join: shop_order_items {
+    sql_on: ${shop_orders.id} = ${shop_order_items.order_id} ;;
+    view_label: "Orders"
+    relationship: one_to_many
+  }
+
 
   join: shipping_address {
     sql_on: ${shop_orders.shipping_address_id} = ${shipping_address.shipping_address_id} ;;
