@@ -41,8 +41,9 @@ view: contact_subscriptions {
 
   dimension_group: product_subscription_created_eastern_time {
     type: time
-    timeframes: [time,date,week,month]
-    sql: DATEADD(hr,3, ${product_subscription_created_time}::timestamp);;
+    convert_tz: no
+    timeframes:  [time, date, week, month]
+    sql: CONVERT_TIMEZONE ( 'EST', ${TABLE}.created_at);;
   }
 
   dimension: currency {
