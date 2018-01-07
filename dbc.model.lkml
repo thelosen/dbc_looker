@@ -259,6 +259,11 @@ explore: users {
     relationship: many_to_one
   }
 
+  join: order_kit_id {
+    sql_on: ${order_kit_id.id} = ${shop_orders.id} ;;
+    relationship: one_to_one
+  }
+
 
 }
 
