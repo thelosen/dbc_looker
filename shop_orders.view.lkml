@@ -247,10 +247,6 @@ view: shop_orders {
     sql: DATEDIFF(month, ${pdt_user_fact.first_order_date}, ${created_date}) + 1;;
   }
 
-  dimension: order_kit_id {
-    type: number
-    sql: MAX(${shop_order_items.kit_id};;
-  }
 
   dimension: is_before_mtd {
     type: yesno
