@@ -85,6 +85,19 @@
               ELSE '12. Null' END ;;
     }
 
+    dimension: first_order_price_grouping_non_kit_check {
+      type: string
+      sql: CASE WHEN ${TABLE}.first_purchase_price < 30.50 THEN 'A. Under $30.50'
+              WHEN ${TABLE}.first_purchase_price < 35.5 THEN 'B. $30.50 - $35.49'
+              WHEN ${TABLE}.first_purchase_price < 40.5 THEN 'C. $35.50 - $40.49'
+              WHEN ${TABLE}.first_purchase_price < 45.5 THEN 'D. $40.50 - $45.49'
+              WHEN ${TABLE}.first_purchase_price < 50.5 THEN 'E. $45.50 - $50.49'
+              WHEN ${TABLE}.first_purchase_price < 55.5 THEN 'F. $50.50 - $55.49'
+              WHEN ${TABLE}.first_purchase_price < 60.5 THEN 'G. $55.50 - $60.49'
+              WHEN ${TABLE}.first_purchase_price >= 60.5 THEN 'H. $60.50 +'
+              ELSE 'I. Null' END ;;
+    }
+
 
 ################# Measures #######################
   measure: first_order_total {
