@@ -27,7 +27,7 @@ view: kit_initial_id {
                 SELECT user_id, min(id) as id, min(created_at) as first_created
                 FROM mysql_heroku_app_db.contact_subscriptions
                 GROUP BY contact_subscriptions.user_id) first_subscription
-                INNER JOIN mysql_heroku_app_db.contact_subscriptions as kit_id ON first_subscription.id = kit_id.id)
+                LEFT JOIN mysql_heroku_app_db.contact_subscriptions as kit_id ON first_subscription.id = kit_id.id)
                 GROUP BY first_subscription.user_id) cs
         LEFT JOIN
           --define first order created and kit id for that order from shop_order items
