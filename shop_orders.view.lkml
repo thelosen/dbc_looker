@@ -7,6 +7,11 @@ view: shop_orders {
     sql:
       SELECT id,
            subscription_id,
+           newgistics_shipment_id,
+           newgistics_order_id,
+           newgistics_tracking,
+           newgistics_tracking_url,
+           newgistics_status,
            shipwire_id,
            shipwire_orderno,
            shipwire_externalid,
@@ -38,6 +43,11 @@ view: shop_orders {
     UNION ALL
       SELECT id,
            null as subscription_id,
+           null as newgistics_shipment_id,
+           null as newgistics_order_id,
+           null as newgistics_tracking,
+           null as newgistics_tracking_url,
+           null as newgistics_status,
            null as shipwire_id,
            null as shipwire_orderno,
            null as shipwire_externalid,
@@ -190,6 +200,36 @@ view: shop_orders {
     timeframes: [time, date, week, month]
     sql: ${TABLE}.shipwire_trackeddate ;;
     view_label: "Shipwire"
+  }
+
+  dimension: newgistics_shipment_id {
+    type: number
+    sql: ${TABLE}.newgistics_shipment_id ;;
+    view_label: "Newgistics"
+  }
+
+  dimension: newgistics_order_id {
+    type: string
+    sql: ${TABLE}.newgistics_order_id ;;
+    view_label: "Newgistics"
+  }
+
+  dimension: newgistics_tracking {
+    type: string
+    sql: ${TABLE}.newgistics_tracking ;;
+    view_label: "Newgistics"
+  }
+
+  dimension: newgistics_tracking_url {
+    type: string
+    sql: ${TABLE}.newgistics_tracking_url ;;
+    view_label: "Newgistics"
+  }
+
+  dimension: newgistics_status {
+    type: string
+    sql: ${TABLE}.newgistics_status ;;
+    view_label: "Newgistics"
   }
 
   dimension: status {
