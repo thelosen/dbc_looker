@@ -257,4 +257,11 @@ view: contact_addresses {
     type: string
     sql: ${TABLE}.zip ;;
   }
+
+  ################## Measures #################
+
+  measure: distinct_contact_id_count {
+    type: count_distinct
+    sql:  ${TABLE}.contact_id ;;
+    }
   }
