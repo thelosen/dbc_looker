@@ -8,6 +8,12 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+explore: contact_addresses {
+  view_label: "Addresses"
+  label: "Addresses"
+
+  }
+
 
 explore: shop_order_items {
   view_label: "Orders"
