@@ -5,7 +5,6 @@ view: contacts {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-    hidden: yes
   }
 
   dimension: contact_address1 {
