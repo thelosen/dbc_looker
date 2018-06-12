@@ -72,6 +72,7 @@ view: contact_addresses {
     sql: ${TABLE}.id ;;
   }
 
+
   dimension: _fivetran_deleted {
     hidden: yes
     type: yesno
@@ -105,7 +106,7 @@ view: contact_addresses {
   }
 
   dimension: contact_id {
-    hidden: yes
+    hidden: no
     type: number
     # hidden: yes
     sql: ${TABLE}.contact_id ;;
